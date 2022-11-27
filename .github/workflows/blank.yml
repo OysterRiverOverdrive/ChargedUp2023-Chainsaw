@@ -18,7 +18,7 @@ jobs:
     # This build will run in a roborio docker container that provided by wpilib.
     # Versions can be seen in:
     # https://hub.docker.com/r/wpilib/roborio-cross-ubuntu/tags
-    container: wpilib/roborio-cross-ubuntu:2021-18.04
+    container: wpilib/roborio-cross-ubuntu:2023-22.04
 
     steps:
       - uses: actions/checkout@v2
