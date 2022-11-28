@@ -16,7 +16,7 @@ public final class Constants {
     public static int LeftDrive1 = 1;
     public static int LeftDrive2 = 2;
     public static int RightDrive1 = 3;
-    public static int RightDrive2= 4;
+    public static int RightDrive2 = 4;
     // establishing motor callouts and their CAN-IDs
 
     public static double SLEWTURN = 4.5;
