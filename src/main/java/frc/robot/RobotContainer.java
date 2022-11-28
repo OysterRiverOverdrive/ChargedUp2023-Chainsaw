@@ -4,17 +4,25 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.autoCmd;
-import frc.robot.commands.teleopCmd;
+import frc.robot.commands.basic.autoCmd;
+import frc.robot.commands.basic.teleopCmd;
 import frc.robot.subsystems.drivetrainSubsystem;
 
 
 public class RobotContainer {
+  // Defining Controllers
+  private final Joystick driver1 = new Joystick(Constants.DRIVER_ONE_PORT);
+  private final Joystick driver2 = new Joystick(Constants.DRIVER_SEC_PORT);
+  private final Joystick operator = new Joystick(Constants.OPER_PORT);
+
+  // Defining Subsystems
   private final drivetrainSubsystem drivetrain = new drivetrainSubsystem();
+
+  // Defining Commands
   private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
-
-
+  
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
