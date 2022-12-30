@@ -30,8 +30,11 @@ public class drivetrainSubsystem extends SubsystemBase {
     }
 
     public void teleop(double speed, double turn) {
-    
-    m_robotDrive.arcadeDrive(speed,turn);
+    if (Constants.arcadedriver == true) {
+      m_robotDrive.arcadeDrive(speed,turn);
+    } else {
+      m_robotDrive.tankDrive(speed, turn);
+    }
     
   }
 

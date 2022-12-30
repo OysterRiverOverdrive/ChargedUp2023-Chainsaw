@@ -29,6 +29,9 @@ public final class Constants {
     public static int DRIVER_ONE_PORT = 0;
     public static int DRIVER_SEC_PORT = 0;
     public static boolean DRIVER_W_BUTTONS = false;//Work in progress, Don't touch please
+    // Basic Controller configuraton (Xbox Pro)
+    public static boolean arcadedriver = true;
+    public static int DRIVER_PORT = 0;
     public static int DRIVER_TURN = 5;
     public static int DRIVER_SPEED = 2;
 
