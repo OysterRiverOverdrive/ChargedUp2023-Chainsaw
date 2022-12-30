@@ -13,13 +13,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class drivetrainSubsystem extends SubsystemBase {
 
-    private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushed);
-    private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushed);
+    private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushless);
+    private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushless);
 
     MotorControllerGroup leftSide = new MotorControllerGroup(left1, left2);
 
-    private final CANSparkMax right1 = new CANSparkMax(Constants.RightDrive1, MotorType.kBrushed);
-    private final CANSparkMax right2 = new CANSparkMax(Constants.RightDrive2, MotorType.kBrushed);
+    private final CANSparkMax right1 = new CANSparkMax(Constants.RightDrive1, MotorType.kBrushless);
+    private final CANSparkMax right2 = new CANSparkMax(Constants.RightDrive2, MotorType.kBrushless);
 
     MotorControllerGroup rightSide = new MotorControllerGroup(right1, right2);
 
