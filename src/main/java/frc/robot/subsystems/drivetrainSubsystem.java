@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 // install new drivetrain library
 // manage vendor libraries -> install new library
 // https://software-metadata.revrobotics.com/REVLib.json
@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class drivetrainSubsystem extends SubsystemBase {
 
-    private final PWMSparkMax left1 = new PWMSparkMax(Constants.LeftDrive1);
-    private final PWMSparkMax left2 = new PWMSparkMax(Constants.LeftDrive2);
+    private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushed);
+    private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushed);
 
     MotorControllerGroup leftSide = new MotorControllerGroup(left1, left2);
 
-    private final PWMSparkMax right1 = new PWMSparkMax(Constants.RightDrive1);
-    private final PWMSparkMax right2 = new PWMSparkMax(Constants.RightDrive2);
+    private final CANSparkMax right1 = new CANSparkMax(Constants.RightDrive1, MotorType.kBrushed);
+    private final CANSparkMax right2 = new CANSparkMax(Constants.RightDrive2, MotorType.kBrushed);
 
     MotorControllerGroup rightSide = new MotorControllerGroup(right1, right2);
 
