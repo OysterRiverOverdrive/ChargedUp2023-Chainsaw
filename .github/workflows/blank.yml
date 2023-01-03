@@ -23,5 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Verify that the java code compiles
+      - name: Verify that the java code compiles.
         run: ./gradlew --console=verbose build
+
+      # This can be checked locally with either:
+      #   ./gradlew :spotlessCheck
+      #   ./gradlew :spotlessApply
+      - name: Run the spotless check to ensure we keep readable code.
+        run: ./gradlew :spotlessCheck
