@@ -10,7 +10,6 @@ import frc.robot.commands.basic.autoCmd;
 import frc.robot.commands.basic.teleopCmd;
 import frc.robot.subsystems.drivetrainSubsystem;
 
-
 public class RobotContainer {
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Constants.DRIVER_ONE_PORT);

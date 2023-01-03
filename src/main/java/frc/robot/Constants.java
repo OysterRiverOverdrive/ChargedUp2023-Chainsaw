@@ -36,6 +36,4 @@ public final class Constants {
 
     // Operator Controller Configuration (Logitech Dual Action)
     public static int OPER_PORT = 3;
-    
-
 }
