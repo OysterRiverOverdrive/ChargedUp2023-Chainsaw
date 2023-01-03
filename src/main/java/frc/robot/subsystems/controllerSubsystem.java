@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Controllers;
 
 public class controllerSubsystem extends SubsystemBase {
@@ -26,19 +25,19 @@ public class controllerSubsystem extends SubsystemBase {
   }
 
   public void defaultdriveConfig() {
-    Constants.DRIVER_TURN = Controllers.xbox_rx;
-    Constants.DRIVER_SPEED = Controllers.xbox_ly;
+    Controllers.DRIVER_TURN = Controllers.xbox_rx;
+    Controllers.DRIVER_SPEED = Controllers.xbox_ly;
   }
 
   public void onestickdriveConfig() {
-    Constants.DRIVER_TURN = Controllers.xbox_lx;
-    Constants.DRIVER_SPEED = Controllers.xbox_ly;
+    Controllers.DRIVER_TURN = Controllers.xbox_lx;
+    Controllers.DRIVER_SPEED = Controllers.xbox_ly;
   }
 
   public void tankdriveConfig() {
-    Constants.arcadedriver = false;
-    Constants.DRIVER_TURN = Controllers.xbox_ly;
-    Constants.DRIVER_SPEED = Controllers.xbox_ry;
+    Controllers.arcadedriver = false;
+    Controllers.DRIVER_TURN = Controllers.xbox_ly;
+    Controllers.DRIVER_SPEED = Controllers.xbox_ry;
   }
 
   @Override

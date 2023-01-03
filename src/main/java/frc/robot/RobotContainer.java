@@ -8,39 +8,33 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.basic.autoCmd;
 import frc.robot.commands.basic.teleopCmd;
+import frc.robot.subsystems.controllerSubsystem;
 import frc.robot.subsystems.drivetrainSubsystem;
 
 public class RobotContainer {
   // Defining Controllers
-  private final Joystick driver1 = new Joystick(Constants.DRIVER_ONE_PORT);
-  private final Joystick driver2 = new Joystick(Constants.DRIVER_SEC_PORT);
-  private final Joystick operator = new Joystick(Constants.OPER_PORT);
+  private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
+  private final Joystick driver2 = new Joystick(Controllers.DRIVER_SEC_PORT);
+  private final Joystick operator = new Joystick(Controllers.OPER_PORT);
 
   // Defining Subsystems
   private final drivetrainSubsystem drivetrain = new drivetrainSubsystem();
+  private final controllerSubsystem controls = new controllerSubsystem();
 
   // Defining Commands
-  private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
-
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final autoCmd m_autoCommand = new autoCmd();
+  private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
+    controls.setup();
   }
 
   private void configureButtonBindings() {}
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;

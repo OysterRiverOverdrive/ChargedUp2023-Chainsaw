@@ -4,6 +4,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Controllers;
 import frc.robot.subsystems.drivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
@@ -13,8 +14,8 @@ public class teleopCmd extends CommandBase {
 
   private double turns;
   private double speeds;
-  private final Joystick driver1 = new Joystick(Constants.DRIVER_ONE_PORT);
-  private final Joystick driver2 = new Joystick(Constants.DRIVER_SEC_PORT);
+  private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
+  private final Joystick driver2 = new Joystick(Controllers.DRIVER_SEC_PORT);
   private final SlewRateLimiter slrForTurn = new SlewRateLimiter(Constants.SLEWTURN);
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(Constants.SLEWSPEED);
 
@@ -31,9 +32,9 @@ public class teleopCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (Constants.DRIVER_W_BUTTONS == false) {
-      turns = driver1.getRawAxis(Constants.DRIVER_TURN);
-      speeds = driver2.getRawAxis(Constants.DRIVER_SPEED);
+    if (Controllers.DRIVER_W_BUTTONS == false) {
+      turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
+      speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
     }
   }
 

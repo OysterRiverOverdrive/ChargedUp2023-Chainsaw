@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Controllers;
 
 public class drivetrainSubsystem extends SubsystemBase {
 
@@ -29,7 +30,7 @@ public class drivetrainSubsystem extends SubsystemBase {
   }
 
   public void teleop(double speed, double turn) {
-    if (Constants.arcadedriver == true) {
+    if (Controllers.arcadedriver == true) {
       m_robotDrive.arcadeDrive(speed, turn);
     } else {
       m_robotDrive.tankDrive(speed, turn);
