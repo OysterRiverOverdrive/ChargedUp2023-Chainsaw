@@ -13,22 +13,19 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int LeftDrive1 = 1;
-    public static int LeftDrive2 = 2;
-    public static int RightDrive1 = 3;
-    public static int RightDrive2= 4;
-    // establishing motor callouts and their CAN-IDs
+  public static int LeftDrive1 = 1;
+  public static int LeftDrive2 = 2;
+  public static int RightDrive1 = 3;
+  public static int RightDrive2 = 4;
+  // establishing motor callouts and their CAN-IDs
 
-    public static double SLEWTURN = 4.5;
-    public static double SLEWSPEED = 2.2;
-    public static double SPEEDLIMIT_TURN = 0.75;
-    public static double SPEEDLIMIT_SPEED = 0.95;
+  public static double SLEWTURN = 4.5;
+  public static double SLEWSPEED = 2.2;
+  public static double SPEEDLIMIT_TURN = 0.75;
+  public static double SPEEDLIMIT_SPEED = 0.95;
 
-
-    // Basic Controller configuraton (Xbox Pro)
-    public static int DRIVER_PORT = 0;
-    public static int DRIVER_TURN = 5;
-    public static int DRIVER_SPEED = 2;
-    
-
+  // Basic Controller configuraton (Xbox Pro)
+  public static int DRIVER_PORT = 0;
+  public static int DRIVER_TURN = 5;
+  public static int DRIVER_SPEED = 2;
 }

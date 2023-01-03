@@ -9,11 +9,9 @@ import frc.robot.commands.autoCmd;
 import frc.robot.commands.teleopCmd;
 import frc.robot.subsystems.drivetrainSubsystem;
 
-
 public class RobotContainer {
   private final drivetrainSubsystem drivetrain = new drivetrainSubsystem();
   private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
-
 
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
