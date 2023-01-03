@@ -1,14 +1,16 @@
 package frc.robot.commands.basic;
-import frc.robot.Constants;
-import frc.robot.subsystems.drivetrainSubsystem;
+
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.drivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class teleopCmd extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final drivetrainSubsystem drivesubsystem;
+
   private double turns;
   private double speeds;
   private final Joystick driver1 = new Joystick(Constants.DRIVER_ONE_PORT);
@@ -35,14 +37,14 @@ public class teleopCmd extends CommandBase {
     }
   }
 
-  // Called every time the scheduler runs while the command is scheduled. 
-// stick.getRawAxis(Constants.DRIVER_TURN)
-// stick.getRawAxis(Constants.DRIVER_SPEED)
+  // Called every time the scheduler runs while the command is scheduled.
+  // stick.getRawAxis(Constants.DRIVER_TURN)
+  // stick.getRawAxis(Constants.DRIVER_SPEED)
   @Override
   public void execute() {
-    double turn = slrForTurn.calculate(turns*Constants.SPEEDLIMIT_TURN);
-    //double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
-    double speed = slrForDrive.calculate (speeds*Constants.SPEEDLIMIT_SPEED);//todo new value .95
+    double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN);
+    // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
+    double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED); // todo new value .95
 
     drivesubsystem.teleop(speed, turn);
   }

@@ -12,29 +12,28 @@ import frc.robot.Constants;
 
 public class drivetrainSubsystem extends SubsystemBase {
 
-    private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushless);
-    private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushless);
+  private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushless);
+  private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushless);
 
   MotorControllerGroup leftSide = new MotorControllerGroup(left1, left2);
 
-    private final CANSparkMax right1 = new CANSparkMax(Constants.RightDrive1, MotorType.kBrushless);
-    private final CANSparkMax right2 = new CANSparkMax(Constants.RightDrive2, MotorType.kBrushless);
+  private final CANSparkMax right1 = new CANSparkMax(Constants.RightDrive1, MotorType.kBrushless);
+  private final CANSparkMax right2 = new CANSparkMax(Constants.RightDrive2, MotorType.kBrushless);
 
   MotorControllerGroup rightSide = new MotorControllerGroup(right1, right2);
 
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
 
-    public drivetrainSubsystem() {
-        leftSide.setInverted(true);
-    }
+  public drivetrainSubsystem() {
+    leftSide.setInverted(true);
+  }
 
-    public void teleop(double speed, double turn) {
+  public void teleop(double speed, double turn) {
     if (Constants.arcadedriver == true) {
-      m_robotDrive.arcadeDrive(speed,turn);
+      m_robotDrive.arcadeDrive(speed, turn);
     } else {
       m_robotDrive.tankDrive(speed, turn);
     }
-    
   }
 
   @Override
