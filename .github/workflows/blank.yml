@@ -8,7 +8,6 @@
 name: pr-checks
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -18,10 +17,16 @@ jobs:
     # This build will run in a roborio docker container that provided by wpilib.
     # Versions can be seen in:
     # https://hub.docker.com/r/wpilib/roborio-cross-ubuntu/tags
-    container: wpilib/roborio-cross-ubuntu:2023-22.04
+    container: wpilib/roborio-cross-ubuntu:2022-20.04
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Verify that the java code compiles
+      - name: Verify that the java code compiles.
         run: ./gradlew --console=verbose build
+
+      # This can be checked locally with either:
+      #   ./gradlew :spotlessCheck
+      #   ./gradlew :spotlessApply
+      - name: Run the spotless check to ensure we keep readable code.
+        run: ./gradlew :spotlessCheck
