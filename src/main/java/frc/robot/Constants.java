@@ -23,4 +23,9 @@ public final class Constants {
   public static double SLEWSPEED = 2.2;
   public static double SPEEDLIMIT_TURN = 0.75;
   public static double SPEEDLIMIT_SPEED = 0.95;
+
+  // Basic Controller configuraton (Xbox Pro)
+  public static int DRIVER_PORT = 0;
+  public static int DRIVER_TURN = 4;
+  public static int DRIVER_SPEED = 1;
 }
