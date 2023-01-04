@@ -15,7 +15,7 @@ public class teleopCmd extends CommandBase {
       new SlewRateLimiter(Constants.SLEWTURN); // from 2 to 2.5 to 3.5 to 4.0 to 4.5
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(Constants.SLEWSPEED);
 
-  private final Joystick stick = new Joystick(Constants.DRIVER_PORT);
+  private final Joystick driver = new Joystick(Constants.DRIVER_PORT);
   private boolean isTeleOp = false;
 
   public teleopCmd(drivetrainSubsystem subsystem) {
@@ -32,11 +32,11 @@ public class teleopCmd extends CommandBase {
   @Override
   public void execute() {
     double turn =
-        slrForTurn.calculate(stick.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN);
+        slrForTurn.calculate(driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN);
     // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
     double speed =
         slrForDrive.calculate(
-            stick.getRawAxis(Constants.DRIVER_SPEED)
+            driver.getRawAxis(Constants.DRIVER_SPEED)
                 * Constants.SPEEDLIMIT_SPEED); // todo new value .95
 
     drivesubsystem.teleop(speed, turn);
