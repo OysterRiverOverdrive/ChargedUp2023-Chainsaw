@@ -26,6 +26,6 @@ public final class Constants {
 
   // Basic Controller configuraton (Xbox Pro)
   public static int DRIVER_PORT = 0;
-  public static int DRIVER_TURN = 5;
-  public static int DRIVER_SPEED = 2;
+  public static int DRIVER_TURN = 4;
+  public static int DRIVER_SPEED = 1;
 }
