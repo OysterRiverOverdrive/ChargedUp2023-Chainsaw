@@ -13,9 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static int LeftDrive1 = 1;
-  public static int LeftDrive2 = 2;
-  public static int RightDrive1 = 3;
+  public static int LeftDrive1 = 6;
+  public static int LeftDrive2 = 7;
+  public static int RightDrive1 = 1;
   public static int RightDrive2 = 4;
   // establishing motor callouts and their CAN-IDs
 

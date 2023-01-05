@@ -9,10 +9,10 @@ public final class Controllers {
   // Driver Controller configuraton (Xbox Pro)
   public static int DRIVER_ONE_PORT = 0;
   public static int DRIVER_SEC_PORT = 0;
-  public static boolean DRIVER_W_BUTTONS = false; // Work in progress, Don't touch please
-  public static boolean arcadedriver = true;
-  public static int DRIVER_TURN = 5;
-  public static int DRIVER_SPEED = 2;
+  // public static boolean DRIVER_W_BUTTONS = false; // Work in progress, Don't touch please
+  // public static boolean arcadedriver = true;
+  public static int DRIVER_TURN = 4;
+  public static int DRIVER_SPEED = 1;
 
   // Operator Controller Configuration (Logitech Dual Action)
   public static int OPER_PORT = 3;

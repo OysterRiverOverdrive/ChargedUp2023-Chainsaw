@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Controllers;
 
-public class controllerSubsystem extends SubsystemBase {
+public class ControllerSubsystem extends SubsystemBase {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private final String kdefaultdriver = "Default Driver";
   private final String konestickdriver = "One-Stick Driver";
   private final String ktankdriver = "Tank Driver";
   /** Creates a new controllerSubsystem. */
-  public controllerSubsystem() {}
+  public ControllerSubsystem() {}
 
   public void setup() {
     m_chooser.setDefaultOption("Default Driver", kdefaultdriver);
@@ -35,7 +35,7 @@ public class controllerSubsystem extends SubsystemBase {
   }
 
   public void tankdriveConfig() {
-    Controllers.arcadedriver = false;
+    // Controllers.arcadedriver = false;
     Controllers.DRIVER_TURN = Controllers.xbox_ly;
     Controllers.DRIVER_SPEED = Controllers.xbox_ry;
   }

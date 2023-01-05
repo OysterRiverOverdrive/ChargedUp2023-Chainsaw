@@ -1,17 +1,30 @@
 {
   "HALProvider": {
-    "PWM Outputs": {
-      "window": {
-        "visible": true
+    "Other Devices": {
+      "SPARK MAX [6]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/ControllerSubsystem": "Subsystem",
+      "/LiveWindow/DrivetrainSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-      "/LiveWindow/drivetrainSubsystem": "Subsystem"
+      "/LiveWindow/drivetrainSubsystem": "Subsystem",
+      "/SmartDashboard/Driver Config": "String Chooser"
+    }
+  },
+  "NetworkTables": {
+    "SmartDashboard": {
+      "Driver Config": {
+        "open": true
+      },
+      "open": true
     }
   }
 }

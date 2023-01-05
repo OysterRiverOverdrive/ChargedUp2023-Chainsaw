@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Controllers;
-import frc.robot.subsystems.drivetrainSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class teleopCmd extends CommandBase {
+public class TeleopCmd extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final drivetrainSubsystem drivesubsystem;
+  private final DrivetrainSubsystem drivesubsystem;
 
   private double turns;
   private double speeds;
@@ -21,7 +21,7 @@ public class teleopCmd extends CommandBase {
 
   private boolean isTeleOp = false;
 
-  public teleopCmd(drivetrainSubsystem subsystem) {
+  public TeleopCmd(DrivetrainSubsystem subsystem) {
     drivesubsystem = subsystem;
     // turns = turnvariable;
     // speeds = speedvariable;
@@ -32,10 +32,10 @@ public class teleopCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (Controllers.DRIVER_W_BUTTONS == false) {
+    // if (Controllers.DRIVER_W_BUTTONS == false) {
       turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
       speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
-    }
+    // }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
