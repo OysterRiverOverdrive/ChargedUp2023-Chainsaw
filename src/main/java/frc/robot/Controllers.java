@@ -19,10 +19,10 @@ public final class Controllers {
 
   // XBOX PRO
   // Joysticks
-  public static int xbox_lx = 1;
+  public static int xbox_lx = 0;
   public static int xbox_ly = 1;
-  public static int xbox_lt = 1;
-  public static int xbox_rt = 1;
-  public static int xbox_rx = 1;
-  public static int xbox_ry = 1;
+  public static int xbox_lt = 2;
+  public static int xbox_rt = 3;
+  public static int xbox_rx = 4;
+  public static int xbox_ry = 5;
 }

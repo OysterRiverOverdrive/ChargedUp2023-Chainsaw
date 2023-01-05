@@ -33,9 +33,8 @@ public class TeleopCmd extends CommandBase {
   @Override
   public void initialize() {
     // if (Controllers.DRIVER_W_BUTTONS == false) {
-      turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
-      speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
     // }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,13 +42,15 @@ public class TeleopCmd extends CommandBase {
   // stick.getRawAxis(Constants.DRIVER_SPEED)
   @Override
   public void execute() {
-    double turn =
-        slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
+    turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
+    speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
+    double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
     // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
-    double speed =
-        slrForDrive.calculate(speeds
-                * Constants.SPEEDLIMIT_SPEED); // todo new value .95
-
+    double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED); // todo new value .95
+    // System.out.println(turn);
+    // System.out.println(speed);
+    // turn = 0;
+    // speed = 0.5;
     drivesubsystem.teleop(speed, turn);
   }
 
