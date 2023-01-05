@@ -4,6 +4,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Controllers;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
@@ -11,11 +12,13 @@ public class TeleopCmd extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DrivetrainSubsystem drivesubsystem;
 
-  private final SlewRateLimiter slrForTurn =
-      new SlewRateLimiter(Constants.SLEWTURN); // from 2 to 2.5 to 3.5 to 4.0 to 4.5
+  private double turns;
+  private double speeds;
+  private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
+  private final Joystick driver2 = new Joystick(Controllers.DRIVER_SEC_PORT);
+  private final SlewRateLimiter slrForTurn = new SlewRateLimiter(Constants.SLEWTURN);
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(Constants.SLEWSPEED);
 
-  private final Joystick driver = new Joystick(Constants.DRIVER_PORT);
   private boolean isTeleOp = false;
 
   public TeleopCmd(DrivetrainSubsystem subsystem) {
@@ -31,16 +34,24 @@ public class TeleopCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double turn =
-        slrForTurn.calculate(
-            driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN * -1.0);
-    // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
-    double speed =
-        slrForDrive.calculate(
-            driver.getRawAxis(Constants.DRIVER_SPEED)
-                * Constants.SPEEDLIMIT_SPEED); // todo new value .95
-
-    drivesubsystem.teleop(speed, turn);
+    // import the controllers, its two separate ones to accomodate for the helicopter joysticks that
+    // are split between two
+    turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
+    speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
+    if (Controllers.arcadedriver == true) {
+      // Follow standard order to use arcade driving preset
+      // Get the axises and apply speed limits
+      double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
+      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      drivesubsystem.teleop(speed, turn);
+    } else {
+      // Follow tank drive preset
+      // turn the retrieved axises in to left and right sides with only the straightline speed limit
+      // applied
+      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED);
+      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      drivesubsystem.teleop(left, right);
+    }
   }
 
   public void setTeleOpMode(boolean teleOPMode) {
