@@ -25,19 +25,21 @@ public class ControllerSubsystem extends SubsystemBase {
   }
 
   public void defaultdriveConfig() {
+    Controllers.arcadedriver = true;
     Controllers.DRIVER_TURN = Controllers.xbox_rx;
     Controllers.DRIVER_SPEED = Controllers.xbox_ly;
   }
 
   public void onestickdriveConfig() {
+    Controllers.arcadedriver = true;
     Controllers.DRIVER_TURN = Controllers.xbox_lx;
     Controllers.DRIVER_SPEED = Controllers.xbox_ly;
   }
 
   public void tankdriveConfig() {
-    // Controllers.arcadedriver = false;
-    Controllers.DRIVER_TURN = Controllers.xbox_ly;
-    Controllers.DRIVER_SPEED = Controllers.xbox_ry;
+    Controllers.arcadedriver = false;
+    Controllers.DRIVER_TURN = Controllers.xbox_ry;
+    Controllers.DRIVER_SPEED = Controllers.xbox_ly;
   }
 
   @Override

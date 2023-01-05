@@ -42,16 +42,22 @@ public class TeleopCmd extends CommandBase {
   // stick.getRawAxis(Constants.DRIVER_SPEED)
   @Override
   public void execute() {
+    // import the controllers, its two separate ones to accomodate for the helicopter joysticks that are split between two
     turns = driver1.getRawAxis(Controllers.DRIVER_TURN);
     speeds = driver2.getRawAxis(Controllers.DRIVER_SPEED);
-    double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
-    // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
-    double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED); // todo new value .95
-    // System.out.println(turn);
-    // System.out.println(speed);
-    // turn = 0;
-    // speed = 0.5;
-    drivesubsystem.teleop(speed, turn);
+    if (Controllers.arcadedriver == true) {
+    // Follow standard order to use arcade driving preset 
+    // Get the axises and apply speed limits 
+      double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
+      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      drivesubsystem.teleop(speed, turn);
+    } else {
+      // Follow tank drive preset
+      // turn the retrieved axises in to left and right sides with only the straightline speed limit applied
+      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED);
+      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      drivesubsystem.teleop(left, right);
+    }
   }
 
   public void setTeleOpMode(boolean teleOPMode) {
