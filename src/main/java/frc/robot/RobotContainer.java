@@ -5,20 +5,18 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.autoCmd;
-import frc.robot.commands.teleopCmd;
-import frc.robot.subsystems.drivetrainSubsystem;
+import frc.robot.commands.AutoCmd;
+import frc.robot.commands.TeleopCmd;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class RobotContainer {
-  private final drivetrainSubsystem drivetrain = new drivetrainSubsystem();
-  private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
+  // Define subsystems
+  private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // Define Commands
+  private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
+  private final AutoCmd m_autoCommand = new AutoCmd();
 
-  private final autoCmd m_autoCommand = new autoCmd();
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();

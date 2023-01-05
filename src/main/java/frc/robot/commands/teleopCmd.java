@@ -4,12 +4,12 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.drivetrainSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class teleopCmd extends CommandBase {
+public class TeleopCmd extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final drivetrainSubsystem drivesubsystem;
+  private final DrivetrainSubsystem drivesubsystem;
 
   private final SlewRateLimiter slrForTurn =
       new SlewRateLimiter(Constants.SLEWTURN); // from 2 to 2.5 to 3.5 to 4.0 to 4.5
@@ -18,7 +18,7 @@ public class teleopCmd extends CommandBase {
   private final Joystick driver = new Joystick(Constants.DRIVER_PORT);
   private boolean isTeleOp = false;
 
-  public teleopCmd(drivetrainSubsystem subsystem) {
+  public TeleopCmd(DrivetrainSubsystem subsystem) {
     drivesubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
