@@ -32,7 +32,8 @@ public class teleopCmd extends CommandBase {
   @Override
   public void execute() {
     double turn =
-        slrForTurn.calculate(driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN);
+        slrForTurn.calculate(
+            driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN * -1.0);
     // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
     double speed =
         slrForDrive.calculate(
