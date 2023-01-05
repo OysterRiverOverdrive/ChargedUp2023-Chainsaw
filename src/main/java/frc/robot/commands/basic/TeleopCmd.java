@@ -8,7 +8,7 @@ import frc.robot.Controllers;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class teleopCmd extends CommandBase {
+public class TeleopCmd extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DrivetrainSubsystem drivesubsystem;
 
@@ -21,7 +21,7 @@ public class teleopCmd extends CommandBase {
 
   private boolean isTeleOp = false;
 
-  public teleopCmd(DrivetrainSubsystem subsystem) {
+  public TeleopCmd(DrivetrainSubsystem subsystem) {
     drivesubsystem = subsystem;
     // turns = turnvariable;
     // speeds = speedvariable;
