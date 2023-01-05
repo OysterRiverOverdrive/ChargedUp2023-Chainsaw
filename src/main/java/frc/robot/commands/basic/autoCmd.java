@@ -6,9 +6,9 @@ package frc.robot.commands.basic;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class AutoCmd extends CommandBase {
+public class autoCmd extends CommandBase {
   /** Creates a new autoCmd. */
-  public AutoCmd() {
+  public autoCmd() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
