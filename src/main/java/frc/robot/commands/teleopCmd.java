@@ -31,9 +31,14 @@ public class teleopCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double turn = slrForTurn.calculate(driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN*-1.0);
+    double turn =
+        slrForTurn.calculate(
+            driver.getRawAxis(Constants.DRIVER_TURN) * Constants.SPEEDLIMIT_TURN * -1.0);
     // double speed = slrForDrive.calculate (m_stick.getRawAxis(1)*-0.85);
-    double speed = slrForDrive.calculate(driver.getRawAxis(Constants.DRIVER_SPEED) * Constants.SPEEDLIMIT_SPEED); // todo new value .95
+    double speed =
+        slrForDrive.calculate(
+            driver.getRawAxis(Constants.DRIVER_SPEED)
+                * Constants.SPEEDLIMIT_SPEED); // todo new value .95
 
     drivesubsystem.teleop(speed, turn);
   }
