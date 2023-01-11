@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Controllers;
 
-public class drivetrainSubsystem extends SubsystemBase {
+public class DrivetrainSubsystem extends SubsystemBase {
 
   private final CANSparkMax left1 = new CANSparkMax(Constants.LeftDrive1, MotorType.kBrushless);
   private final CANSparkMax left2 = new CANSparkMax(Constants.LeftDrive2, MotorType.kBrushless);
@@ -24,13 +25,16 @@ public class drivetrainSubsystem extends SubsystemBase {
 
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
 
-  public drivetrainSubsystem() {
+  public DrivetrainSubsystem() {
     leftSide.setInverted(true);
   }
 
   public void teleop(double speed, double turn) {
-
-    m_robotDrive.arcadeDrive(speed, turn);
+    if (Controllers.arcadedriver == true) {
+      m_robotDrive.arcadeDrive(speed, turn);
+    } else {
+      m_robotDrive.tankDrive(speed, turn);
+    }
   }
 
   @Override

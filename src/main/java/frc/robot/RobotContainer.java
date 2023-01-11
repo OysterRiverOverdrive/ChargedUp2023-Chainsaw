@@ -4,34 +4,37 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.autoCmd;
-import frc.robot.commands.teleopCmd;
-import frc.robot.subsystems.drivetrainSubsystem;
+import frc.robot.commands.AutoCmd;
+import frc.robot.commands.TeleopCmd;
+import frc.robot.subsystems.ControllerSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class RobotContainer {
-  private final drivetrainSubsystem drivetrain = new drivetrainSubsystem();
-  private final teleopCmd teleopCmd = new teleopCmd(drivetrain);
+  // Defining Controllers
+  private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
+  private final Joystick driver2 = new Joystick(Controllers.DRIVER_SEC_PORT);
+  private final Joystick operator = new Joystick(Controllers.OPER_PORT);
 
-  // The robot's subsystems and commands are defined here...
-  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // Defining Subsystems
+  private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+  private final ControllerSubsystem controls = new ControllerSubsystem();
 
-  private final autoCmd m_autoCommand = new autoCmd();
+  // Defining Commands
+  private final AutoCmd m_autoCommand = new AutoCmd();
+  private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
+    controls.setup();
   }
 
   private void configureButtonBindings() {}
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
