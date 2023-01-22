@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 // install new drivetrain library
 // manage vendor libraries -> install new library
-// https://software-metadata.revrobotics.com/REVLib.json
+// https://software-metadata.revrobotics.com/REVLib-2023.json
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
