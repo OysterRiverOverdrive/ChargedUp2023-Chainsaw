@@ -6,8 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.AutoCmd;
 import frc.robot.commands.TeleopCmd;
+import frc.robot.commands.Auto.AutoCmd;
 import frc.robot.subsystems.ControllerSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
