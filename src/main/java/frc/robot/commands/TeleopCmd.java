@@ -19,7 +19,7 @@ public class TeleopCmd extends CommandBase {
   private final SlewRateLimiter slrForTurn = new SlewRateLimiter(Constants.SLEWTURN);
   private final SlewRateLimiter slrForDrive = new SlewRateLimiter(Constants.SLEWSPEED);
 
-  private boolean isTeleOp = false;
+   
 
   public TeleopCmd(DrivetrainSubsystem subsystem) {
     drivesubsystem = subsystem;
@@ -54,9 +54,7 @@ public class TeleopCmd extends CommandBase {
     }
   }
 
-  public void setTeleOpMode(boolean teleOPMode) {
-    isTeleOp = teleOPMode;
-  }
+ 
 
   // Called once the command ends or is interrupted.
   @Override
