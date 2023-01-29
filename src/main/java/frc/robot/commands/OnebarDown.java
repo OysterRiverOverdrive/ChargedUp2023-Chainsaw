@@ -5,18 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import frc.robot.subsystems.OnebarSubsystem;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.robot.Constants;
 
-public class OnebarIn extends CommandBase {
-  /** Creates a new OnebarIn. */
+public class OnebarDown extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
+  private final DutyCycleEncoder encBarDutyCycleEncoder = new DutyCycleEncoder(Constants.encOneBarPort);
 
-  public OnebarIn(OnebarSubsystem subsystem) {
+  /** Creates a new OneBarDown. */
+  public OnebarDown(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -24,15 +22,14 @@ public class OnebarIn extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double pValue = pot.get();
-    double percentage = pValue * 100.0;
-    onebarsubsystem.armIn(percentage);
+    double eValue = encBarDutyCycleEncoder.get();
+    eValue = eValue * Constants.ratio;
+    onebarsubsystem.armDown(eValue);
   }
 
   // Called once the command ends or is interrupted.

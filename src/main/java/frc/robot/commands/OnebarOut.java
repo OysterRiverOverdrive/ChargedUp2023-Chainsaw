@@ -9,11 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import frc.robot.subsystems.OnebarSubsystem;
+import frc.robot.Constants;
 
 public class OnebarOut extends CommandBase {
   /** Creates a new OnebarOut. */
   private final OnebarSubsystem onebarSubsystem;
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(0);
+  private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
 
   public OnebarOut(OnebarSubsystem subsystem) {
     onebarSubsystem = subsystem;
@@ -29,8 +30,8 @@ public class OnebarOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double value = pot.get();
-    double percentage = value * 100.0;
+    double pValue = pot.get();
+    double percentage = pValue * 100.0;
     onebarSubsystem.armOut(percentage);
   }
 
