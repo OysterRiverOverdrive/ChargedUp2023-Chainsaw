@@ -41,7 +41,7 @@ public class TeleopCmd extends CommandBase {
     if (Controllers.arcadedriver == true) {
       // Follow standard order to use arcade driving preset
       // Get the axises and apply speed limits
-      double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN * -1.0);
+      double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN);
       double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
       drivesubsystem.teleop(speed, turn);
     } else {
