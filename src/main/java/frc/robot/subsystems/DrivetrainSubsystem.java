@@ -10,6 +10,12 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Controllers;
+//ref libary
+//https://codedocs.revrobotics.com/java/com/revrobotics/package-summary.html
+import com.revrobotics.RelativeEncoder;
+// install new drivetrain library
+// manage vendor libraries -> install new library
+// https://software-metadata.revrobotics.com/REVLib-2023.json
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
@@ -24,6 +30,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   MotorControllerGroup rightSide = new MotorControllerGroup(right1, right2);
 
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
+
+  //right side encoder
+  private RelativeEncoder m_encoder_Right;
 
   public DrivetrainSubsystem() {
     leftSide.setInverted(true);
@@ -45,5 +54,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+  public void MoveUntill(double Inches){
+    //radius 3 in
+    Inches = Inches/18.8495559215;
+    if(m_encoder_Right.getPosition()/9.52 <= Inches){
+      m_robotDrive.arcadeDrive(0.5, 0);
+    }else{
+      m_robotDrive.arcadeDrive(0, 0);
+    }
   }
 }
