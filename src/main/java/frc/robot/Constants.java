@@ -19,6 +19,8 @@ public final class Constants {
   public static int RightDrive2 = 4;
   // establishing motor callouts and their CAN-IDs
 
+  public static double FORSPEED = 0.38;
+  public static double REVSPEED = Constants.FORSPEED * -1;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.2;
   public static double SPEEDLIMIT_TURN = 0.75;
@@ -33,11 +35,12 @@ public final class Constants {
   public static double ratio = 0.01;
   public static double potMaxPerc = 96;
   public static double potMinPerc = 10;
-  public static double encMaxVal = 10;
-  public static double encMinVal = 1;
+  public static double encMaxVal = 1;
+  public static double encMinVal = -1;
 
   // Ports for Encoder, Potentiometer, and Motors
   public static int encOneBarPort = 0;
-  public static int potOneBarPort = 1;
-  public static int motorOneBarDeviceID = 5;
+  public static int potOneBarPort = 0;
+  public static int motorRotID = 4;
+  public static int motorExtID = 3;
 }

@@ -14,7 +14,6 @@ import frc.robot.Constants;
 public class OnebarIn extends CommandBase {
   /** Creates a new OnebarIn. */
   private final OnebarSubsystem onebarsubsystem;
-  private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
 
   public OnebarIn(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
@@ -30,9 +29,7 @@ public class OnebarIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double pValue = pot.get();
-    double percentage = pValue * 100.0;
-    onebarsubsystem.armIn(percentage);
+    onebarsubsystem.armIn();
   }
 
   // Called once the command ends or is interrupted.

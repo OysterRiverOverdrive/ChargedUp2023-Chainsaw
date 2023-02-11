@@ -3,17 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import frc.robot.subsystems.OnebarSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.OnebarSubsystem;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import frc.robot.Constants;
 
-public class OnebarDown extends CommandBase {
+public class ArmExtStop extends CommandBase {
+  /** Creates a new ArmExtStop. */
   private final OnebarSubsystem onebarsubsystem;
-  
-  /** Creates a new OneBarDown. */
-  public OnebarDown(OnebarSubsystem subsystem) {
+  public ArmExtStop(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -21,14 +18,12 @@ public class OnebarDown extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
-    onebarsubsystem.InverseMotor();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armDown();
+    onebarsubsystem.armExtensionStop();
   }
 
   // Called once the command ends or is interrupted.

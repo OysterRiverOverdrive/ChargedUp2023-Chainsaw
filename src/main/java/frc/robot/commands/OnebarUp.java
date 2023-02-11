@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class OnebarUp extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final DutyCycleEncoder encBarDutyCycleEncoder = new DutyCycleEncoder(Constants.encOneBarPort);
+
   /** Creates a new OneBarUp. */
   public OnebarUp(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
@@ -21,14 +21,14 @@ public class OnebarUp extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    onebarsubsystem.InverseMotor();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double eValue = encBarDutyCycleEncoder.get();
-    eValue = eValue * Constants.ratio;
-    onebarsubsystem.armUp(eValue);
+    onebarsubsystem.armUp();
   }
 
   // Called once the command ends or is interrupted.
