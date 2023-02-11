@@ -4,20 +4,11 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.TeleopCmd;
-import frc.robot.commands.OneBar.ArmExtStop;
-import frc.robot.commands.OneBar.ArmRotStop;
-import frc.robot.commands.OneBar.OnebarDown;
-import frc.robot.commands.OneBar.OnebarIn;
-import frc.robot.commands.OneBar.OnebarOut;
-import frc.robot.commands.OneBar.OnebarUp;
-import frc.robot.commands.AutoCmd;
-import frc.robot.subsystems.ControllerSubsystem;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.OnebarSubsystem;
+import frc.robot.commands.*;
+import frc.robot.commands.OneBar.*;
+import frc.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj2.command.button.*;
 import java.util.function.BooleanSupplier;
@@ -60,9 +51,13 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
+    // Arm Extension In
     supplier(5).onTrue(armIn).onFalse(armExtStop);
+    // Arm Extension Out
     supplier(3).onTrue(armOut).onFalse(armExtStop);
+    // Arm Rotation Up
     supplier(6).onTrue(armUp).onFalse(armRotStop);
+    // Arm Rotation Down
     supplier(4).onTrue(armDown).onFalse(armRotStop);
     
   }
