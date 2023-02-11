@@ -9,6 +9,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
 import frc.robot.commands.OneBar.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.WristSubsystem;
+import frc.robot.commands.LowerCmd;
+import frc.robot.commands.RaiseCmd;
+import frc.robot.commands.RotLeftCmd;
+import frc.robot.commands.RotRightCmd;
+import frc.robot.commands.StopRaiseCmd;
+import frc.robot.commands.StopRotCmd;
 
 import edu.wpi.first.wpilibj2.command.button.*;
 import java.util.function.BooleanSupplier;
@@ -33,7 +40,13 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-
+  private final WristSubsystem wristSubsystem = new WristSubsystem();
+  private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
+  private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
+  private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
+  private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
+  private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
+  private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
   public Trigger supplier(int buttonID){
     BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
@@ -60,6 +73,25 @@ public class RobotContainer {
     // Arm Rotation Down
     supplier(4).onTrue(armDown).onFalse(armRotStop);
     
+
+    Trigger lowerbutton = supplier(1);
+    lowerbutton.onTrue(raiseCmd);
+    lowerbutton.onFalse(stopRaiseCmd);
+
+    Trigger raisebutton = supplier(2);
+    raisebutton.onTrue(raiseCmd);
+    raisebutton.onFalse(stopRaiseCmd);
+
+    Trigger rotleftbutton = supplier(3);
+    rotleftbutton.onTrue(rotLeftCmd);
+    rotleftbutton.onFalse(stopRotCmd);
+
+    Trigger rotrightbutton = supplier(4);
+    rotrightbutton.onTrue(rotRightCmd);
+    rotrightbutton.onFalse(stopRotCmd);
+
+
+
   }
 
   public Command getAutonomousCommand() {
