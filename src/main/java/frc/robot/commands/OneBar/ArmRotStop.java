@@ -2,15 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.OneBar;
 import frc.robot.subsystems.OnebarSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ArmExtStop extends CommandBase {
-  /** Creates a new ArmExtStop. */
+public class ArmRotStop extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  public ArmExtStop(OnebarSubsystem subsystem) {
+  /** Creates a new ArmRotStop. */
+  public ArmRotStop(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -23,7 +23,7 @@ public class ArmExtStop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armExtensionStop();
+    onebarsubsystem.armRotationStop();
   }
 
   // Called once the command ends or is interrupted.

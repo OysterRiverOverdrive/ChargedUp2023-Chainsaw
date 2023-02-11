@@ -2,20 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.OneBar;
+import frc.robot.subsystems.OnebarSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import frc.robot.subsystems.OnebarSubsystem;
-import frc.robot.Constants;
 
-public class OnebarIn extends CommandBase {
-  /** Creates a new OnebarIn. */
+public class ArmExtStop extends CommandBase {
+  /** Creates a new ArmExtStop. */
   private final OnebarSubsystem onebarsubsystem;
-
-  public OnebarIn(OnebarSubsystem subsystem) {
+  public ArmExtStop(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -23,13 +18,12 @@ public class OnebarIn extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armIn();
+    onebarsubsystem.armExtensionStop();
   }
 
   // Called once the command ends or is interrupted.
