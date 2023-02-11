@@ -5,18 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import frc.robot.subsystems.OnebarSubsystem;
-import frc.robot.Constants;
 
-public class OnebarOut extends CommandBase {
-  /** Creates a new OnebarOut. */
-  private final OnebarSubsystem onebarSubsystem;
-  
-  public OnebarOut(OnebarSubsystem subsystem) {
-    onebarSubsystem = subsystem;
+public class OnebarIn extends CommandBase {
+  /** Creates a new OnebarIn. */
+  private final OnebarSubsystem onebarsubsystem;
+
+  public OnebarIn(OnebarSubsystem subsystem) {
+    onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -29,7 +25,7 @@ public class OnebarOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarSubsystem.armOut();
+    onebarsubsystem.armIn();
   }
 
   // Called once the command ends or is interrupted.
