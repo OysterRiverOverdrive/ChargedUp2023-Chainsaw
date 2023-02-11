@@ -19,13 +19,28 @@ public final class Constants {
   public static int RightDrive2 = 4;
   // establishing motor callouts and their CAN-IDs
 
-  public static double SLEWTURN = 3.5;
-  public static double SLEWSPEED = 1.2;
-  public static double SPEEDLIMIT_TURN = 0.55;
-  public static double SPEEDLIMIT_SPEED = 0.75;
+  public static double FORSPEED = 0.38;
+  public static double REVSPEED = Constants.FORSPEED * -1;
+  public static double SLEWTURN = 4.5;
+  public static double SLEWSPEED = 2.2;
+  public static double SPEEDLIMIT_TURN = 0.75;
+  public static double SPEEDLIMIT_SPEED = 0.95;
 
   // Basic Controller configuraton (Xbox Pro)
   public static int DRIVER_PORT = 0;
   public static int DRIVER_TURN = 4;
   public static int DRIVER_SPEED = 1;
+
+  // Potentiometer and Encoder maximums, minimums, and ratios
+  public static double ratio = 0.01;
+  public static double potMaxPerc = 96;
+  public static double potMinPerc = 10;
+  public static double encMaxVal = 1;
+  public static double encMinVal = -1;
+
+  // Ports for Encoder, Potentiometer, and Motors
+  public static int encOneBarPort = 0;
+  public static int potOneBarPort = 0;
+  public static int motorRotID = 4;
+  public static int motorExtID = 3;
 }
