@@ -7,7 +7,11 @@ public final class Controllers {
   public static int DRIVER_SEC_PORT = 0;
   public static int DRIVER_TURN = 4;
   public static int DRIVER_SPEED = 1;
-  public static boolean DRIVER_W_BUTTONS = false; // Work in progress, Don't touch please
+  public static int HIGHSPEED = 2;
+  public static int LOWSPEED = 1;// 0.5
+  public static double LOWEREDSPEED = 0.55;
+  public static boolean DRIVER_W_BUTTONS = false;
+  public static int CURRENT_SPEEDLIMIT = 2;
   public static boolean arcadedriver = true;
 
   // Operator Controller Configuration (Logitech Dual Action)
