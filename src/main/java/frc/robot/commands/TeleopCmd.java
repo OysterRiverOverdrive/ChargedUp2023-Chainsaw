@@ -27,6 +27,16 @@ public class TeleopCmd extends CommandBase {
     addRequirements(subsystem);
   }
 
+  public double getGear() {
+    double returned = 1.0;
+    if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {
+      returned = 1.0;
+    } else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.LOWSPEED) {
+      returned = Controllers.LOWEREDSPEED;
+    }
+    return returned;
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -42,14 +52,14 @@ public class TeleopCmd extends CommandBase {
       // Follow standard order to use arcade driving preset
       // Get the axises and apply speed limits
       double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN);
-      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED*getGear());
       drivesubsystem.teleop(speed, turn);
     } else {
       // Follow tank drive preset
       // turn the retrieved axises in to left and right sides with only the straightline speed limit
       // applied
-      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED);
-      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED);
+      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED*getGear());
+      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED*getGear());
       drivesubsystem.teleop(left, right);
     }
   }
