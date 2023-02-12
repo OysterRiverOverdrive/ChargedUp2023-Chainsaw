@@ -26,6 +26,9 @@ public class RobotContainer {
   // Defining Commands
   private final AutoCmd m_autoCommand = new AutoCmd();
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
+  private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
+  private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
+
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -34,7 +37,7 @@ public class RobotContainer {
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
 
   public Trigger supplier(int buttonID) {
-    BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
+    BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
     return mybutton;
   }
@@ -49,14 +52,19 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // Arm Extension In
-    supplier(5).onTrue(armIn).onFalse(armExtStop);
-    // Arm Extension Out
-    supplier(3).onTrue(armOut).onFalse(armExtStop);
-    // Arm Rotation Up
-    supplier(6).onTrue(armUp).onFalse(armRotStop);
-    // Arm Rotation Down
-    supplier(4).onTrue(armDown).onFalse(armRotStop);
+    // // Arm Extension In
+    // supplier(5).onTrue(armIn).onFalse(armExtStop);
+    // // Arm Extension Out
+    // supplier(3).onTrue(armOut).onFalse(armExtStop);
+    // // Arm Rotation Up
+    // supplier(6).onTrue(armUp).onFalse(armRotStop);
+    // // Arm Rotation Down
+    // supplier(4).onTrue(armDown).onFalse(armRotStop);
+
+    // Shift Up
+    supplier(2).onTrue(shiftup);
+    // Shift Down
+    supplier(3).onTrue(shiftdown);
   }
 
   public Command getAutonomousCommand() {

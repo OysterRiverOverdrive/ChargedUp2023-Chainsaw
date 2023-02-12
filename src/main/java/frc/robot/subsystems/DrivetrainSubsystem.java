@@ -26,7 +26,16 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
 
   public DrivetrainSubsystem() {
+    m_robotDrive.setSafetyEnabled(false);
     leftSide.setInverted(true);
+  }
+
+  public void speedup() {
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.HIGHSPEED;
+  }
+
+  public void speeddown() {
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.LOWSPEED;
   }
 
   public void teleop(double speed, double turn) {
@@ -39,6 +48,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // boolean speeding = false;
+    // if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {speeding = false;}
+    // else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.LOWSPEED) {speeding = true;}
+    // SmartDashboard.putBoolean("Lowering Speed", speeding);
+    // SmartDashboard.putNumber("Speedlimit", Controllers.CURRENT_SPEEDLIMIT);
+    // SmartDashboard.putBoolean("Safety", m_robotDrive.isSafetyEnabled());
     // This method will be called once per scheduler run
   }
 
