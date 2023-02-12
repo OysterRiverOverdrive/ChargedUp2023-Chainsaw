@@ -102,44 +102,44 @@ tasks.withType(JavaCompile) {
 // Ensure readable code with spotless.
 // See https://docs.wpilib.org/en/stable/docs/software/advanced-gradlerio/code-formatting.html
 spotless {
-   java {
-      target fileTree('.') {
+    java {
+        target fileTree('.') {
             include '**/*.java'
             exclude '**/build/**', '**/build-*/**'
-      }
-      toggleOffOn()
-      googleJavaFormat()
-      removeUnusedImports()
-      trimTrailingWhitespace()
-      endWithNewline()
-   }
-   groovyGradle {
-      target fileTree('.') {
+        }
+        toggleOffOn()
+        googleJavaFormat()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target fileTree('.') {
             include '**/*.gradle'
             exclude '**/build/**', '**/build-*/**'
-      }
-      greclipse()
-      indentWithSpaces(4)
-      trimTrailingWhitespace()
-      endWithNewline()
-   }
-   format 'xml', {
-      target fileTree('.') {
+        }
+        greclipse()
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'xml', {
+        target fileTree('.') {
             include '**/*.xml'
             exclude '**/build/**', '**/build-*/**'
-      }
-      eclipseWtp('xml')
-      trimTrailingWhitespace()
-      indentWithSpaces(2)
-      endWithNewline()
-   }
-   format 'misc', {
-      target fileTree('.') {
+        }
+        eclipseWtp('xml')
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
+    format 'misc', {
+        target fileTree('.') {
             include '**/*.md', '**/.gitignore'
             exclude '**/build/**', '**/build-*/**'
-      }
-      trimTrailingWhitespace()
-      indentWithSpaces(2)
-      endWithNewline()
-   }
+        }
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
+    }
 }

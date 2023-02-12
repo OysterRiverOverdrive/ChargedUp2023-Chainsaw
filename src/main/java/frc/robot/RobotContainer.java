@@ -6,11 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.OneBar.*;
 import frc.robot.subsystems.*;
-
-import edu.wpi.first.wpilibj2.command.button.*;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -34,15 +33,14 @@ public class RobotContainer {
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
 
-
-  public Trigger supplier(int buttonID){
+  public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
     return mybutton;
   }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
+
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
@@ -59,7 +57,6 @@ public class RobotContainer {
     supplier(6).onTrue(armUp).onFalse(armRotStop);
     // Arm Rotation Down
     supplier(4).onTrue(armDown).onFalse(armRotStop);
-    
   }
 
   public Command getAutonomousCommand() {
