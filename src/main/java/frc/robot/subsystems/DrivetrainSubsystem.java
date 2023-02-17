@@ -41,7 +41,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
   //right side encoder
   private RelativeEncoder m_encoder_Right = right1.getEncoder();
 
-  
   public DrivetrainSubsystem() {
     m_robotDrive.setSafetyEnabled(false);
     leftSide.setInverted(true);

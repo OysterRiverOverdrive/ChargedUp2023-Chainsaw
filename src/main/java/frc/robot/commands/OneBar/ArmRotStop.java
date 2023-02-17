@@ -3,9 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.OneBar;
-import frc.robot.subsystems.OnebarSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.OnebarSubsystem;
 
 public class ArmRotStop extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
