@@ -44,5 +44,4 @@ public final class Constants {
 
   public static int motorRotID = 2;
   public static int motorExtID = 3;
-
 }

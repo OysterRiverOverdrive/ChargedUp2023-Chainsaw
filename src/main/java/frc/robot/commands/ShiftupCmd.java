@@ -10,6 +10,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public class ShiftupCmd extends CommandBase {
   /** Creates a new ShiftupCmd. */
   private DrivetrainSubsystem drive;
+
   public ShiftupCmd(DrivetrainSubsystem drives) {
     drive = drives;
     addRequirements(drives);

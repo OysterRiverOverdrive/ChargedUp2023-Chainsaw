@@ -4,90 +4,84 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
   /** Creates a new OnebarSubsystem. */
   private final CANSparkMax rotMotor = new CANSparkMax(Constants.motorRotID, MotorType.kBrushless);
+
   private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushless);
-  private final DutyCycleEncoder encBarDutyCycleEncoder = new DutyCycleEncoder(Constants.encOneBarPort);
+  private final DutyCycleEncoder encBarDutyCycleEncoder =
+      new DutyCycleEncoder(Constants.encOneBarPort);
   private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
 
-  public OnebarSubsystem() 
-  {
-    
+  public OnebarSubsystem() {}
+
+  public void setup() {
+    resetEnc();
   }
 
-public void setup(){
-  resetEnc();
-}
-
-
-public void InverseMotor()
-{
-  rotMotor.setInverted(true);
-}
-
-
-public void armOut(){
-  double pValue = pot.get();
-  double percentage = pValue * 100.0;
-  if(percentage < Constants.potMaxPerc){
-    extMotor.set(Constants.FORSPEED);
+  public void InverseMotor() {
+    rotMotor.setInverted(true);
   }
-}
 
-public void armIn(){
-  double pValue = pot.get();
-  double percentage = pValue * 100.0;
-  if(percentage > Constants.potMinPerc){
-    extMotor.set(Constants.REVSPEED);
+  public void armOut() {
+    double pValue = pot.get();
+    double percentage = pValue * 100.0;
+    if (percentage < Constants.potMaxPerc) {
+      extMotor.set(Constants.FORSPEED);
+    }
   }
-}
 
-public void armUp(){
-  double eValue = encBarDutyCycleEncoder.get();
-  eValue = eValue * Constants.ratio;
-  if (eValue < Constants.encMaxVal){
+  public void armIn() {
+    double pValue = pot.get();
+    double percentage = pValue * 100.0;
+    if (percentage > Constants.potMinPerc) {
+      extMotor.set(Constants.REVSPEED);
+    }
+  }
+
+  public void armUp() {
+    double eValue = encBarDutyCycleEncoder.get();
+    eValue = eValue * Constants.ratio;
+    if (eValue < Constants.encMaxVal) {
       rotMotor.set(Constants.FORSPEED);
-    }
-    else{
+    } else {
       rotMotor.stopMotor();
     }
-}
+  }
 
-public void armDown(){
-  double eValue = encBarDutyCycleEncoder.get();
-  eValue = eValue * Constants.ratio;
-  if (eValue > Constants.encMinVal){
+  public void armDown() {
+    double eValue = encBarDutyCycleEncoder.get();
+    eValue = eValue * Constants.ratio;
+    if (eValue > Constants.encMinVal) {
       rotMotor.set(Constants.REVSPEED);
-    }
-    else{
+    } else {
       rotMotor.stopMotor();
     }
-}
+  }
 
-public void armRotationStop(){
-  rotMotor.stopMotor();
-}
+  public void armRotationStop() {
+    rotMotor.stopMotor();
+  }
 
-public void armExtensionStop(){
-  extMotor.stopMotor();
-}
+  public void armExtensionStop() {
+    extMotor.stopMotor();
+  }
 
-public void resetEnc(){
-  encBarDutyCycleEncoder.reset();
-}
+  public void resetEnc() {
+    encBarDutyCycleEncoder.reset();
+  }
 
-public double getEncoder(){
-  return encBarDutyCycleEncoder.get();
-}
+  public double getEncoder() {
+    return encBarDutyCycleEncoder.get();
+  }
 
   @Override
   public void periodic() {
