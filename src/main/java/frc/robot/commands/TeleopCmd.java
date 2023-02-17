@@ -52,14 +52,14 @@ public class TeleopCmd extends CommandBase {
       // Follow standard order to use arcade driving preset
       // Get the axises and apply speed limits
       double turn = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_TURN);
-      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED*getGear());
+      double speed = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED * getGear());
       drivesubsystem.teleop(speed, turn);
     } else {
       // Follow tank drive preset
       // turn the retrieved axises in to left and right sides with only the straightline speed limit
       // applied
-      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED*getGear());
-      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED*getGear());
+      double right = slrForTurn.calculate(turns * Constants.SPEEDLIMIT_SPEED * getGear());
+      double left = slrForDrive.calculate(speeds * Constants.SPEEDLIMIT_SPEED * getGear());
       drivesubsystem.teleop(left, right);
     }
   }

@@ -3,13 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.OneBar;
-import frc.robot.subsystems.OnebarSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.OnebarSubsystem;
 
 public class ArmExtStop extends CommandBase {
   /** Creates a new ArmExtStop. */
   private final OnebarSubsystem onebarsubsystem;
+
   public ArmExtStop(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.

@@ -10,6 +10,7 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public class ShiftdownCmd extends CommandBase {
   /** Creates a new ShiftdownCmd. */
   private DrivetrainSubsystem drive;
+
   public ShiftdownCmd(DrivetrainSubsystem drives) {
     drive = drives;
     addRequirements(drives);

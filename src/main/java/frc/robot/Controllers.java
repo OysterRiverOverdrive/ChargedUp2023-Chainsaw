@@ -8,7 +8,7 @@ public final class Controllers {
   public static int DRIVER_TURN = 4;
   public static int DRIVER_SPEED = 1;
   public static int HIGHSPEED = 2;
-  public static int LOWSPEED = 1;// 0.5
+  public static int LOWSPEED = 1; // 0.5
   public static double LOWEREDSPEED = 0.55;
   public static boolean DRIVER_W_BUTTONS = false;
   public static int CURRENT_SPEEDLIMIT = 2;

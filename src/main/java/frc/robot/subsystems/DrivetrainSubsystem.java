@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 // https://software-metadata.revrobotics.com/REVLib-2023.json
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Controllers;
@@ -25,7 +24,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   MotorControllerGroup rightSide = new MotorControllerGroup(right1, right2);
 
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftSide, rightSide);
-  
+
   public DrivetrainSubsystem() {
     m_robotDrive.setSafetyEnabled(false);
     leftSide.setInverted(true);
@@ -50,7 +49,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // boolean speeding = false;
-    // if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {speeding = false;} 
+    // if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {speeding = false;}
     // else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.LOWSPEED) {speeding = true;}
     // SmartDashboard.putBoolean("Lowering Speed", speeding);
     // SmartDashboard.putNumber("Speedlimit", Controllers.CURRENT_SPEEDLIMIT);
