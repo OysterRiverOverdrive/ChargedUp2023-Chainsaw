@@ -65,7 +65,6 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
-    
   }
 
   public Command getAutonomousCommand() {
