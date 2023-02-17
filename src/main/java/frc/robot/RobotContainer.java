@@ -64,9 +64,9 @@ public class RobotContainer {
     // supplier(4).onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
-    supplier(2).onTrue(shiftup);
+    supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
-    supplier(3).onTrue(shiftdown);
+    supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
     
   }
 

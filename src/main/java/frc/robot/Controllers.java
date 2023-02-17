@@ -26,6 +26,18 @@ public final class Controllers {
   public static int xbox_rx = 4;
   public static int xbox_ry = 5;
 
+  // Buttons
+  public static int xbox_a = 1;
+  public static int xbox_b = 2;
+  public static int xbox_x = 3;
+  public static int xbox_y = 4;
+  public static int xbox_lb = 5;
+  public static int xbox_rb = 6;
+  public static int xbox_share = 7;
+  public static int xbox_options = 8;
+  public static int xbox_lbutton = 9;
+  public static int xbox_rbutton = 10;
+
   // Logitech Dual Action
   // Joysticks
   public static int logi_lx = 0;
