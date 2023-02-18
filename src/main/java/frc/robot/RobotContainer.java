@@ -18,6 +18,12 @@ import frc.robot.commands.StopRotCmd;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
+import frc.robot.commands.ClampCmd;
+import frc.robot.commands.ReleaseCmd;
+import frc.robot.commands.ShiftLeftCmd;
+import frc.robot.commands.ShiftRightCmd;
+import frc.robot.commands.StopClawCmd;
+import frc.robot.subsystems.ClawSubsystem;
 
 public class RobotContainer {
   // Defining Controllers
@@ -35,7 +41,6 @@ public class RobotContainer {
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
-
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -49,6 +54,12 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
 
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
@@ -96,6 +107,22 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+
+    Trigger clampbutton = supplier(5);
+    clampbutton.onTrue(clampCmd);
+    clampbutton.onFalse(stopClawCmd);
+    
+    Trigger releasebutton = supplier(6);
+    releasebutton.onTrue(releaseCmd);
+    releasebutton.onFalse(stopClawCmd);
+
+    Trigger shiftleftbutton = supplier(7);
+    shiftleftbutton.onTrue(shiftLeftCmd);
+    shiftleftbutton.onFalse(stopClawCmd);
+
+    Trigger shiftrightbutton = supplier(8);
+    shiftrightbutton.onTrue(shiftRightCmd);
+    shiftrightbutton.onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
