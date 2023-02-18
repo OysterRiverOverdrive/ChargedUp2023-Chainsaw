@@ -44,6 +44,7 @@ public class LimelightSubsystem extends SubsystemBase {
       SmartDashboard.putBoolean("Target Seen", true);
       SmartDashboard.putNumber("target Id", table.getEntry("tid").getDouble(0.0));
       SmartDashboard.putNumber("pipe line", pipeln.getDouble(0.0));
+      SmartDashboard.putNumber("distance constantly updated", getDistance());
     }
     // TODO get tgt ID  - based of pipeline
     else {
@@ -57,7 +58,7 @@ public class LimelightSubsystem extends SubsystemBase {
     double tgtHeightInches = 18.00;
     double cameraHeightInches = 10.5;
     double offSetInches = tgtHeightInches - cameraHeightInches;
-    double cameraMountAngleDegrees = 1.00;
+    double cameraMountAngleDegrees = -1.0;
     double tgtAngleRadians = 0.0;
 
     tgtViz = tv.getDouble(0.0);

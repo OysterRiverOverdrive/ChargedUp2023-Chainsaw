@@ -18,12 +18,12 @@ public class MoveToAprilTagCmd extends CommandBase {
   DrivetrainSubsystem drv;
   LimelightSubsystem camera;
 
-  double standOffDistInches = 18.00; //  was 18 and mesurment is in inches
+  double standOffDistInches = 22.00; //  was 18 and mesurment is in inches
 
   boolean cmdFinished = false;
   double speed = 0.0;
   final double speedKp = 0.01;
-  final double turnRateKp = 0.01;
+  final double turnRateKp = 0.011; // was 0.01
 
   private final SendableChooser<Integer> pipelineChooser = new SendableChooser<>();
 
@@ -38,7 +38,7 @@ public class MoveToAprilTagCmd extends CommandBase {
     addRequirements(limelight);
     pipelineChooser.setDefaultOption(
         "Blue Tag 1", 0); // TODO add the other tags that are on the field
-    pipelineChooser.setDefaultOption("Blue Tag 2", 1);
+    pipelineChooser.setDefaultOption("Blue Tag 6", 5);
     pipelineChooser.setDefaultOption("Blue Tag 8", 7);
     SmartDashboard.putData("Choose Pipeline", pipelineChooser);
   }
@@ -69,8 +69,9 @@ public class MoveToAprilTagCmd extends CommandBase {
         speed = distToMyTgt * speedKp; // was og +0.01
       }
 
-      if (distToMyTgt != -10000.00
-          && distToMyTgt <= standOffDistInches) // the bot is at its goal//was at 30
+      if (distToMyTgt
+          <= standOffDistInches) // the bot is at its goal//was at 30// also had distToMyTgt !=
+      // -10000.00 && condition
       {
 
         System.out.println("ALL Done");
