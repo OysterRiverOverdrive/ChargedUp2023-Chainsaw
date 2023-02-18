@@ -22,12 +22,15 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
+  private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
 
   // Defining Commands
   private final AutoCmd m_autoCommand = new AutoCmd();
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
+  private final MoveToAprilTagCmd moveToAprilTagCmd =
+      new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
@@ -65,6 +68,9 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+
+    supplier(Controllers.xbox_b)
+        .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
   }
 
   public Command getAutonomousCommand() {
