@@ -113,7 +113,6 @@ public class RobotContainer {
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
 
-
     supplier(Controllers.xbox_b)
         .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
 
@@ -132,7 +131,6 @@ public class RobotContainer {
     Trigger shiftrightbutton = supplier(8);
     shiftrightbutton.onTrue(shiftRightCmd);
     shiftrightbutton.onFalse(stopClawCmd);
-
   }
 
   public Command getAutonomousCommand() {
