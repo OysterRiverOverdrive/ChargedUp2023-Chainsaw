@@ -10,6 +10,7 @@ import frc.robot.subsystems.WristSubsystem;
 public class RaiseCmd extends CommandBase {
   /** Creates a new RaiseCmd. */
   private WristSubsystem wrist;
+
   public RaiseCmd(WristSubsystem wrists) {
     wrist = wrists;
     addRequirements(wrists);

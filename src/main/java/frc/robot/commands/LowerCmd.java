@@ -11,10 +11,10 @@ public class LowerCmd extends CommandBase {
 
   /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
+
   public LowerCmd(WristSubsystem wrists) {
     wrist = wrists;
     addRequirements(wrists);
-
   }
 
   public LowerCmd() {
@@ -30,7 +30,6 @@ public class LowerCmd extends CommandBase {
   public void execute() {
 
     wrist.encWrisDutyCycleEncoderlower();
-
   }
 
   // Called once the command ends or is interrupted.

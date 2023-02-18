@@ -9,15 +9,12 @@ import frc.robot.subsystems.WristSubsystem;
 
 public class RotRightCmd extends CommandBase {
   private WristSubsystem wrist;
-    
-    public RotRightCmd(WristSubsystem wrists) {
-  
-      wrist = wrists;
-      addRequirements(wrists);
-  
-    }
 
-  
+  public RotRightCmd(WristSubsystem wrists) {
+
+    wrist = wrists;
+    addRequirements(wrists);
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -28,7 +25,6 @@ public class RotRightCmd extends CommandBase {
   public void execute() {
 
     wrist.encWrisrotright();
-
   }
 
   // Called once the command ends or is interrupted.

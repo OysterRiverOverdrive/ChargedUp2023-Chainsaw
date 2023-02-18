@@ -9,15 +9,13 @@ import frc.robot.subsystems.WristSubsystem;
 
 public class StopRaiseCmd extends CommandBase {
   private WristSubsystem wrist;
-  public StopRaiseCmd(WristSubsystem wrists) {
- 
 
-      wrist = wrists;
-      addRequirements(wrists);
-  
+  public StopRaiseCmd(WristSubsystem wrists) {
+
+    wrist = wrists;
+    addRequirements(wrists);
   }
-    // Use addRequirements() here to declare subsystem dependencies.
-  
+  // Use addRequirements() here to declare subsystem dependencies.
 
   // Called when the command is initially scheduled.
   @Override
@@ -28,7 +26,6 @@ public class StopRaiseCmd extends CommandBase {
   public void execute() {
 
     wrist.stopraise();
-
   }
 
   // Called once the command ends or is interrupted.

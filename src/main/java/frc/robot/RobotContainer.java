@@ -8,18 +8,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
-import frc.robot.commands.OneBar.*;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.WristSubsystem;
 import frc.robot.commands.LowerCmd;
+import frc.robot.commands.OneBar.*;
 import frc.robot.commands.RaiseCmd;
 import frc.robot.commands.RotLeftCmd;
 import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.StopRaiseCmd;
 import frc.robot.commands.StopRotCmd;
-
-import edu.wpi.first.wpilibj2.command.button.*;
-
+import frc.robot.subsystems.*;
+import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -53,7 +50,6 @@ public class RobotContainer {
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
-
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
@@ -70,8 +66,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    
-
 
     Trigger lowerbutton = supplier(1);
     lowerbutton.onTrue(raiseCmd);
@@ -102,7 +96,6 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
-
   }
 
   public Command getAutonomousCommand() {

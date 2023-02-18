@@ -9,11 +9,11 @@ import frc.robot.subsystems.WristSubsystem;
 
 public class StopRotCmd extends CommandBase {
   private WristSubsystem wrist;
+
   public StopRotCmd(WristSubsystem wrists) {
-  
-      wrist = wrists;
-      addRequirements(wrists);
-  
+
+    wrist = wrists;
+    addRequirements(wrists);
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +25,6 @@ public class StopRotCmd extends CommandBase {
   public void execute() {
 
     wrist.stoprot();
-
   }
 
   // Called once the command ends or is interrupted.
