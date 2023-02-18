@@ -101,11 +101,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public void speedup() {
-    Controllers.CURRENT_SPEEDLIMIT = Controllers.HIGHSPEED;
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.Gears.HIGH;
   }
 
   public void speeddown() {
-    Controllers.CURRENT_SPEEDLIMIT = Controllers.LOWSPEED;
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.Gears.LOW;
   }
 
   public void teleop(double speed, double turn) {
