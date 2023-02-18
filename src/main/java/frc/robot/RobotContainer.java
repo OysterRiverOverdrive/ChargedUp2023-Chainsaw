@@ -19,6 +19,7 @@ import frc.robot.commands.StopRaiseCmd;
 import frc.robot.commands.StopRotCmd;
 
 import edu.wpi.first.wpilibj2.command.button.*;
+
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -52,6 +53,7 @@ public class RobotContainer {
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
+
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
@@ -69,6 +71,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     
+
 
     Trigger lowerbutton = supplier(1);
     lowerbutton.onTrue(raiseCmd);
@@ -99,6 +102,7 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+
   }
 
   public Command getAutonomousCommand() {
