@@ -10,6 +10,7 @@ import frc.robot.subsystems.ClawSubsystem;
 public class ReleaseCmd extends CommandBase {
   /** Creates a new ReleaseCmd. */
   private ClawSubsystem claw;
+
   public ReleaseCmd(ClawSubsystem claws) {
     claw = claws;
     addRequirements(claws);
@@ -20,7 +21,6 @@ public class ReleaseCmd extends CommandBase {
   public void initialize() {
 
     claw.release();
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -8,22 +8,22 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
+import frc.robot.commands.ClampCmd;
 import frc.robot.commands.LowerCmd;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.RaiseCmd;
+import frc.robot.commands.ReleaseCmd;
 import frc.robot.commands.RotLeftCmd;
 import frc.robot.commands.RotRightCmd;
-import frc.robot.commands.StopRaiseCmd;
-import frc.robot.commands.StopRotCmd;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.WristSubsystem;
-import java.util.function.BooleanSupplier;
-import frc.robot.commands.ClampCmd;
-import frc.robot.commands.ReleaseCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
 import frc.robot.commands.StopClawCmd;
+import frc.robot.commands.StopRaiseCmd;
+import frc.robot.commands.StopRotCmd;
+import frc.robot.subsystems.*;
 import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.WristSubsystem;
+import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
   // Defining Controllers
@@ -111,7 +111,7 @@ public class RobotContainer {
     Trigger clampbutton = supplier(5);
     clampbutton.onTrue(clampCmd);
     clampbutton.onFalse(stopClawCmd);
-    
+
     Trigger releasebutton = supplier(6);
     releasebutton.onTrue(releaseCmd);
     releasebutton.onFalse(stopClawCmd);

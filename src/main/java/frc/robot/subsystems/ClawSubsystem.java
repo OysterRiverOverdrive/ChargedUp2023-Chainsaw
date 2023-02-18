@@ -4,20 +4,15 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.CAN;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClawSubsystem extends SubsystemBase {
   /** Creates a new ClawSubsystem. */
   public ClawSubsystem() {}
-
 
   private final CANSparkMax motleft = new CANSparkMax(5, MotorType.kBrushless);
   private final CANSparkMax motright = new CANSparkMax(1, MotorType.kBrushed);
@@ -26,51 +21,45 @@ public class ClawSubsystem extends SubsystemBase {
 
   MotorControllerGroup clawGroup = new MotorControllerGroup(motleft, motright);
 
-  public void shiftright () {
+  public void shiftright() {
 
-  motleft.setInverted(false);
-  motright.setInverted(false);
-  clawGroup.set(0.4);
-
+    motleft.setInverted(false);
+    motright.setInverted(false);
+    clawGroup.set(0.4);
   }
 
-  public void shiftleft () {
+  public void shiftleft() {
 
-  motleft.setInverted(false);
-  motright.setInverted(false);
-  clawGroup.set(-0.4);
-  
+    motleft.setInverted(false);
+    motright.setInverted(false);
+    clawGroup.set(-0.4);
   }
 
-  public void clamp () {
+  public void clamp() {
 
     motleft.setInverted(false);
     motright.setInverted(true);
     clawGroup.set(0.4);
-
   }
 
-  public void release () {
+  public void release() {
 
     motleft.setInverted(true);
     motright.setInverted(false);
     clawGroup.set(-0.4);
-
   }
 
-  public void stop () {
+  public void stop() {
 
     clawGroup.stopMotor();
-
   }
 
   @Override
   public void periodic() {
     // shiftright();
-    //shiftleft();
-    //clamp();
-    //release();
-    //stop();
+    // shiftleft();
+    // clamp();
+    // release();
+    // stop();
   }
 }
-

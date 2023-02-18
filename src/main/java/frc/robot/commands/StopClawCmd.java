@@ -10,6 +10,7 @@ import frc.robot.subsystems.ClawSubsystem;
 public class StopClawCmd extends CommandBase {
   /** Creates a new StopClawCmd. */
   private ClawSubsystem claw;
+
   public StopClawCmd(ClawSubsystem claws) {
     claw = claws;
     addRequirements(claws);
@@ -23,8 +24,7 @@ public class StopClawCmd extends CommandBase {
   @Override
   public void execute() {
 
-claw.stop();
-
+    claw.stop();
   }
 
   // Called once the command ends or is interrupted.

@@ -3,18 +3,19 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.subsystems.ClawSubsystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ClawSubsystem;
 
 public class ClampCmd extends CommandBase {
 
   private ClawSubsystem claw;
+
   public ClampCmd(ClawSubsystem claws) {
     claw = claws;
     addRequirements(claws);
   }
-  
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -23,8 +24,7 @@ public class ClampCmd extends CommandBase {
   @Override
   public void execute() {
 
-  claw.clamp();
-
+    claw.clamp();
   }
 
   // Called once the command ends or is interrupted.

@@ -9,12 +9,12 @@ import frc.robot.subsystems.ClawSubsystem;
 
 public class ShiftRightCmd extends CommandBase {
 
-    private ClawSubsystem claw;
-    public ShiftRightCmd(ClawSubsystem claws) {
-      claw = claws;
-      addRequirements(claws);
-    }
-  
+  private ClawSubsystem claw;
+
+  public ShiftRightCmd(ClawSubsystem claws) {
+    claw = claws;
+    addRequirements(claws);
+  }
 
   // Called when the command is initially scheduled.
   @Override
@@ -24,8 +24,7 @@ public class ShiftRightCmd extends CommandBase {
   @Override
   public void execute() {
 
-claw.shiftright();
-
+    claw.shiftright();
   }
 
   // Called once the command ends or is interrupted.
