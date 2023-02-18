@@ -116,6 +116,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
   }
 
+  // making only arcade drive method for vision processing system to be able to input speed and turn
+  // for going to april tag
+  public void arcadeDrive(double speed, double turn) {
+    m_robotDrive.arcadeDrive(speed, turn);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
