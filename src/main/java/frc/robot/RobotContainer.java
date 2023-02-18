@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.OneBar.*;
 import frc.robot.subsystems.*;
@@ -18,6 +19,7 @@ import frc.robot.commands.StopRaiseCmd;
 import frc.robot.commands.StopRotCmd;
 
 import edu.wpi.first.wpilibj2.command.button.*;
+
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -34,6 +36,9 @@ public class RobotContainer {
   // Defining Commands
   private final AutoCmd m_autoCommand = new AutoCmd();
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
+  private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
+  private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
+
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -48,14 +53,15 @@ public class RobotContainer {
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
-  public Trigger supplier(int buttonID){
-    BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
+
+  public Trigger supplier(int buttonID) {
+    BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
     return mybutton;
   }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
+
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
@@ -64,15 +70,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // Arm Extension In
-    supplier(5).onTrue(armIn).onFalse(armExtStop);
-    // Arm Extension Out
-    supplier(3).onTrue(armOut).onFalse(armExtStop);
-    // Arm Rotation Up
-    supplier(6).onTrue(armUp).onFalse(armRotStop);
-    // Arm Rotation Down
-    supplier(4).onTrue(armDown).onFalse(armRotStop);
-    
+
 
     Trigger lowerbutton = supplier(1);
     lowerbutton.onTrue(raiseCmd);
@@ -90,7 +88,19 @@ public class RobotContainer {
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);
 
+    // // Arm Extension In
+    // supplier(5).onTrue(armIn).onFalse(armExtStop);
+    // // Arm Extension Out
+    // supplier(3).onTrue(armOut).onFalse(armExtStop);
+    // // Arm Rotation Up
+    // supplier(6).onTrue(armUp).onFalse(armRotStop);
+    // // Arm Rotation Down
+    // supplier(4).onTrue(armDown).onFalse(armRotStop);
 
+    // Shift Up
+    supplier(Controllers.xbox_rbutton).onTrue(shiftup);
+    // Shift Down
+    supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
 
   }
 

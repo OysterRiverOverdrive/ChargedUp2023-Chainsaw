@@ -2,19 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.OneBar;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.OnebarSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class ArmExtStop extends CommandBase {
-  /** Creates a new ArmExtStop. */
-  private final OnebarSubsystem onebarsubsystem;
+public class ShiftupCmd extends CommandBase {
+  /** Creates a new ShiftupCmd. */
+  private DrivetrainSubsystem drive;
 
-  public ArmExtStop(OnebarSubsystem subsystem) {
-    onebarsubsystem = subsystem;
+  public ShiftupCmd(DrivetrainSubsystem drives) {
+    drive = drives;
+    addRequirements(drives);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +24,7 @@ public class ArmExtStop extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armExtensionStop();
+    drive.speedup();
   }
 
   // Called once the command ends or is interrupted.
@@ -34,6 +34,6 @@ public class ArmExtStop extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

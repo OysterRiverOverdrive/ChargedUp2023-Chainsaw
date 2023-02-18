@@ -7,7 +7,11 @@ public final class Controllers {
   public static int DRIVER_SEC_PORT = 0;
   public static int DRIVER_TURN = 4;
   public static int DRIVER_SPEED = 1;
-  public static boolean DRIVER_W_BUTTONS = false; // Work in progress, Don't touch please
+  public static int HIGHSPEED = 2;
+  public static int LOWSPEED = 1; // 0.5
+  public static double LOWEREDSPEED = 0.55;
+  public static boolean DRIVER_W_BUTTONS = false;
+  public static int CURRENT_SPEEDLIMIT = 2;
   public static boolean arcadedriver = true;
 
   // Operator Controller Configuration (Logitech Dual Action)
@@ -21,6 +25,18 @@ public final class Controllers {
   public static int xbox_rt = 3;
   public static int xbox_rx = 4;
   public static int xbox_ry = 5;
+
+  // Buttons
+  public static int xbox_a = 1;
+  public static int xbox_b = 2;
+  public static int xbox_x = 3;
+  public static int xbox_y = 4;
+  public static int xbox_lb = 5;
+  public static int xbox_rb = 6;
+  public static int xbox_share = 7;
+  public static int xbox_options = 8;
+  public static int xbox_lbutton = 9;
+  public static int xbox_rbutton = 10;
 
   // Logitech Dual Action
   // Joysticks

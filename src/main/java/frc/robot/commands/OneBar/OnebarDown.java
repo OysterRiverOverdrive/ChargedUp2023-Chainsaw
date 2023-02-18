@@ -9,7 +9,7 @@ import frc.robot.subsystems.OnebarSubsystem;
 
 public class OnebarDown extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  
+
   /** Creates a new OneBarDown. */
   public OnebarDown(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
@@ -19,7 +19,7 @@ public class OnebarDown extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
+  public void initialize() {
     onebarsubsystem.InverseMotor();
   }
 
