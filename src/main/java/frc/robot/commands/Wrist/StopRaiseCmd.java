@@ -2,19 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristSubsystem;
 
-public class StopRotCmd extends CommandBase {
+public class StopRaiseCmd extends CommandBase {
   private WristSubsystem wrist;
 
-  public StopRotCmd(WristSubsystem wrists) {
+  public StopRaiseCmd(WristSubsystem wrists) {
 
     wrist = wrists;
     addRequirements(wrists);
   }
+  // Use addRequirements() here to declare subsystem dependencies.
 
   // Called when the command is initially scheduled.
   @Override
@@ -24,7 +25,7 @@ public class StopRotCmd extends CommandBase {
   @Override
   public void execute() {
 
-    wrist.stoprot();
+    wrist.stopraise();
   }
 
   // Called once the command ends or is interrupted.

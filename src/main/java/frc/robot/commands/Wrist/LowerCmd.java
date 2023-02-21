@@ -2,18 +2,23 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
-public class ShiftRightCmd extends CommandBase {
+public class LowerCmd extends CommandBase {
 
-  private ClawSubsystem claw;
+  /** Creates a new LowerCmd. */
+  private WristSubsystem wrist;
 
-  public ShiftRightCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  public LowerCmd(WristSubsystem wrists) {
+    wrist = wrists;
+    addRequirements(wrists);
+  }
+
+  public LowerCmd() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +29,7 @@ public class ShiftRightCmd extends CommandBase {
   @Override
   public void execute() {
 
-    claw.shiftright();
+    wrist.encWrisDutyCycleEncoderlower();
   }
 
   // Called once the command ends or is interrupted.
