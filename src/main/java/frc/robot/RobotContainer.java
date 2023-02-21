@@ -29,25 +29,30 @@ public class RobotContainer {
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
+  // Drivetrain
   private final AutoCmd m_autoCommand = new AutoCmd();
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
-
   private final MoveToAprilTagCmd moveToAprilTagCmd = new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
+  // OneBar
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+
+  // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
   private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
   private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+
+  // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
   private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
   private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
@@ -101,8 +106,7 @@ public class RobotContainer {
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
 
-    supplier(Controllers.xbox_b)
-        .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
+    supplier(Controllers.xbox_b).onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
 
     Trigger clampbutton = supplier(5);
     clampbutton.onTrue(clampCmd);
