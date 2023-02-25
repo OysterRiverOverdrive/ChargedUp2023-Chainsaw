@@ -59,6 +59,8 @@ public class RobotContainer {
   private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
   private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
   private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
+  private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
   private enum joysticks {
     DRIVER,
@@ -96,6 +98,10 @@ public class RobotContainer {
     supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
     // Wrist Right
     supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+
+    supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+
+    supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(5, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
