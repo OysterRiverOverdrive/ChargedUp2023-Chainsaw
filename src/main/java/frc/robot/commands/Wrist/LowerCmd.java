@@ -2,30 +2,34 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristSubsystem;
 
-public class RotRight90Cmd extends CommandBase {
-  /** Creates a new RotRight90Cmd. */
+public class LowerCmd extends CommandBase {
+
+  /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
 
-  public RotRight90Cmd(WristSubsystem wrists) {
+  public LowerCmd(WristSubsystem wrists) {
     wrist = wrists;
     addRequirements(wrists);
   }
+
+  public LowerCmd() {
+    // Use addRequirements() here to declare subsystem dependencies.
+  }
+
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    wrist.resetrot();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    wrist.rotWristRight90();
+    wrist.encWrisDutyCycleEncoderlower();
   }
 
   // Called once the command ends or is interrupted.
@@ -35,13 +39,6 @@ public class RotRight90Cmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double rotation = wrist.getrotations() * 360;
-    System.out.println("Rotations " + rotation);
-    if (rotation > 90) {
-      wrist.stoprot();
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 }

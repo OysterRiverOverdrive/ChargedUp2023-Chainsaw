@@ -2,30 +2,30 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
-public class ReleaseCmd extends CommandBase {
-  /** Creates a new ReleaseCmd. */
-  private ClawSubsystem claw;
+public class RotLeftCmd extends CommandBase {
+  private WristSubsystem wrist;
 
-  public ReleaseCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  public RotLeftCmd(WristSubsystem wrists) {
+
+    wrist = wrists;
+    addRequirements(wrists);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-    claw.release();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    wrist.encWrisrotleft();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

@@ -8,23 +8,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
-import frc.robot.commands.ClampCmd;
-import frc.robot.commands.LowerCmd;
+import frc.robot.commands.Claw.*;
 import frc.robot.commands.OneBar.*;
-import frc.robot.commands.RaiseCmd;
-import frc.robot.commands.ReleaseCmd;
-import frc.robot.commands.RotLeft90Cmd;
-import frc.robot.commands.RotLeftCmd;
-import frc.robot.commands.RotRight90Cmd;
-import frc.robot.commands.RotRightCmd;
-import frc.robot.commands.ShiftLeftCmd;
-import frc.robot.commands.ShiftRightCmd;
-import frc.robot.commands.StopClawCmd;
-import frc.robot.commands.StopRaiseCmd;
-import frc.robot.commands.StopRotCmd;
+import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.ClawSubsystem;
-import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -38,43 +25,58 @@ public class RobotContainer {
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
+  private final WristSubsystem wristSubsystem = new WristSubsystem();
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
+  // Drivetrain
   private final AutoCmd m_autoCommand = new AutoCmd();
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
-
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
+  // OneBar
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
 
-  private final WristSubsystem wristSubsystem = new WristSubsystem();
+  // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
   private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
   private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+
+  // Claw
+  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
   private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
-  public Trigger supplier(int buttonID) {
-    BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
-    Trigger mybutton = new Trigger(bsup);
-    return mybutton;
+  private enum joysticks {
+    DRIVER,
+    OPERATOR
+  }
+
+  public Trigger supplier(int buttonID, joysticks joystick) {
+    if (joystick == joysticks.DRIVER) {
+      BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    } else {
+      BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    }
   }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -88,60 +90,43 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    Trigger lowerbutton = supplier(1);
-    lowerbutton.onTrue(lowerCmd);
-    lowerbutton.onFalse(stopRaiseCmd);
+    // Wrist Raise
+    supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    // Wrist Lower
+    supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    // Wrist Left
+    supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
+    // Wrist Right
+    supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+    // Wrist Left 90
+    supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+    // Wrist Right 90
+    supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
-    Trigger raisebutton = supplier(2);
-    raisebutton.onTrue(raiseCmd);
-    raisebutton.onFalse(stopRaiseCmd);
-
-    Trigger rotleftbutton = supplier(3);
-    rotleftbutton.onTrue(rotLeftCmd);
-    rotleftbutton.onFalse(stopRotCmd);
-
-    Trigger rotrightbutton = supplier(4);
-    rotrightbutton.onTrue(rotRightCmd);
-    rotrightbutton.onFalse(stopRotCmd);
-
-    Trigger rotleft90button = supplier(5);
-    rotleft90button.onTrue(rotLeft90Cmd);
-
-    Trigger rotright90button = supplier(6);
-    rotright90button.onTrue(rotRight90Cmd);
-
-    // // Arm Extension In
-    // supplier(5).onTrue(armIn).onFalse(armExtStop);
-    // // Arm Extension Out
-    // supplier(3).onTrue(armOut).onFalse(armExtStop);
-    // // Arm Rotation Up
-    // supplier(6).onTrue(armUp).onFalse(armRotStop);
-    // // Arm Rotation Down
-    // supplier(4).onTrue(armDown).onFalse(armRotStop);
+    // Arm Extension In
+    supplier(5, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
+    // Arm Extension Out
+    supplier(3, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
+    // Arm Rotation Up
+    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
+    // Arm Rotation Down
+    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
-    supplier(Controllers.xbox_rbutton).onTrue(shiftup);
+    supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
+    // April tag control
+    supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
-    supplier(Controllers.xbox_b)
-        .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
-
-    Trigger clampbutton = supplier(5);
-    clampbutton.onTrue(clampCmd);
-    clampbutton.onFalse(stopClawCmd);
-
-    Trigger releasebutton = supplier(6);
-    releasebutton.onTrue(releaseCmd);
-    releasebutton.onFalse(stopClawCmd);
-
-    Trigger shiftleftbutton = supplier(7);
-    shiftleftbutton.onTrue(shiftLeftCmd);
-    shiftleftbutton.onFalse(stopClawCmd);
-
-    Trigger shiftrightbutton = supplier(8);
-    shiftrightbutton.onTrue(shiftRightCmd);
-    shiftrightbutton.onFalse(stopClawCmd);
+    // Close Claw
+    supplier(5, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
+    // Open Claw
+    supplier(6, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
+    // Shift Claw Left
+    supplier(7, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    // Shift Claw Right
+    supplier(8, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
