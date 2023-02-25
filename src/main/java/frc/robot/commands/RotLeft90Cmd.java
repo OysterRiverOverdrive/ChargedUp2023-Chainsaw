@@ -22,7 +22,7 @@ public class RotLeft90Cmd extends CommandBase {
   public void initialize()
   {
 
-  wrist.resetencoder();
+  wrist.resetrot();
   }
   
 

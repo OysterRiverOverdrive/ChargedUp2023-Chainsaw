@@ -9,25 +9,27 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.OneBar.*;
-import frc.robot.subsystems.*
+import frc.robot.subsystems.*;
+
+import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.commands.ClampCmd;
-import frc.robot.commands.LowerCmd;
-import frc.robot.commands.OneBar.*;
-import frc.robot.commands.RaiseCmd;
 import frc.robot.commands.ReleaseCmd;
-import frc.robot.commands.RotLeftCmd;
-import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
+
+import frc.robot.subsystems.WristSubsystem;
+import frc.robot.commands.LowerCmd;
+import frc.robot.commands.RaiseCmd;
+import frc.robot.commands.RotLeftCmd;
+import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.StopClawCmd;
 import frc.robot.commands.StopRaiseCmd;
 import frc.robot.commands.StopRotCmd;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.ClawSubsystem;
-import frc.robot.subsystems.WristSubsystem;
-import java.util.function.BooleanSupplier;
 import frc.robot.commands.RotLeft90Cmd;
 import frc.robot.commands.RotRight90Cmd;
+
+import java.util.function.BooleanSupplier;
+
 
 public class RobotContainer {
   // Defining Controllers
@@ -56,13 +58,6 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-  private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
-  private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
-  private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
-  private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
-  private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
-  private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
   private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
@@ -98,7 +93,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     Trigger lowerbutton = supplier(1);
-    lowerbutton.onTrue(raiseCmd);
+    lowerbutton.onTrue(lowerCmd);
     lowerbutton.onFalse(stopRaiseCmd);
 
     Trigger raisebutton = supplier(2);
@@ -112,6 +107,12 @@ public class RobotContainer {
     Trigger rotrightbutton = supplier(4);
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);
+
+    Trigger rotleft90button = supplier(5);
+    rotleft90button.onTrue(rotLeft90Cmd);
+
+    Trigger rotright90button = supplier(6);
+    rotright90button.onTrue(rotRight90Cmd);
 
     // // Arm Extension In
     // supplier(5).onTrue(armIn).onFalse(armExtStop);
@@ -127,11 +128,6 @@ public class RobotContainer {
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
 
-    Trigger rotleft90button = supplier(5);
-    rotleft90button.onTrue(rotLeft90Cmd);
-
-    Trigger rotright90button = supplier(6);
-    rotright90button.onTrue(rotRight90Cmd);
     
     supplier(Controllers.xbox_b)
         .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
