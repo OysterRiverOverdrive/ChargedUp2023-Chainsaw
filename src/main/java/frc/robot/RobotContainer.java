@@ -9,24 +9,22 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.ClampCmd;
-import frc.robot.commands.Wrist.LowerCmd;
+import frc.robot.commands.Claw.*;
 import frc.robot.commands.OneBar.*;
-import frc.robot.commands.Wrist.RaiseCmd;
 import frc.robot.commands.ReleaseCmd;
-import frc.robot.commands.Wrist.RotLeftCmd;
-import frc.robot.commands.Wrist.RotRightCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
 import frc.robot.commands.StopClawCmd;
+import frc.robot.commands.Wrist.*;
+import frc.robot.commands.Wrist.LowerCmd;
+import frc.robot.commands.Wrist.RaiseCmd;
+import frc.robot.commands.Wrist.RotLeftCmd;
+import frc.robot.commands.Wrist.RotRightCmd;
 import frc.robot.commands.Wrist.StopRaiseCmd;
 import frc.robot.commands.Wrist.StopRotCmd;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.WristSubsystem;
-import frc.robot.commands.Claw.*;
-import frc.robot.commands.OneBar.*;
-import frc.robot.commands.Wrist.*;
-import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -138,7 +136,7 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
-    
+
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
@@ -151,7 +149,6 @@ public class RobotContainer {
     supplier(7, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
     // Shift Claw Right
     supplier(8, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
-
   }
 
   public Command getAutonomousCommand() {
