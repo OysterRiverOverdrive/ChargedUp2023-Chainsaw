@@ -8,28 +8,24 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
-import frc.robot.commands.OneBar.*;
-import frc.robot.subsystems.*;
-
-import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.commands.ClampCmd;
+import frc.robot.commands.LowerCmd;
+import frc.robot.commands.OneBar.*;
+import frc.robot.commands.RaiseCmd;
 import frc.robot.commands.ReleaseCmd;
+import frc.robot.commands.RotLeft90Cmd;
+import frc.robot.commands.RotLeftCmd;
+import frc.robot.commands.RotRight90Cmd;
+import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
-
-import frc.robot.subsystems.WristSubsystem;
-import frc.robot.commands.LowerCmd;
-import frc.robot.commands.RaiseCmd;
-import frc.robot.commands.RotLeftCmd;
-import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.StopClawCmd;
 import frc.robot.commands.StopRaiseCmd;
 import frc.robot.commands.StopRotCmd;
-import frc.robot.commands.RotLeft90Cmd;
-import frc.robot.commands.RotRight90Cmd;
-
+import frc.robot.subsystems.*;
+import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
-
 
 public class RobotContainer {
   // Defining Controllers
@@ -128,7 +124,6 @@ public class RobotContainer {
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
 
-    
     supplier(Controllers.xbox_b)
         .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
 

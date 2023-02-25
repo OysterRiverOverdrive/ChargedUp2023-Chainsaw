@@ -10,11 +10,10 @@ import frc.robot.subsystems.WristSubsystem;
 public class RotRight90Cmd extends CommandBase {
   /** Creates a new RotRight90Cmd. */
   private WristSubsystem wrist;
-  
+
   public RotRight90Cmd(WristSubsystem wrists) {
     wrist = wrists;
     addRequirements(wrists);
-
   }
   // Called when the command is initially scheduled.
   @Override
@@ -26,8 +25,7 @@ public class RotRight90Cmd extends CommandBase {
   @Override
   public void execute() {
 
-   wrist.rotWristRight90();
-
+    wrist.rotWristRight90();
   }
 
   // Called once the command ends or is interrupted.
@@ -37,16 +35,13 @@ public class RotRight90Cmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double rotation = wrist.getrotations()*360;
+    double rotation = wrist.getrotations() * 360;
     System.out.println("Rotations " + rotation);
-    if (rotation > 90)
-    {
+    if (rotation > 90) {
       wrist.stoprot();
       return true;
-    }
-    else 
-    {
-      return false; 
+    } else {
+      return false;
     }
   }
 }
