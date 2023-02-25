@@ -98,9 +98,9 @@ public class RobotContainer {
     supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
     // Wrist Right
     supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-
+    // Wrist Left 90
     supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-
+    // Wrist Right 90
     supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
