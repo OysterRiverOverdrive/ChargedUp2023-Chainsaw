@@ -29,9 +29,9 @@ public class TeleopCmd extends CommandBase {
 
   public double getGear() {
     double returned = 1.0;
-    if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {
+    if (Controllers.CURRENT_SPEEDLIMIT == Controllers.Gears.HIGH) {
       returned = 1.0;
-    } else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.LOWSPEED) {
+    } else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.Gears.LOW) {
       returned = Controllers.LOWEREDSPEED;
     }
     return returned;

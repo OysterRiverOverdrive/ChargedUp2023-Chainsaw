@@ -25,7 +25,6 @@ public class WristSubsystem extends SubsystemBase {
   // private RelativeEncoder encoderot = rot.getEncoder();
   // private RelativeEncoder encoderaise = rot.getEncoder();
 
-
   public void startup() {
 
     encWrisDutyCycleEncoderaise.reset();
@@ -80,8 +79,6 @@ public class WristSubsystem extends SubsystemBase {
 
     }
 
-  }
-
   public void encWrisDutyCycleEncoderaise() {
 
     double raise = encWrisDutyCycleEncoderaise.get();
@@ -127,23 +124,6 @@ public class WristSubsystem extends SubsystemBase {
     }
 
   }
-
-  // public void encWrisrotright90() {
-
-  //   encWrisDutyCycleEncoderot.reset();  
-  //   double rotation = encWrisDutyCycleEncoderot.get();
-  //   double degrees = encWrisDutyCycleEncoderot.get() * 360;
-  //   System.out.println(degrees);
-
-  //   if (degrees <= 90 && degrees >= 0) {
-
-  //     rot.set(0.2);
-
-  //   } else {
-
-  //     m_raise.stopMotor();
-  //   }
-  // }
   
 
  public void rotWrist90Left()
@@ -159,22 +139,6 @@ public class WristSubsystem extends SubsystemBase {
 
  }
 
-
-  // public void encWrisrotleft90() {
-
-  //   double rotation = encWrisDutyCycleEncoderot.get();
-  //   double degrees = encWrisDutyCycleEncoderot.get() * 360;
-  //   System.out.println(rotation);
-
-  //   if (degrees >= -90 && degrees <=0) {
-
-  //     rot.set(-0.2);
-
-  //   } else {
-
-  //     rot.stopMotor();
-  //   }
-  // }
 
   public double getrotations () {
 
@@ -212,7 +176,57 @@ public void resetencoder (){
 
 }
 
+  public void encWrisrotright90() {
 
+    double rotation = encWrisDutyCycleEncoderot.get();
+    double degrees = encWrisDutyCycleEncoderot.get() * 360;
+    System.out.println(degrees);
+
+    if (degrees <= 90) {
+
+      rot.set(0.33);
+
+    } else {
+
+      m_raise.stopMotor();
+    }
+  }
+
+  public void encWrisrotleft90() {
+
+    double rotation = encWrisDutyCycleEncoderot.get();
+    double degrees = encWrisDutyCycleEncoderot.get() * 360;
+    System.out.println(degrees);
+
+    if (degrees >= -90) {
+
+      rot.set(-0.5);
+
+    } else {
+
+      rot.stopMotor();
+    }
+  }
+
+  public void resetrot() {
+
+    encWrisDutyCycleEncoderot.reset();
+  }
+
+  public void resetraise() {
+
+    encWrisDutyCycleEncoderaise.reset();
+  }
+
+  public void stoprot() {
+
+    rot.stopMotor();
+  }
+
+  public void stopraise() {
+
+    m_raise.stopMotor();
+  }
 
   public WristSubsystem() {
     rot.setIdleMode(IdleMode.kBrake);
@@ -224,6 +238,5 @@ public void resetencoder (){
    
     SmartDashboard.putNumber("rot360", encWrisDutyCycleEncoderot.get()*360);
     SmartDashboard.putNumber("rot", encWrisDutyCycleEncoderot.get());
-
   }
 }

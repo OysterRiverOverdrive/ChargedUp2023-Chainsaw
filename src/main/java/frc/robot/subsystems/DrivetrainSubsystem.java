@@ -101,11 +101,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public void speedup() {
-    Controllers.CURRENT_SPEEDLIMIT = Controllers.HIGHSPEED;
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.Gears.HIGH;
   }
 
   public void speeddown() {
-    Controllers.CURRENT_SPEEDLIMIT = Controllers.LOWSPEED;
+    Controllers.CURRENT_SPEEDLIMIT = Controllers.Gears.LOW;
   }
 
   public void teleop(double speed, double turn) {
@@ -114,6 +114,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
     } else {
       m_robotDrive.tankDrive(speed, turn);
     }
+  }
+
+  // making only arcade drive method for vision processing system to be able to input speed and turn
+  // for going to april tag
+  public void arcadeDrive(double speed, double turn) {
+    m_robotDrive.arcadeDrive(speed, turn);
   }
 
   @Override
