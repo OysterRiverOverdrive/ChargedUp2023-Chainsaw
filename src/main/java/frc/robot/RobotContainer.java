@@ -13,7 +13,9 @@ import frc.robot.commands.LowerCmd;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.RaiseCmd;
 import frc.robot.commands.ReleaseCmd;
+import frc.robot.commands.RotLeft90Cmd;
 import frc.robot.commands.RotLeftCmd;
+import frc.robot.commands.RotRight90Cmd;
 import frc.robot.commands.RotRightCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
@@ -52,6 +54,13 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+
   private final WristSubsystem wristSubsystem = new WristSubsystem();
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
   private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
@@ -59,12 +68,8 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
+  private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
@@ -84,7 +89,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     Trigger lowerbutton = supplier(1);
-    lowerbutton.onTrue(raiseCmd);
+    lowerbutton.onTrue(lowerCmd);
     lowerbutton.onFalse(stopRaiseCmd);
 
     Trigger raisebutton = supplier(2);
@@ -98,6 +103,12 @@ public class RobotContainer {
     Trigger rotrightbutton = supplier(4);
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);
+
+    Trigger rotleft90button = supplier(5);
+    rotleft90button.onTrue(rotLeft90Cmd);
+
+    Trigger rotright90button = supplier(6);
+    rotright90button.onTrue(rotRight90Cmd);
 
     // // Arm Extension In
     // supplier(5).onTrue(armIn).onFalse(armExtStop);
