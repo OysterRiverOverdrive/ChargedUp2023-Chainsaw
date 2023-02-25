@@ -12,8 +12,6 @@ import frc.robot.commands.Claw.*;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.ClawSubsystem;
-import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
