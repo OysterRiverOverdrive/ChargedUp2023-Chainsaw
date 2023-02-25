@@ -34,7 +34,8 @@ public class RobotContainer {
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
-  private final MoveToAprilTagCmd moveToAprilTagCmd = new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
+  private final MoveToAprilTagCmd moveToAprilTagCmd =
+      new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
   // OneBar
   private final OnebarDown armDown = new OnebarDown(onebar);
@@ -61,9 +62,9 @@ public class RobotContainer {
 
   public Trigger supplier(int buttonID, boolean driver) {
     if (driver == true) {
-    BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
-    Trigger mybutton = new Trigger(bsup);
-    return mybutton;
+      BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
     } else {
       BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
       Trigger mybutton = new Trigger(bsup);
