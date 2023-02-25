@@ -18,6 +18,8 @@ import frc.robot.commands.StopRotCmd;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
+import frc.robot.commands.RotLeft90Cmd;
+import frc.robot.commands.RotRight90Cmd;
 
 public class RobotContainer {
   // Defining Controllers
@@ -42,6 +44,7 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+
   private final WristSubsystem wristSubsystem = new WristSubsystem();
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
   private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
@@ -49,6 +52,8 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+  private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
+  private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
@@ -96,6 +101,12 @@ public class RobotContainer {
     supplier(Controllers.xbox_rbutton).onTrue(shiftup);
     // Shift Down
     supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+
+    Trigger rotleft90button = supplier(5);
+    rotleft90button.onTrue(rotLeft90Cmd);
+
+    Trigger rotright90button = supplier(6);
+    rotright90button.onTrue(rotRight90Cmd);
   }
 
   public Command getAutonomousCommand() {
