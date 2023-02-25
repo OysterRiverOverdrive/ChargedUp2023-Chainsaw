@@ -9,17 +9,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.ClampCmd;
-import frc.robot.commands.LowerCmd;
+import frc.robot.commands.Wrist.LowerCmd;
 import frc.robot.commands.OneBar.*;
-import frc.robot.commands.RaiseCmd;
+import frc.robot.commands.Wrist.RaiseCmd;
 import frc.robot.commands.ReleaseCmd;
-import frc.robot.commands.RotLeftCmd;
-import frc.robot.commands.RotRightCmd;
+import frc.robot.commands.Wrist.RotLeftCmd;
+import frc.robot.commands.Wrist.RotRightCmd;
 import frc.robot.commands.ShiftLeftCmd;
 import frc.robot.commands.ShiftRightCmd;
 import frc.robot.commands.StopClawCmd;
-import frc.robot.commands.StopRaiseCmd;
-import frc.robot.commands.StopRotCmd;
+import frc.robot.commands.Wrist.StopRaiseCmd;
+import frc.robot.commands.Wrist.StopRotCmd;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.WristSubsystem;
@@ -41,7 +41,6 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
@@ -70,11 +69,11 @@ public class RobotContainer {
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  private final ClampCmd ClampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd ReleaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd ShiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd ShiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd StopClawCmd = new StopClawCmd(clawSubsystem);
 
   // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
@@ -138,7 +137,7 @@ public class RobotContainer {
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
