@@ -60,8 +60,13 @@ public class RobotContainer {
   private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
   private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
 
-  public Trigger supplier(int buttonID, boolean driver) {
-    if (driver == true) {
+  private enum joysticks {
+    DRIVER,
+    OPERATOR
+  }
+
+  public Trigger supplier(int buttonID, joysticks joystick) {
+    if (joystick == joysticks.DRIVER) {
       BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
       Trigger mybutton = new Trigger(bsup);
       return mybutton;
@@ -83,51 +88,51 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    Trigger lowerbutton = supplier(1, true);
+    Trigger lowerbutton = supplier(1, joysticks.DRIVER);
     lowerbutton.onTrue(raiseCmd);
     lowerbutton.onFalse(stopRaiseCmd);
 
-    Trigger raisebutton = supplier(2, true);
+    Trigger raisebutton = supplier(2, joysticks.DRIVER);
     raisebutton.onTrue(raiseCmd);
     raisebutton.onFalse(stopRaiseCmd);
 
-    Trigger rotleftbutton = supplier(3, true);
+    Trigger rotleftbutton = supplier(3, joysticks.DRIVER);
     rotleftbutton.onTrue(rotLeftCmd);
     rotleftbutton.onFalse(stopRotCmd);
 
-    Trigger rotrightbutton = supplier(4, true);
+    Trigger rotrightbutton = supplier(4, joysticks.DRIVER);
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);
 
     // // Arm Extension In
-    // supplier(5).onTrue(armIn).onFalse(armExtStop);
+    // supplier(5, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
     // // Arm Extension Out
-    // supplier(3).onTrue(armOut).onFalse(armExtStop);
+    // supplier(3, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
     // // Arm Rotation Up
-    // supplier(6).onTrue(armUp).onFalse(armRotStop);
+    // supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
     // // Arm Rotation Down
-    // supplier(4).onTrue(armDown).onFalse(armRotStop);
+    // supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
-    supplier(Controllers.xbox_rbutton, true).onTrue(shiftup);
+    supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton, true).onTrue(shiftdown);
+    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
 
-    supplier(Controllers.xbox_b, true).onTrue(moveToAprilTagCmd);
+    supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
-    Trigger clampbutton = supplier(5, true);
+    Trigger clampbutton = supplier(5, joysticks.DRIVER);
     clampbutton.onTrue(clampCmd);
     clampbutton.onFalse(stopClawCmd);
 
-    Trigger releasebutton = supplier(6, true);
+    Trigger releasebutton = supplier(6, joysticks.DRIVER);
     releasebutton.onTrue(releaseCmd);
     releasebutton.onFalse(stopClawCmd);
 
-    Trigger shiftleftbutton = supplier(7, true);
+    Trigger shiftleftbutton = supplier(7, joysticks.DRIVER);
     shiftleftbutton.onTrue(shiftLeftCmd);
     shiftleftbutton.onFalse(stopClawCmd);
 
-    Trigger shiftrightbutton = supplier(8, true);
+    Trigger shiftrightbutton = supplier(8, joysticks.DRIVER);
     shiftrightbutton.onTrue(shiftRightCmd);
     shiftrightbutton.onFalse(stopClawCmd);
   }
