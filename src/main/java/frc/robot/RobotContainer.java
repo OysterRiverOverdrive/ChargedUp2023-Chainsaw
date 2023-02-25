@@ -59,10 +59,16 @@ public class RobotContainer {
   private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
   private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
 
-  public Trigger supplier(int buttonID) {
+  public Trigger supplier(int buttonID, boolean driver) {
+    if (driver == true) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
     Trigger mybutton = new Trigger(bsup);
     return mybutton;
+    } else {
+      BooleanSupplier bsup = () -> operator.getRawButton(buttonID);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    }
   }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -76,19 +82,19 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    Trigger lowerbutton = supplier(1);
+    Trigger lowerbutton = supplier(1, true);
     lowerbutton.onTrue(raiseCmd);
     lowerbutton.onFalse(stopRaiseCmd);
 
-    Trigger raisebutton = supplier(2);
+    Trigger raisebutton = supplier(2, true);
     raisebutton.onTrue(raiseCmd);
     raisebutton.onFalse(stopRaiseCmd);
 
-    Trigger rotleftbutton = supplier(3);
+    Trigger rotleftbutton = supplier(3, true);
     rotleftbutton.onTrue(rotLeftCmd);
     rotleftbutton.onFalse(stopRotCmd);
 
-    Trigger rotrightbutton = supplier(4);
+    Trigger rotrightbutton = supplier(4, true);
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);
 
@@ -102,25 +108,25 @@ public class RobotContainer {
     // supplier(4).onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
-    supplier(Controllers.xbox_rbutton).onTrue(shiftup);
+    supplier(Controllers.xbox_rbutton, true).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton).onTrue(shiftdown);
+    supplier(Controllers.xbox_lbutton, true).onTrue(shiftdown);
 
-    supplier(Controllers.xbox_b).onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
+    supplier(Controllers.xbox_b, true).onTrue(moveToAprilTagCmd);
 
-    Trigger clampbutton = supplier(5);
+    Trigger clampbutton = supplier(5, true);
     clampbutton.onTrue(clampCmd);
     clampbutton.onFalse(stopClawCmd);
 
-    Trigger releasebutton = supplier(6);
+    Trigger releasebutton = supplier(6, true);
     releasebutton.onTrue(releaseCmd);
     releasebutton.onFalse(stopClawCmd);
 
-    Trigger shiftleftbutton = supplier(7);
+    Trigger shiftleftbutton = supplier(7, true);
     shiftleftbutton.onTrue(shiftLeftCmd);
     shiftleftbutton.onFalse(stopClawCmd);
 
-    Trigger shiftrightbutton = supplier(8);
+    Trigger shiftrightbutton = supplier(8, true);
     shiftrightbutton.onTrue(shiftRightCmd);
     shiftrightbutton.onFalse(stopClawCmd);
   }
