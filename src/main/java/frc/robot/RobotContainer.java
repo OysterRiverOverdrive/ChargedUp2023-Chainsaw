@@ -26,7 +26,6 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
@@ -34,10 +33,12 @@ public class RobotContainer {
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
+
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
   // OneBar
+
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -52,6 +53,12 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final ClampCmd ClampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd ReleaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd ShiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd ShiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd StopClawCmd = new StopClawCmd(clawSubsystem);
 
   // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
@@ -115,6 +122,8 @@ public class RobotContainer {
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
+    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
+
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
