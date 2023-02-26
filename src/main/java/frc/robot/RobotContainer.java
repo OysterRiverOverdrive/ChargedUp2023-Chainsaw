@@ -29,7 +29,9 @@ public class RobotContainer {
 
   // Defining Commands
   // Drivetrain
-  private final AutoCmd m_autoCommand = new AutoCmd();
+  private final AutoCmd autoCmd = new AutoCmd(drivetrain);
+  private final DriveCmd driveCmd = new DriveCmd(drivetrain, 40.0);
+  private final TurnCmd turnCmd = new TurnCmd(drivetrain, 90.0);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -69,6 +71,14 @@ public class RobotContainer {
   private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
+  public void setbrake() {
+    drivetrain.setBrake();
+  }
+
+  public void setcoast() {
+    drivetrain.setCoast();
+  }
+
   private enum joysticks {
     DRIVER,
     OPERATOR
@@ -91,6 +101,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
+    drivetrain.zeroyawnavx();
     controls.setup();
     onebar.setup();
   }
@@ -140,6 +151,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return driveCmd;
   }
 }

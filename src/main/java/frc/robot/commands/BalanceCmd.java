@@ -4,14 +4,18 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class ShiftupCmd extends CommandBase {
-  /** Creates a new ShiftupCmd. */
-  private DrivetrainSubsystem drive;
+public class BalanceCmd extends CommandBase {
+  /** Creates a new BalanceCmd. */
+  DrivetrainSubsystem drive;
 
-  public ShiftupCmd(DrivetrainSubsystem drives) {
+  boolean motorstop;
+  Timer timer = new Timer();
+
+  public BalanceCmd(DrivetrainSubsystem drives) {
     drive = drives;
     addRequirements(drives);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,8 +28,13 @@ public class ShiftupCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drive.speedup();
-    drive.setCoast();
+    motorstop = drive.balancemvmnt();
+    if (motorstop == true) {
+      timer.start();
+    } else {
+      timer.stop();
+      timer.reset();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -35,6 +44,12 @@ public class ShiftupCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    boolean status;
+    if (motorstop == true && timer.get() > 1.5) {
+      status = true;
+    } else {
+      status = false;
+    }
+    return status;
   }
 }
