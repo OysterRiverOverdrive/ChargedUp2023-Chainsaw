@@ -26,10 +26,13 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
-  private final AutoCmd m_autoCommand = new AutoCmd();
+  private final AutoCmd autoCmd = new AutoCmd(drivetrain);
+  private final DriveCmd driveCmd = new DriveCmd(drivetrain, 40.0);
+  private final TurnCmd turnCmd = new TurnCmd(drivetrain, 90.0);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -38,7 +41,6 @@ public class RobotContainer {
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
   // OneBar
-
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -53,12 +55,6 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
-  private final ClampCmd ClampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd ReleaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd ShiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd ShiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd StopClawCmd = new StopClawCmd(clawSubsystem);
 
   // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
@@ -68,6 +64,14 @@ public class RobotContainer {
   private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
   private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
+
+  public void setbrake() {
+    drivetrain.setBrake();
+  }
+
+  public void setcoast() {
+    drivetrain.setCoast();
+  }
 
   private enum joysticks {
     DRIVER,
@@ -91,6 +95,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
+    drivetrain.zeroyawnavx();
     controls.setup();
     onebar.setup();
   }
@@ -140,6 +145,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return driveCmd;
   }
 }

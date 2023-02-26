@@ -42,6 +42,6 @@ public final class Constants {
   public static int encOneBarPort = 0;
   public static int potOneBarPort = 0;
 
-  public static int motorRotID = 2;
-  public static int motorExtID = 3;
+  public static int motorRotID = 9;
+  public static int motorExtID = 8;
 }
