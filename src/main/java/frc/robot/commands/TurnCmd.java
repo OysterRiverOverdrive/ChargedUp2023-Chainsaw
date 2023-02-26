@@ -32,7 +32,7 @@ public class TurnCmd extends CommandBase {
   @Override
   public void execute() {
     isdone = drive.turn();
-    System.out.println(isdone);
+    // System.out.println(isdone);
   }
 
   // Called once the command ends or is interrupted.

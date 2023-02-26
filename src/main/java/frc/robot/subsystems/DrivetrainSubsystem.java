@@ -72,6 +72,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public boolean move(double inches) {
+    // Inches divided by 2*3(wheel radius)*pi
     inches = inches / 18.8495559215;
     if (m_encoder_Left.getPosition() / 9.52 <= inches) {
       m_robotDrive.arcadeDrive(-0.6, 0);
