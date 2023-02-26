@@ -39,7 +39,7 @@ public final class Constants {
   public static double encMinVal = -1;
 
   // Ports for Encoder, Potentiometer, and Motors
-  public static int encOneBarPort = 0;
+  public static int encOneBarPort = 3;
   public static int potOneBarPort = 0;
 
   public static int motorRotID = 9;
