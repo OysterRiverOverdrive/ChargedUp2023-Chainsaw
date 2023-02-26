@@ -25,6 +25,7 @@ public class ShiftdownCmd extends CommandBase {
   @Override
   public void execute() {
     drive.speeddown();
+    drive.setBrake();
   }
 
   // Called once the command ends or is interrupted.

@@ -25,6 +25,7 @@ public class ShiftupCmd extends CommandBase {
   @Override
   public void execute() {
     drive.speedup();
+    drive.setCoast();
   }
 
   // Called once the command ends or is interrupted.
