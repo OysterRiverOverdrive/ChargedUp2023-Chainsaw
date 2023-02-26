@@ -97,7 +97,7 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     controls.setup();
-    // onebar.setup();
+    onebar.setup();
   }
 
   private void configureButtonBindings() {
