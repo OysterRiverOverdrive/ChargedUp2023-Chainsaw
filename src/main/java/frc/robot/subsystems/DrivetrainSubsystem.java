@@ -171,9 +171,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("encoder", m_encoder_Left.getPosition());
-    SmartDashboard.putNumber("angle", angles);
-    SmartDashboard.putNumber("Navx Yaw", navx.getYaw());
+    // SmartDashboard.putNumber("encoder", m_encoder_Left.getPosition());
+    // SmartDashboard.putNumber("angle", angles);
     // This method will be called once per scheduler run
   }
 

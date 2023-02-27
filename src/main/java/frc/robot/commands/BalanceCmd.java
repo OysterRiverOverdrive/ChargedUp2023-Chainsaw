@@ -51,7 +51,6 @@ public class BalanceCmd extends CommandBase {
     } else {
       status = false;
     }
-    System.out.println(status);
     return status;
   }
 }
