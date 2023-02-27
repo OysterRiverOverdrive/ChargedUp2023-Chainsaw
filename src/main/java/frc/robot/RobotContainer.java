@@ -118,27 +118,27 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    // // Wrist Raise
-    // supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
-    // // Wrist Lower
-    // supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
-    // // Wrist Left
-    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
-    // // Wrist Right
-    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-    // // Wrist Left 90
-    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-    // // Wrist Right 90
-    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
+    // Wrist Raise
+    supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    // Wrist Lower
+    supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    // Wrist Left
+    supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
+    // Wrist Right
+    supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+    // Wrist Left 90
+    supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+    // Wrist Right 90
+    supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
-    // // Arm Extension In
-    // supplier(5, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
-    // // Arm Extension Out
-    // supplier(3, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
-    // // Arm Rotation Up
-    // supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
-    // // Arm Rotation Down
-    // supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
+    // Arm Extension In
+    supplier(5, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
+    // Arm Extension Out
+    supplier(3, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
+    // Arm Rotation Up
+    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
+    // Arm Rotation Down
+    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
@@ -149,14 +149,14 @@ public class RobotContainer {
     // April tag control
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
-    // // Close Claw
-    // supplier(5, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
-    // // Open Claw
-    // supplier(6, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // // Shift Claw Left
-    // supplier(7, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
-    // // Shift Claw Right
-    // supplier(8, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
+    // Close Claw
+    supplier(5, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
+    // Open Claw
+    supplier(6, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
+    // Shift Claw Left
+    supplier(7, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    // Shift Claw Right
+    supplier(8, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
