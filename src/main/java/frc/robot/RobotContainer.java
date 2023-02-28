@@ -13,6 +13,7 @@ import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
+import edu.wpi.first.math.controller.PIDController;
 
 public class RobotContainer {
   // Defining Controllers
@@ -24,6 +25,7 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
+  private final PIDController pidController = new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
 
@@ -47,6 +49,7 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+  private final PID stayHeight = new PID(onebar,pidController);
 
   // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -103,7 +106,6 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     controls.setup();
-    onebar.setup();
   }
 
   private void configureButtonBindings() {
@@ -126,9 +128,9 @@ public class RobotContainer {
     // Arm Extension Out
     supplier(3, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
+    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
+    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(stayHeight);
 
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);

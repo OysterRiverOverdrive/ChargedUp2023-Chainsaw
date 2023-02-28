@@ -4,16 +4,23 @@
 
 package frc.robot.commands.OneBar;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.OnebarSubsystem;
+import edu.wpi.first.math.controller.PIDController;
+import frc.robot.Constants;
 
-public class OnebarUp extends CommandBase {
+public class PID extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
+  private final PIDController PIDo; 
 
-  /** Creates a new OneBarUp. */
-  public OnebarUp(OnebarSubsystem subsystem) {
+  double setPoint;
+
+  /** Creates a new PID. */
+  public PID(OnebarSubsystem subsystem, PIDController pid) {
     onebarsubsystem = subsystem;
+    PIDo = pid;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -21,14 +28,21 @@ public class OnebarUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // onebarsubsystem.InverseMotor();
+    setPoint = onebarsubsystem.getEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armUp();
-  }
+      double PIDPos = onebarsubsystem.getEncoder();
+
+      double speedOut = PIDo.calculate(PIDPos, setPoint);
+      speedOut = speedOut*0.05;
+      System.out.println("turn speed: " + speedOut);
+
+      onebarsubsystem.setMotorSpeed(speedOut);
+    }
+  
 
   // Called once the command ends or is interrupted.
   @Override
@@ -37,11 +51,6 @@ public class OnebarUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(onebarsubsystem.getEncoder() > Constants.encMinVal){
-      return false;
-    }
-    else{
-      return true;
-    }
+    return false;
   }
 }
