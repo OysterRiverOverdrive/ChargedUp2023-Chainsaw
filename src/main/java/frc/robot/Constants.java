@@ -49,7 +49,7 @@ public final class Constants {
   //numbers correspond to the values {0, 1, 2...}
 
   // Ports for Encoder, Potentiometer, and Motors
-  public static int encOneBarPort = 0;
+  public static int encOneBarPort = 3;
   public static int potOneBarPort = 0;
   public static int motorRotID = 3;
   public static int motorExtID = 4;

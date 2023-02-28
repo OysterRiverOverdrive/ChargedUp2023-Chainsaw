@@ -17,8 +17,9 @@ public class AutoCmd extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new DriveCmd(drivetrain, 55),
-        new TurnCmd(drivetrain, 90),
+        new TurnCmd(drivetrain, -90),
         new DriveCmd(drivetrain, 60),
-        new TurnCmd(drivetrain, 90));
+        new TurnCmd(drivetrain, -90),
+        new BalanceSeqCmd(drivetrain));
   }
 }
