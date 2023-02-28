@@ -6,14 +6,11 @@ package frc.robot.commands.OneBar;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.OnebarSubsystem;
-import edu.wpi.first.math.controller.PIDController;
-import frc.robot.Constants;
 
 public class PID extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final PIDController PIDo; 
+  private final PIDController PIDo;
 
   double setPoint;
 
@@ -34,15 +31,14 @@ public class PID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      double PIDPos = onebarsubsystem.getEncoder();
+    double PIDPos = onebarsubsystem.getEncoder();
 
-      double speedOut = PIDo.calculate(PIDPos, setPoint);
-      speedOut = speedOut*0.05;
-      System.out.println("turn speed: " + speedOut);
+    double speedOut = PIDo.calculate(PIDPos, setPoint);
+    speedOut = speedOut * 0.05;
+    System.out.println("turn speed: " + speedOut);
 
-      onebarsubsystem.setMotorSpeed(speedOut);
-    }
-  
+    onebarsubsystem.setMotorSpeed(speedOut);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

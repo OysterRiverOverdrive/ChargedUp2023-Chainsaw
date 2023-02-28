@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,7 +16,6 @@ import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
-import edu.wpi.first.math.controller.PIDController;
 
 public class RobotContainer {
 
@@ -35,7 +35,8 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
-  private final PIDController pidController = new PIDController(Constants.kP, Constants.kI, Constants.kD);
+  private final PIDController pidController =
+      new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
@@ -59,7 +60,7 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-  private final PID stayHeight = new PID(onebar,pidController);
+  private final PID stayHeight = new PID(onebar, pidController);
 
   // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
