@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
@@ -15,6 +17,14 @@ import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
+
+  // Auto Dropdown
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private final String mob = "auto1";
+  private final String farmob = "auto2";
+  private final String charge = "auto3";
+  private final String mobandcharge = "auto4";
+
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
   private final Joystick driver2 = new Joystick(Controllers.DRIVER_SEC_PORT);
@@ -26,21 +36,21 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
-  private final AutoCmd autoCmd = new AutoCmd(drivetrain);
-  private final DriveCmd driveCmd = new DriveCmd(drivetrain, 40.0);
-  private final TurnCmd turnCmd = new TurnCmd(drivetrain, 90.0);
+  private final AutoCmd mobandchargeCmd = new AutoCmd(drivetrain);
+  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 80.0);
+  private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
+  private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
-
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
   // OneBar
-
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -55,12 +65,6 @@ public class RobotContainer {
   private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
-  private final ClampCmd ClampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd ReleaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd ShiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd ShiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd StopClawCmd = new StopClawCmd(clawSubsystem);
 
   // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
@@ -97,6 +101,12 @@ public class RobotContainer {
   }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    m_chooser.setDefaultOption("Basic Mobility", mob);
+    m_chooser.addOption("Mobility Far", farmob);
+    m_chooser.addOption("Charge", charge);
+    m_chooser.addOption("Mobility & Charge", mobandcharge);
+    SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -150,7 +160,16 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return driveCmd;
+    switch (m_chooser.getSelected()) {
+      case farmob:
+        return farmobCmd;
+      case charge:
+        return chargeCmd;
+      case mobandcharge:
+        return mobandchargeCmd;
+      case mob:
+      default:
+        return mobCmd;
+    }
   }
 }

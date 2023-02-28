@@ -31,6 +31,7 @@ public class BalanceCmd extends CommandBase {
     motorstop = drive.balancemvmnt();
     if (motorstop == true) {
       timer.start();
+      timer.reset();
     } else {
       timer.stop();
       timer.reset();
@@ -45,7 +46,7 @@ public class BalanceCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean status;
-    if (motorstop == true && timer.get() > 1.5) {
+    if (motorstop == true && timer.get() > 5) {
       status = true;
     } else {
       status = false;
