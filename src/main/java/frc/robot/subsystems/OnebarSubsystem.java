@@ -6,8 +6,8 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,55 +16,57 @@ public class OnebarSubsystem extends SubsystemBase {
   /** Creates a new OnebarSubsystem. */
   private final CANSparkMax rotMotor = new CANSparkMax(Constants.motorRotID, MotorType.kBrushless);
 
-  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushless);
-  private final DutyCycleEncoder encBarDutyCycleEncoder =
-      new DutyCycleEncoder(Constants.encOneBarPort);
+  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushed);
+  // private final DutyCycleEncoder encBarDutyCycleEncoder = new
+  // DutyCycleEncoder(Constants.encOneBarPort);
+  private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
   private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
 
-  public OnebarSubsystem() {}
-
-  public void setup() {
-    resetEnc();
+  public OnebarSubsystem() {
+    // armInUse = false;
+    extMotor.setInverted(true);
   }
 
   public void InverseMotor() {
-    rotMotor.setInverted(true);
+    rotMotor.setInverted(false);
   }
 
   public void armOut() {
     double pValue = pot.get();
     double percentage = pValue * 100.0;
+    SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage < Constants.potMaxPerc) {
-      extMotor.set(Constants.FORSPEED);
+      extMotor.set(Constants.REVSPEED);
+    } else {
+      if (percentage > Constants.potMaxPerc) {
+        extMotor.set(Constants.FORSPEED);
+      } else {
+        extMotor.stopMotor();
+      }
     }
   }
 
   public void armIn() {
     double pValue = pot.get();
     double percentage = pValue * 100.0;
+    SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage > Constants.potMinPerc) {
-      extMotor.set(Constants.REVSPEED);
+      extMotor.set(Constants.FORSPEED);
+    } else {
+      if (percentage < Constants.potMinPerc) {
+        extMotor.set(Constants.REVSPEED);
+      } else {
+        extMotor.stopMotor();
+      }
     }
   }
 
   public void armUp() {
-    double eValue = encBarDutyCycleEncoder.get();
-    eValue = eValue * Constants.ratio;
-    if (eValue < Constants.encMaxVal) {
-      rotMotor.set(Constants.FORSPEED);
-    } else {
-      rotMotor.stopMotor();
-    }
+    rotMotor.set(Constants.FORSPEED); // constraints were moved into the command
   }
 
   public void armDown() {
-    double eValue = encBarDutyCycleEncoder.get();
-    eValue = eValue * Constants.ratio;
-    if (eValue > Constants.encMinVal) {
-      rotMotor.set(Constants.REVSPEED);
-    } else {
-      rotMotor.stopMotor();
-    }
+    rotMotor.set(Constants.REVSPEED); // constraints were moved into the command
   }
 
   public void armRotationStop() {
@@ -76,17 +78,25 @@ public class OnebarSubsystem extends SubsystemBase {
   }
 
   public void resetEnc() {
-    encBarDutyCycleEncoder.reset();
+    encRelativeEncoder.setPosition(0);
   }
 
   public double getEncoder() {
-    return encBarDutyCycleEncoder.get();
+    return encRelativeEncoder.getPosition();
+  }
+
+  public double getPot() {
+    return pot.get();
+  }
+
+  public void setMotorSpeed(double speed) {
+    rotMotor.set(speed);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    double eValue = encBarDutyCycleEncoder.get();
+
+    double eValue = getEncoder();
     SmartDashboard.putNumber("Encoder Value", eValue);
   }
 }

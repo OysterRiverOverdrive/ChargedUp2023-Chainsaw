@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +35,8 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
+  private final PIDController pidController =
+      new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
@@ -57,6 +60,7 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+  private final PID stayHeight = new PID(onebar, pidController);
 
   // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -113,7 +117,6 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     controls.setup();
-    onebar.setup();
   }
 
   private void configureButtonBindings() {
@@ -136,10 +139,9 @@ public class RobotContainer {
     // Arm Extension Out
     supplier(8, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(9, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
+    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(10, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
-
+    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(stayHeight);
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
