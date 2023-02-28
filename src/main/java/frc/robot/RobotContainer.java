@@ -148,7 +148,7 @@ public class RobotContainer {
     // Shift Claw Right
     supplier(14, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
-  
+
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return driveCmd;
