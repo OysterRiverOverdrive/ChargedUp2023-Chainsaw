@@ -72,7 +72,7 @@ public class RobotContainer {
 
     /*Trigger lowerbutton = supplier(1);
     lowerbutton.onTrue(raiseCmd);
-    lowerbutton.onFalse(stopRaiseCmd);
+    lowerbutton.onFalse(lowerCmd);//changed from stopCmds
 
     Trigger raisebutton = supplier(2);
     raisebutton.onTrue(raiseCmd);
@@ -85,6 +85,9 @@ public class RobotContainer {
     Trigger rotrightbutton = supplier(4);
     rotrightbutton.onTrue(rotRightCmd);
     rotrightbutton.onFalse(stopRotCmd);*/
+
+
+
 
     // // Arm Extension In
     // supplier(5).onTrue(armIn).onFalse(armExtStop);

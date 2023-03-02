@@ -25,6 +25,8 @@ public class RaiseCmd extends CommandBase {
   @Override
   public void execute() {
     wrist.encWrisDutyCycleEncoderaise();
+
+    
   }
 
   // Called once the command ends or is interrupted.
