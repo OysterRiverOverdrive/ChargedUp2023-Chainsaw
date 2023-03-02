@@ -15,6 +15,7 @@ import frc.robot.commands.Claw.*;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
+import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
 
@@ -53,7 +54,7 @@ public class RobotContainer {
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
-  /*private final OnebarDown armDown = new OnebarDown(onebar);
+  private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
