@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 // import frc.robot.subsystems.TalonDriveTrain;//in case we were to use winch doctor
@@ -18,14 +16,14 @@ public class MoveToAprilTagCmd extends CommandBase {
   DrivetrainSubsystem drv;
   LimelightSubsystem camera;
 
-  double standOffDistInches = 22.00; //  was 18 and mesurment is in inches
+  double standOffDistInches = 31.00; //  was 22 and mesurment is in inches
 
   boolean cmdFinished = false;
   double speed = 0.0;
   final double speedKp = 0.01;
   final double turnRateKp = 0.011; // was 0.01
 
-  private final SendableChooser<Integer> pipelineChooser = new SendableChooser<>();
+  // private final SendableChooser<Integer> pipelineChooser = new SendableChooser<>();
 
   /** Creates a new ToAprilTagCmd. */
   public MoveToAprilTagCmd(DrivetrainSubsystem drivetrain, LimelightSubsystem limelight) {
@@ -36,11 +34,12 @@ public class MoveToAprilTagCmd extends CommandBase {
 
     addRequirements(drivetrain);
     addRequirements(limelight);
-    pipelineChooser.setDefaultOption(
-        "Blue Tag 1", 0); // TODO add the other tags that are on the field
-    pipelineChooser.setDefaultOption("Blue Tag 6", 5);
-    pipelineChooser.setDefaultOption("Blue Tag 8", 7);
-    SmartDashboard.putData("Choose Pipeline", pipelineChooser);
+
+    // pipelineChooser.setDefaultOption(
+    //     "Blue Tag 1", 0); // TODO add the other tags that are on the field
+    // pipelineChooser.setDefaultOption("Blue Tag 6", 5);
+    // pipelineChooser.setDefaultOption("Blue Tag 8", 7);
+    // SmartDashboard.putData("Choose Pipeline", pipelineChooser);
   }
 
   // Called when the command is initially scheduled.
@@ -50,9 +49,17 @@ public class MoveToAprilTagCmd extends CommandBase {
 
     speed = 0.6;
 
-    int pLine = pipelineChooser.getSelected().intValue();
+    // int pLine = pipelineChooser.getSelected().intValue();
 
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pLine);
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pLine);
+
+    System.out.println("starting april tag");
+
+    if (camera.pLine == 5) {
+      standOffDistInches = 47.0;
+    } else {
+      standOffDistInches = 31.0;
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -69,8 +76,9 @@ public class MoveToAprilTagCmd extends CommandBase {
         speed = distToMyTgt * speedKp; // was og +0.01
       }
 
-      if (distToMyTgt
-          <= standOffDistInches) // the bot is at its goal//was at 30// also had distToMyTgt !=
+      if (distToMyTgt != -10000.00
+          && distToMyTgt
+              <= standOffDistInches) // the bot is at its goal//was at 30// also had distToMyTgt !=
       // -10000.00 && condition
       {
 

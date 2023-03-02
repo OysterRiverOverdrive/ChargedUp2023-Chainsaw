@@ -8,21 +8,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
-import frc.robot.commands.ClampCmd;
-import frc.robot.commands.LowerCmd;
 import frc.robot.commands.OneBar.*;
-import frc.robot.commands.RaiseCmd;
-import frc.robot.commands.ReleaseCmd;
-import frc.robot.commands.RotLeftCmd;
-import frc.robot.commands.RotRightCmd;
-import frc.robot.commands.ShiftLeftCmd;
-import frc.robot.commands.ShiftRightCmd;
-import frc.robot.commands.StopClawCmd;
-import frc.robot.commands.StopRaiseCmd;
-import frc.robot.commands.StopRotCmd;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.ClawSubsystem;
-import frc.robot.subsystems.WristSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -46,7 +33,7 @@ public class RobotContainer {
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
-  private final OnebarDown armDown = new OnebarDown(onebar);
+  /*private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
@@ -64,7 +51,7 @@ public class RobotContainer {
   private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
   private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
   private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);*/
 
   public Trigger supplier(int buttonID) {
     BooleanSupplier bsup = () -> driver1.getRawButton(buttonID);
@@ -83,7 +70,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    Trigger lowerbutton = supplier(1);
+    /*Trigger lowerbutton = supplier(1);
     lowerbutton.onTrue(raiseCmd);
     lowerbutton.onFalse(stopRaiseCmd);
 
@@ -97,7 +84,7 @@ public class RobotContainer {
 
     Trigger rotrightbutton = supplier(4);
     rotrightbutton.onTrue(rotRightCmd);
-    rotrightbutton.onFalse(stopRotCmd);
+    rotrightbutton.onFalse(stopRotCmd);*/
 
     // // Arm Extension In
     // supplier(5).onTrue(armIn).onFalse(armExtStop);
@@ -116,7 +103,7 @@ public class RobotContainer {
     supplier(Controllers.xbox_b)
         .onTrue(moveToAprilTagCmd); // when b button clicked moving to april tag
 
-    Trigger clampbutton = supplier(5);
+    /*Trigger clampbutton = supplier(5);
     clampbutton.onTrue(clampCmd);
     clampbutton.onFalse(stopClawCmd);
 
@@ -130,7 +117,7 @@ public class RobotContainer {
 
     Trigger shiftrightbutton = supplier(8);
     shiftrightbutton.onTrue(shiftRightCmd);
-    shiftrightbutton.onFalse(stopClawCmd);
+    shiftrightbutton.onFalse(stopClawCmd);*/
   }
 
   public Command getAutonomousCommand() {
