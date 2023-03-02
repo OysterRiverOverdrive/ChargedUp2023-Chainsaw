@@ -16,14 +16,14 @@ public final class Constants {
   public static int LeftDrive1 = 6;
   public static int LeftDrive2 = 7;
   public static int RightDrive1 = 1;
-  public static int RightDrive2 = 4;
+  public static int RightDrive2 = 0;
   // establishing motor callouts and their CAN-IDs
 
-  public static double FORSPEED = 0.38;
+  public static double FORSPEED = -0.38;
   public static double REVSPEED = Constants.FORSPEED * -1;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.2;
-  public static double SPEEDLIMIT_TURN = 0.55;
+  public static double SPEEDLIMIT_TURN = 0.75;
   public static double SPEEDLIMIT_SPEED = 0.95;
 
   // Basic Controller configuraton (Xbox Pro)
@@ -33,15 +33,28 @@ public final class Constants {
 
   // Potentiometer and Encoder maximums, minimums, and ratios
   public static double ratio = 0.01;
-  public static double potMaxPerc = 96;
-  public static double potMinPerc = 10;
-  public static double encMaxVal = 1;
-  public static double encMinVal = -1;
+  public static double potMaxPerc = 90;
+  public static double potMinPerc = 20;
+  public static double encMaxVal = 50;
+  public static double encMinVal = -50;
+
+  // PID Constants
+  public static double kP = 1;
+  public static double kI = 1.5;
+  public static double kD = 0.2;
+
+  // PID Assisted Arm heights
+  public final double[] armHeights = {
+    0, 180, 360
+  }; // these are, in order, lowest, middle, and highest. There can different placements.
+  public static int index =
+      1; // this is where the basic selection of the arm height you want it to be. this is for an
+  // array.
+  // numbers correspond to the values {0, 1, 2...}
 
   // Ports for Encoder, Potentiometer, and Motors
-  public static int encOneBarPort = 0;
+  public static int encOneBarPort = 3;
   public static int potOneBarPort = 0;
-
-  public static int motorRotID = 2;
-  public static int motorExtID = 3;
+  public static int motorRotID = 3;
+  public static int motorExtID = 4;
 }

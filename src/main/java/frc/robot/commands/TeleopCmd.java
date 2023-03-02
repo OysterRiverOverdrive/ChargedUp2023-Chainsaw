@@ -29,9 +29,9 @@ public class TeleopCmd extends CommandBase {
 
   public double getGear() {
     double returned = 1.0;
-    if (Controllers.CURRENT_SPEEDLIMIT == Controllers.HIGHSPEED) {
+    if (Controllers.CURRENT_SPEEDLIMIT == Controllers.Gears.HIGH) {
       returned = 1.0;
-    } else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.LOWSPEED) {
+    } else if (Controllers.CURRENT_SPEEDLIMIT == Controllers.Gears.LOW) {
       returned = Controllers.LOWEREDSPEED;
     }
     return returned;
@@ -39,7 +39,9 @@ public class TeleopCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    // drivesubsystem.setCoast();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

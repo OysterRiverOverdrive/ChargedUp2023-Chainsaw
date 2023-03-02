@@ -2,30 +2,34 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.OneBar;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.OnebarSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
-public class OnebarDown extends CommandBase {
-  private final OnebarSubsystem onebarsubsystem;
+public class RotLeft90Cmd extends CommandBase {
+  /** Creates a new RotLeft90Cmd. */
+  private WristSubsystem wrist;
 
-  /** Creates a new OneBarDown. */
-  public OnebarDown(OnebarSubsystem subsystem) {
-    onebarsubsystem = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+  public RotLeft90Cmd(WristSubsystem wrists) {
+
+    wrist = wrists;
+    addRequirements(wrists);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+    wrist.resetrot();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    onebarsubsystem.armDown();
+
+    // wrist.encWrisrotleft90();
+    wrist.rotWrist90Left();
   }
 
   // Called once the command ends or is interrupted.
@@ -35,10 +39,14 @@ public class OnebarDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (onebarsubsystem.getEncoder() < Constants.encMaxVal) {
-      return false;
-    } else {
+
+    double rotation = wrist.getrotations() * 360;
+    System.out.println("Rotations " + rotation);
+    if (rotation < -90) {
+      wrist.stoprot();
       return true;
+    } else {
+      return false;
     }
   }
 }

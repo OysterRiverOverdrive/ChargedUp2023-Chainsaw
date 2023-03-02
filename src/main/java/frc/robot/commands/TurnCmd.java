@@ -5,26 +5,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.WristSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class RotRightCmd extends CommandBase {
-  private WristSubsystem wrist;
+public class TurnCmd extends CommandBase {
+  /** Creates a new TurnCmd. */
+  DrivetrainSubsystem drive;
 
-  public RotRightCmd(WristSubsystem wrists) {
+  boolean isdone;
+  double degree;
 
-    wrist = wrists;
-    addRequirements(wrists);
+  public TurnCmd(DrivetrainSubsystem drives, double degrees) {
+    drive = drives;
+    degree = degrees;
+    addRequirements(drives);
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    drive.zeroencoders();
+    drive.setdegree(degree);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    wrist.encWrisrotright();
+    isdone = drive.turn();
+    // System.out.println(isdone);
   }
 
   // Called once the command ends or is interrupted.
@@ -34,6 +42,6 @@ public class RotRightCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isdone;
   }
 }
