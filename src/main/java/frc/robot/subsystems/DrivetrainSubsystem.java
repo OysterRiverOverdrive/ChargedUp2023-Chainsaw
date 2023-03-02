@@ -65,7 +65,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void zeroencoders() {
     m_encoder_Right.setPosition(0);
     m_encoder_Left.setPosition(0);
-
   }
 
   public void zeroyawnavx() {
