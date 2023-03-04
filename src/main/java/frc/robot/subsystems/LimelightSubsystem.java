@@ -103,7 +103,7 @@ public class LimelightSubsystem extends SubsystemBase {
     {
       y = ty.getDouble(0.0);
 
-      tgtAngleRadians = Units.degreesToRadians(cameraMountAngleDegrees + 1 * y);
+      tgtAngleRadians = Units.degreesToRadians(cameraMountAngleDegrees + y);
       dist = offSetInches / (Math.tan(tgtAngleRadians));
     }
 
