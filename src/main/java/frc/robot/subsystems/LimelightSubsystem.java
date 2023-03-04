@@ -51,15 +51,12 @@ public class LimelightSubsystem extends SubsystemBase {
     if (tgtSeen == 1.0) {
       SmartDashboard.putBoolean("Target Seen", true);
       SmartDashboard.putNumber("target Id", table.getEntry("tid").getDouble(0.0));
-      SmartDashboard.putNumber("pipe line", pipeln.getDouble(0.0));
-      SmartDashboard.putNumber("distance constantly updated", getDistance());
-      System.out.println(getDistance() + "sees a target!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
     }
     // TODO get tgt ID  - based of pipeline
     else {
       SmartDashboard.putBoolean("Target Seen", false);
       SmartDashboard.putNumber("target Id", -99);
-      SmartDashboard.putNumber("pipe line", -99);
     }
 
     // SmartDashboard.putNumber("april tag
@@ -85,19 +82,18 @@ public class LimelightSubsystem extends SubsystemBase {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pLine);
 
     if (pLine == 5) {
-      tgtHeightInches = 27.375; // should be 27.375
-      System.out.println("changing target height&&&&&&&&&&&&&&&&&&&&&&&&&");
+      tgtHeightInches = 27.375; // height of the loading zone targets
 
     } else {
-      tgtHeightInches = 18.0;
+      tgtHeightInches = 18.0; // height of the cube node targets
     }
   }
 
   public double getDistance() {
-    // double tgtHeightInches = 18.00;
+
     double cameraHeightInches = 10.0;
     double offSetInches = tgtHeightInches - cameraHeightInches;
-    double cameraMountAngleDegrees = 0.79; // was -1
+    double cameraMountAngleDegrees = 0.79;
     double tgtAngleRadians = 0.0;
 
     tgtViz = tv.getDouble(0.0);
@@ -110,7 +106,7 @@ public class LimelightSubsystem extends SubsystemBase {
       tgtAngleRadians = Units.degreesToRadians(cameraMountAngleDegrees + 1 * y);
       dist = offSetInches / (Math.tan(tgtAngleRadians));
     }
-    SmartDashboard.putNumber("April tag dist inches ", dist);
+
     return dist;
   }
 
@@ -129,7 +125,6 @@ public class LimelightSubsystem extends SubsystemBase {
 
     double retVal = -10000.00;
     tgtViz = tv.getDouble(0.0);
-    System.out.println("tgt viz " + tgtViz);
 
     if (tgtViz == 1) // if limelight can see target
     {
