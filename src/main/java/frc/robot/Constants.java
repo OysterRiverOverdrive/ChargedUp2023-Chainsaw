@@ -17,15 +17,12 @@ public final class Constants {
   public static int LeftDrive2 = 7;
   public static int RightDrive1 = 1;
   public static int RightDrive2 = 0;
-  public static int RightDrive2 = 0;
   // establishing motor callouts and their CAN-IDs
 
-  public static double FORSPEED = -0.38;
   public static double FORSPEED = -0.38;
   public static double REVSPEED = Constants.FORSPEED * -1;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.2;
-  public static double SPEEDLIMIT_TURN = 0.75;
   public static double SPEEDLIMIT_TURN = 0.75;
   public static double SPEEDLIMIT_SPEED = 0.95;
 

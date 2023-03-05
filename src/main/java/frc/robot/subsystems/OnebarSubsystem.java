@@ -101,8 +101,5 @@ public class OnebarSubsystem extends SubsystemBase {
 
     double eValue = getEncoder()*Constants.ratio;
     SmartDashboard.putNumber("Encoder w/ Ratio Value", eValue);
-
-    double eValue = getEncoder();
-    SmartDashboard.putNumber("Encoder Value", eValue);
   }
 }
