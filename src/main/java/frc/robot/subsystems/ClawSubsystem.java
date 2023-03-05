@@ -5,8 +5,9 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -15,11 +16,31 @@ public class ClawSubsystem extends SubsystemBase {
   public ClawSubsystem() {}
 
   private final CANSparkMax motleft = new CANSparkMax(14, MotorType.kBrushless);
-  private final CANSparkMax motright = new CANSparkMax(13, MotorType.kBrushed);
-  private final DutyCycleEncoder leftenc = new DutyCycleEncoder(0);
-  private final DutyCycleEncoder rightenc = new DutyCycleEncoder(1);
+  private final CANSparkMax motright = new CANSparkMax(13, MotorType.kBrushless);
+  // private final DutyCycleEncoder leftenc = new DutyCycleEncoder(0);
+  // private final DutyCycleEncoder rightenc = new DutyCycleEncoder(1);
+  private final RelativeEncoder leftenc = motleft.getEncoder();
+  private final RelativeEncoder rightenc = motright.getEncoder();
 
   MotorControllerGroup clawGroup = new MotorControllerGroup(motleft, motright);
+
+  public void zeroclaw() {
+    leftenc.setPosition(0);
+    rightenc.setPosition(0);
+  }
+
+  public void clawbrake() {
+    motleft.setIdleMode(IdleMode.kBrake);
+    motleft.setIdleMode(IdleMode.kBrake);
+  }
+
+  public double getleftenc() {
+    return leftenc.getPosition();
+  }
+
+  public double getrightenc() {
+    return rightenc.getPosition();
+  }
 
   public void shiftright() {
 
@@ -43,10 +64,18 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   public void release() {
-
     motleft.setInverted(true);
     motright.setInverted(false);
-    clawGroup.set(-0.4);
+    if (getrightenc() >= 0) {
+      motright.set(-0.4);
+    } else {
+      motright.stopMotor();
+    }
+    if (getleftenc() <= 0) {
+      motleft.set(-0.4);
+    } else {
+      motleft.stopMotor();
+    }
   }
 
   public void stop() {
@@ -55,11 +84,5 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // shiftright();
-    // shiftleft();
-    // clamp();
-    // release();
-    // stop();
-  }
+  public void periodic() {}
 }

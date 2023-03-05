@@ -116,6 +116,7 @@ public class RobotContainer {
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
+    clawSubsystem.zeroclaw();
     controls.setup();
   }
 
