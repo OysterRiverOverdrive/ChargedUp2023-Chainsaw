@@ -23,6 +23,7 @@ public class ClawSubsystem extends SubsystemBase {
   MotorControllerGroup clawGroup = new MotorControllerGroup(motleft, motright);
 
   public void zeroclaw() {
+    // Claw needs to be zeroed open, if not the claw can misbehave
     leftenc.setPosition(0);
     rightenc.setPosition(0);
   }
