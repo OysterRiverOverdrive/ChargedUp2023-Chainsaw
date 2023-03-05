@@ -7,9 +7,12 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.OneBar.PID;
 import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
@@ -96,7 +99,7 @@ public class OnebarSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    double eValue = getEncoder();
-    SmartDashboard.putNumber("Encoder Value", eValue);
+    double eValue = getEncoder()*Constants.ratio;
+    SmartDashboard.putNumber("Encoder w/ Ratio Value", eValue);
   }
 }

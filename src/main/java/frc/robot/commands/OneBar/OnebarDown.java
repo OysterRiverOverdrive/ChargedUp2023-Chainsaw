@@ -35,7 +35,7 @@ public class OnebarDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (onebarsubsystem.getEncoder() < Constants.encMaxVal) {
+    if (onebarsubsystem.getEncoder()*Constants.ratio < Constants.encMaxVal) {
       return false;
     } else {
       return true;

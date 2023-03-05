@@ -32,7 +32,7 @@ public final class Constants {
   public static int DRIVER_SPEED = 1;
 
   // Potentiometer and Encoder maximums, minimums, and ratios
-  public static double ratio = 0.01;
+  public static double ratio = 1/311.966;
   public static double potMaxPerc = 90;
   public static double potMinPerc = 20;
   public static double encMaxVal = 50;

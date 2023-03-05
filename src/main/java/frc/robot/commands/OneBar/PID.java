@@ -12,7 +12,7 @@ public class PID extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
   private final PIDController PIDo;
 
-  double setPoint;
+  public double setPoint;
 
   /** Creates a new PID. */
   public PID(OnebarSubsystem subsystem, PIDController pid) {
