@@ -8,14 +8,13 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class WristSubsystem extends SubsystemBase {
-  private final CANSparkMax rot = new CANSparkMax(11, MotorType.kBrushless);
-  private final CANSparkMax m_raise = new CANSparkMax(12, MotorType.kBrushless);
-  private final Joystick controller = new Joystick(0);
+  private final CANSparkMax rot = new CANSparkMax(7, MotorType.kBrushless);
+  private final CANSparkMax m_raise = new CANSparkMax(8, MotorType.kBrushless);
+  // private final Joystick controller = new Joystick(0);
   private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
   // private final DutyCycleEncoder encWrisDutyCycleEncoderot = new DutyCycleEncoder(0);

@@ -38,8 +38,8 @@ public class RobotContainer {
   private final PIDController pidController =
       new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  // private final WristSubsystem wristSubsystem = new WristSubsystem();
+  // private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
@@ -62,22 +62,22 @@ public class RobotContainer {
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
   private final PID stayHeight = new PID(onebar, pidController);
 
-  // Wrist
-  private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
-  private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
-  private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
-  private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
-  private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
-  private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
+  // // Wrist
+  // private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
+  // private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
+  // private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
+  // private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
+  // private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
+  // private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
-  // Claw
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
-  private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
-  private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
+  // // Claw
+  // private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
+  // private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
+  // private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  // private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  // private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
+  // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
   public void setbrake() {
     drivetrain.setBrake();
@@ -117,48 +117,48 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     controls.setup();
+    onebar.resetEnc();
   }
 
   private void configureButtonBindings() {
 
-    // Wrist Raise
-    supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
-    // Wrist Lower
-    supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
-    // Wrist Left
-    supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
-    // Wrist Right
-    supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-    // Wrist Left 90
-    supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-    // Wrist Right 90
-    supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
+    // // Wrist Raise
+    // supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    // // Wrist Lower
+    // supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    // // Wrist Left
+    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
+    // // Wrist Right
+    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+    // // Wrist Left 90
+    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+    // // Wrist Right 90
+    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(7, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
     // Arm Extension Out
     supplier(8, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(6, joysticks.DRIVER).onTrue(armUp).onFalse(stayHeight);
+    supplier(1, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(4, joysticks.DRIVER).onTrue(armDown).onFalse(stayHeight);
+    supplier(4, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
+
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
-
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
     // Close Claw
-    supplier(11, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
-    // Open Claw
-    supplier(12, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // Shift Claw Left
-    supplier(13, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
-    // Shift Claw Right
-    supplier(14, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
+    // supplier(11, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
+    // // Open Claw
+    // supplier(12, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
+    // // Shift Claw Left
+    // supplier(13, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    // // Shift Claw Right
+    // supplier(14, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
