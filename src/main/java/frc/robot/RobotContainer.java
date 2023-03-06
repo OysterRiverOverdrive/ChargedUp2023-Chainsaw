@@ -87,6 +87,10 @@ public class RobotContainer {
     drivetrain.setCoast();
   }
 
+  public void clawbrake() {
+    clawSubsystem.clawbrake();
+  }
+
   private enum joysticks {
     DRIVER,
     OPERATOR
@@ -116,6 +120,7 @@ public class RobotContainer {
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
+    clawSubsystem.zeroclaw();
     controls.setup();
   }
 
