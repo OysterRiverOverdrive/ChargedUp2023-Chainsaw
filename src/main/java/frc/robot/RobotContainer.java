@@ -57,6 +57,10 @@ public class RobotContainer {
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final ArmRotStop armRotStop = new ArmRotStop(onebar);
+  private final POVButton armDown = new POVButton(operator, 90);
+  private final POVButton armUp = new POVButton(operator, 270);
+  private final POVButton armIn = new POVButton(operator, 180);
+  private final POVButton armOut = new POVButton(operator, 0);
 
   // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -119,44 +123,43 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Wrist Raise
-    supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    supplier(3, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
-    supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    supplier(1, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
     // Wrist Left
-    supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
+    supplier(4, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
     // Wrist Right
-    supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+    supplier(5, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
     // Wrist Left 90
-    supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+    supplier(4, joysticks.DRIVER).onTrue(rotLeft90Cmd);
     // Wrist Right 90
-    supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
+    supplier(5, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
-    supplier(7, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
+    
+    armIn.onTrue(armIn);
     // Arm Extension Out
-    supplier(8, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
+    armIn.onTrue(armIn).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(9, joysticks.DRIVER).onTrue(armUp).onFalse(armRotStop);
+    
     // Arm Rotation Down
-    supplier(10, joysticks.DRIVER).onTrue(armDown).onFalse(armRotStop);
+    armDown.onTrue(armDown).onFalse(armRotStop);
 
     // Shift Up
-    supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
+    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
-    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
-
-    supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
+    supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
-    supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
+    supplier(Controllers.xbox_x, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
     // Close Claw
-    supplier(11, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
+    supplier(8, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
     // Open Claw
-    supplier(12, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
+    supplier(9, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
     // Shift Claw Left
-    supplier(13, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    supplier(6, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
     // Shift Claw Right
-    supplier(14, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
+    supplier(7, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
