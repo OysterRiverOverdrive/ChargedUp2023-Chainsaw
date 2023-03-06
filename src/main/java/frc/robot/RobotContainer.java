@@ -144,7 +144,7 @@ public class RobotContainer {
     supplier(5, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
-    
+
     armIn.onTrue(armIn);
     // Arm Extension Out
     armIn.onTrue(armIn).onFalse(armExtStop);
