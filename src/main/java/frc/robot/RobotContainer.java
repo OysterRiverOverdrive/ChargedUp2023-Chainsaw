@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,6 +35,8 @@ public class RobotContainer {
   private final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
   private final ControllerSubsystem controls = new ControllerSubsystem();
   private final OnebarSubsystem onebar = new OnebarSubsystem();
+  private final PIDController pidController =
+      new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
   private final ClawSubsystem clawSubsystem = new ClawSubsystem();
@@ -61,6 +64,7 @@ public class RobotContainer {
   private final POVButton armUp = new POVButton(operator, 270);
   private final POVButton armIn = new POVButton(operator, 180);
   private final POVButton armOut = new POVButton(operator, 0);
+  private final PID stayHeight = new PID(onebar, pidController);
 
   // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -85,6 +89,10 @@ public class RobotContainer {
 
   public void setcoast() {
     drivetrain.setCoast();
+  }
+
+  public void clawbrake() {
+    clawSubsystem.clawbrake();
   }
 
   private enum joysticks {
@@ -116,8 +124,8 @@ public class RobotContainer {
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
+    clawSubsystem.zeroclaw();
     controls.setup();
-    onebar.setup();
   }
 
   private void configureButtonBindings() {
@@ -141,10 +149,9 @@ public class RobotContainer {
     // Arm Extension Out
     armIn.onTrue(armIn).onFalse(armExtStop);
     // Arm Rotation Up
-    
+    armup.onTrue(armUp).onFalse(armRotStop);
     // Arm Rotation Down
     armDown.onTrue(armDown).onFalse(armRotStop);
-
     // Shift Up
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftup);
     // Shift Down
