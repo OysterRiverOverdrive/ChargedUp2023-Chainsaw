@@ -53,7 +53,7 @@ public class RobotContainer {
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
-  // OneBar
+  // One Bar
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
