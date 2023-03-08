@@ -46,3 +46,15 @@ jobs:
 
       - run: ./gradlew spotlessCheck
 
+  custom-checks:
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Running custom checks from pr-check.sh.
+        run: bash pr-check.sh
+
