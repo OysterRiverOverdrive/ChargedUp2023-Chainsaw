@@ -120,14 +120,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.32;
+      speed = -0.22;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.32;
+      speed = 0.22;
     } else {
       dashboardb = false;
     }
@@ -142,8 +142,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
       m_robotDrive.arcadeDrive(speed, 0);
       stopped = false;
     }
-    SmartDashboard.putBoolean("Drive forward", dashboardf);
-    SmartDashboard.putBoolean("Drive Backwards", dashboardb);
     return stopped;
   }
 
