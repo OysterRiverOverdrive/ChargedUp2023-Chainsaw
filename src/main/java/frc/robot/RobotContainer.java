@@ -24,7 +24,8 @@ public class RobotContainer {
   private final String mob = "auto1";
   private final String farmob = "auto2";
   private final String charge = "auto3";
-  private final String mobandcharge = "auto4";
+  private final String redmobandcharge = "auto4";
+  private final String bluemobandcharge = "auto5";
 
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
@@ -43,7 +44,8 @@ public class RobotContainer {
 
   // Defining Commands
   // Drivetrain
-  private final AutoCmd mobandchargeCmd = new AutoCmd(drivetrain);
+  private final RedAuto redmobandchargeCmd = new RedAuto(drivetrain);
+  private final BlueAuto bluemobandchargeCmd = new BlueAuto(drivetrain);
   private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 80.0);
   private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
@@ -53,7 +55,7 @@ public class RobotContainer {
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
 
-  // OneBar
+  // One Bar
   private final OnebarDown armDown = new OnebarDown(onebar);
   private final OnebarUp armUp = new OnebarUp(onebar);
   private final OnebarOut armOut = new OnebarOut(onebar);
@@ -87,6 +89,10 @@ public class RobotContainer {
     drivetrain.setCoast();
   }
 
+  public void clawbrake() {
+    clawSubsystem.clawbrake();
+  }
+
   private enum joysticks {
     DRIVER,
     OPERATOR
@@ -109,13 +115,15 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Basic Mobility", mob);
     m_chooser.addOption("Mobility Far", farmob);
     m_chooser.addOption("Charge", charge);
-    m_chooser.addOption("Mobility & Charge", mobandcharge);
+    m_chooser.addOption("Mobility & Charge red", redmobandcharge);
+    m_chooser.addOption("Mobility & Charge blue", bluemobandcharge);
     SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
+    clawSubsystem.zeroclaw();
     controls.setup();
     onebar.resetEnc();
   }
@@ -167,8 +175,10 @@ public class RobotContainer {
         return farmobCmd;
       case charge:
         return chargeCmd;
-      case mobandcharge:
-        return mobandchargeCmd;
+      case redmobandcharge:
+        return redmobandchargeCmd;
+      case bluemobandcharge:
+        return bluemobandchargeCmd;
       case mob:
       default:
         return mobCmd;
