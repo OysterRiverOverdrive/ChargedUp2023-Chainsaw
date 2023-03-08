@@ -70,7 +70,7 @@ public class RobotContainer {
   // private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
   // private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
-  // private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);  
+  // private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
   // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
