@@ -10,13 +10,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ClawSubsystem extends SubsystemBase {
   /** Creates a new ClawSubsystem. */
   public ClawSubsystem() {}
 
-  private final CANSparkMax motleft = new CANSparkMax(9, MotorType.kBrushless);
-  private final CANSparkMax motright = new CANSparkMax(8, MotorType.kBrushless);
+  private final CANSparkMax motleft = new CANSparkMax(Constants.Clawleft, MotorType.kBrushless);
+  private final CANSparkMax motright = new CANSparkMax(Constants.Clawright, MotorType.kBrushless);
   private final RelativeEncoder leftenc = motleft.getEncoder();
   private final RelativeEncoder rightenc = motright.getEncoder();
 

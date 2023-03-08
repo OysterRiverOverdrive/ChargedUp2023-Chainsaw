@@ -10,10 +10,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class WristSubsystem extends SubsystemBase {
-  private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless);
-  private final CANSparkMax m_raise = new CANSparkMax(7, MotorType.kBrushless);
+  private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless); // not used so useless can id was assigned, will show red in riolog
+  private final CANSparkMax m_raise = new CANSparkMax(Constants.Wrist, MotorType.kBrushless);
   // private final Joystick controller = new Joystick(0);
   private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
