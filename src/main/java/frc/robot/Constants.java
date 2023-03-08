@@ -59,6 +59,9 @@ public final class Constants {
   // array.
   // numbers correspond to the values {0, 1, 2...}
 
-  // Ports for Potentiometer
+  // Ports for Encoder, Potentiometer, and Motors
+  public static int encOneBarPort = 3;
   public static int potOneBarPort = 0;
+  public static int motorRotID = 5;
+  public static int motorExtID = 6;
 }

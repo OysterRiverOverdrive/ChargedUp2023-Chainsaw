@@ -67,7 +67,12 @@ public class RobotContainer {
   // // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
   private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
+  // private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
+  // private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
   private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
+  // private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);  
+  // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
+  // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
   // Claw
   private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
@@ -129,6 +134,14 @@ public class RobotContainer {
     supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
     supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    // // Wrist Left
+    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
+    // // Wrist Right
+    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
+    // // Wrist Left 90
+    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
+    // // Wrist Right 90
+    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
