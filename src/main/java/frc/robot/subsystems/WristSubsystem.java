@@ -13,16 +13,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class WristSubsystem extends SubsystemBase {
-  private final CANSparkMax rot =
-      new CANSparkMax(
-          24,
-          MotorType.kBrushless); // not used so useless can id was assigned, will show red in riolog
+  private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless);
+  // not used so useless can id was assigned, will show red in riolog
   private final CANSparkMax m_raise = new CANSparkMax(Constants.Wrist, MotorType.kBrushless);
-  // private final Joystick controller = new Joystick(0);
   private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
-  // private final DutyCycleEncoder encWrisDutyCycleEncoderot = new DutyCycleEncoder(0);
-  // private final DutyCycleEncoder encWrisDutyCycleEncoderaise = new DutyCycleEncoder(1);
 
   public void startup() {
     encoderot.setPosition(0);
@@ -58,6 +53,7 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderaise() {
+    // 1 to 40 gear ratio
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
@@ -72,6 +68,7 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderlower() {
+    // 1 to 40 gear ratio
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 

@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.SerialPort;
 // https://dev.studica.com/releases/2023/NavX.json
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Controllers;
