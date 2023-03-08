@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -84,5 +85,8 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    SmartDashboard.putNumber("Claw Enc Right", getrightenc());
+    SmartDashboard.putNumber("Claw Enc Left", getleftenc());
+  }
 }

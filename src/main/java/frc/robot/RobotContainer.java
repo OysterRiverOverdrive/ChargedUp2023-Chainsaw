@@ -123,6 +123,7 @@ public class RobotContainer {
     configureButtonBindings();
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
+    wristSubsystem.resetraise();
     clawSubsystem.zeroclaw();
     controls.setup();
     onebar.resetEnc();

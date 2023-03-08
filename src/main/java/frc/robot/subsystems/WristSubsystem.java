@@ -25,19 +25,11 @@ public class WristSubsystem extends SubsystemBase {
   // private final DutyCycleEncoder encWrisDutyCycleEncoderaise = new DutyCycleEncoder(1);
 
   public void startup() {
-
-    // encWrisDutyCycleEncoderaise.reset();
-    // encWrisDutyCycleEncoderot.reset();
-
     encoderot.setPosition(0);
     encoderaise.setPosition(0);
   }
 
   public void encWrisrotright() {
-
-    // double rotation = encWrisDutyCycleEncoderot.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(rotation);
     double rotation = encoderot.getPosition();
     double degree = encoderot.getPosition();
 
@@ -52,10 +44,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisrotleft() {
-
-    // double rotation = encWrisDutyCycleEncoderot.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(degrees);
     double rotation = encoderot.getPosition();
     double degree = encoderot.getPosition();
 
@@ -70,11 +58,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderaise() {
-
-    // double raise = encWrisDutyCycleEncoderaise.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(degrees);
-
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
@@ -89,11 +72,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderlower() {
-
-    // double lower = encWrisDutyCycleEncoderaise.get();
-    // double degrees = encWrisDutyCycleEncoderaise.get()*360;
-    // System.out.println(degrees);
-
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
@@ -118,8 +96,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public double getrotations() {
-
-    // return encWrisDutyCycleEncoderot.get();
     return encoderot.getPosition();
   }
 
@@ -150,8 +126,6 @@ public class WristSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-    SmartDashboard.putNumber("rot360", encoderot.getPosition() * 360);
     SmartDashboard.putNumber("rot", encoderot.getPosition());
   }
 }

@@ -81,8 +81,7 @@ public class OnebarSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-    double eValue = getEncoder();
-    SmartDashboard.putNumber("Encoder Value", eValue);
+    SmartDashboard.putNumber("Onebar Rot", getEncoder());
+    SmartDashboard.putNumber("Onebar Ext", getPot());
   }
 }
