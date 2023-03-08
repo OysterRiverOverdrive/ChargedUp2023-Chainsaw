@@ -14,9 +14,9 @@ import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
   /** Creates a new OnebarSubsystem. */
-  private final CANSparkMax rotMotor = new CANSparkMax(Constants.motorRotID, MotorType.kBrushless);
+  private final CANSparkMax rotMotor = new CANSparkMax(Constants.OnebarRot, MotorType.kBrushless);
 
-  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushless);
+  private final CANSparkMax extMotor = new CANSparkMax(Constants.OnebarExt, MotorType.kBrushless);
   // private final DutyCycleEncoder encBarDutyCycleEncoder = new
   // DutyCycleEncoder(Constants.encOneBarPort);
   private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
@@ -27,10 +27,6 @@ public class OnebarSubsystem extends SubsystemBase {
     extMotor.setInverted(true);
   }
 
-  public void InverseMotor() {
-    rotMotor.setInverted(false);
-  }
-
   public void armOut() {
     double pValue = pot.get();
     double percentage = pValue * 100.0;
@@ -38,11 +34,7 @@ public class OnebarSubsystem extends SubsystemBase {
     if (percentage < Constants.potMaxPerc) {
       extMotor.set(0.7);
     } else {
-      if (percentage > Constants.potMaxPerc) {
-        extMotor.set(-0.7);
-      } else {
-        extMotor.stopMotor();
-      }
+      extMotor.stopMotor();
     }
   }
 
@@ -53,11 +45,7 @@ public class OnebarSubsystem extends SubsystemBase {
     if (percentage > Constants.potMinPerc) {
       extMotor.set(-0.7);
     } else {
-      if (percentage < Constants.potMinPerc) {
-        extMotor.set(0.7);
-      } else {
-        extMotor.stopMotor();
-      }
+      extMotor.stopMotor();
     }
   }
 

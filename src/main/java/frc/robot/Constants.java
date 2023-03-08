@@ -19,6 +19,12 @@ public final class Constants {
   public static int RightDrive2 = 2;
   // establishing motor callouts and their CAN-IDs
 
+  public static int OnebarRot = 5;
+  public static int OnebarExt = 6;
+  public static int Wrist = 7;
+  public static int Clawright = 8;
+  public static int Clawleft = 9;
+
   public static double FORSPEED = -0.5;
   public static double REVSPEED = Constants.FORSPEED * -1;
   public static double SLEWTURN = 4.5;
@@ -52,9 +58,6 @@ public final class Constants {
   // array.
   // numbers correspond to the values {0, 1, 2...}
 
-  // Ports for Encoder, Potentiometer, and Motors
-  public static int encOneBarPort = 3;
+  // Ports for Potentiometer
   public static int potOneBarPort = 0;
-  public static int motorRotID = 5;
-  public static int motorExtID = 6;
 }
