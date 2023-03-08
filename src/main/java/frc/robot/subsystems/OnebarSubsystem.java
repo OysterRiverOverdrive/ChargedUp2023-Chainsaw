@@ -14,11 +14,9 @@ import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
   /** Creates a new OnebarSubsystem. */
-  private final CANSparkMax rotMotor = new CANSparkMax(Constants.motorRotID, MotorType.kBrushless);
+  private final CANSparkMax rotMotor = new CANSparkMax(Constants.OnebarRot, MotorType.kBrushless);
 
-  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushed);
-  // private final DutyCycleEncoder encBarDutyCycleEncoder = new
-  // DutyCycleEncoder(Constants.encOneBarPort);
+  private final CANSparkMax extMotor = new CANSparkMax(Constants.OnebarExt, MotorType.kBrushless);
   private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
   private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
 
@@ -27,22 +25,14 @@ public class OnebarSubsystem extends SubsystemBase {
     extMotor.setInverted(true);
   }
 
-  public void InverseMotor() {
-    rotMotor.setInverted(false);
-  }
-
   public void armOut() {
     double pValue = pot.get();
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage < Constants.potMaxPerc) {
-      extMotor.set(Constants.REVSPEED);
+      extMotor.set(Constants.onebarExtSpeed);
     } else {
-      if (percentage > Constants.potMaxPerc) {
-        extMotor.set(Constants.FORSPEED);
-      } else {
-        extMotor.stopMotor();
-      }
+      extMotor.stopMotor();
     }
   }
 
@@ -51,22 +41,18 @@ public class OnebarSubsystem extends SubsystemBase {
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage > Constants.potMinPerc) {
-      extMotor.set(Constants.FORSPEED);
+      extMotor.set(Constants.onebarExtSpeed * -1);
     } else {
-      if (percentage < Constants.potMinPerc) {
-        extMotor.set(Constants.REVSPEED);
-      } else {
-        extMotor.stopMotor();
-      }
+      extMotor.stopMotor();
     }
   }
 
   public void armUp() {
-    rotMotor.set(Constants.FORSPEED); // constraints were moved into the command
+    rotMotor.set(Constants.onebarRotSpeed * -1); // constraints were moved into the command
   }
 
   public void armDown() {
-    rotMotor.set(Constants.REVSPEED); // constraints were moved into the command
+    rotMotor.set(Constants.onebarRotSpeed); // constraints were moved into the command
   }
 
   public void armRotationStop() {
@@ -95,8 +81,7 @@ public class OnebarSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-    double eValue = getEncoder();
-    SmartDashboard.putNumber("Encoder Value", eValue);
+    SmartDashboard.putNumber("Onebar Rot", getEncoder());
+    SmartDashboard.putNumber("Onebar Ext", getPot());
   }
 }

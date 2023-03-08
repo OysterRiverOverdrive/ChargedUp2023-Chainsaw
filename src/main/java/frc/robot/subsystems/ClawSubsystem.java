@@ -9,14 +9,16 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ClawSubsystem extends SubsystemBase {
   /** Creates a new ClawSubsystem. */
   public ClawSubsystem() {}
 
-  private final CANSparkMax motleft = new CANSparkMax(14, MotorType.kBrushless);
-  private final CANSparkMax motright = new CANSparkMax(13, MotorType.kBrushless);
+  private final CANSparkMax motleft = new CANSparkMax(Constants.Clawleft, MotorType.kBrushless);
+  private final CANSparkMax motright = new CANSparkMax(Constants.Clawright, MotorType.kBrushless);
   private final RelativeEncoder leftenc = motleft.getEncoder();
   private final RelativeEncoder rightenc = motright.getEncoder();
 
@@ -83,5 +85,8 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    SmartDashboard.putNumber("Claw Enc Right", getrightenc());
+    SmartDashboard.putNumber("Claw Enc Left", getleftenc());
+  }
 }

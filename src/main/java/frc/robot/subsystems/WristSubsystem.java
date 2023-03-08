@@ -8,33 +8,23 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class WristSubsystem extends SubsystemBase {
-  private final CANSparkMax rot = new CANSparkMax(11, MotorType.kBrushless);
-  private final CANSparkMax m_raise = new CANSparkMax(12, MotorType.kBrushless);
-  private final Joystick controller = new Joystick(0);
+  private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless);
+  // not used so useless can id was assigned, will show red in riolog
+  private final CANSparkMax m_raise = new CANSparkMax(Constants.Wrist, MotorType.kBrushless);
   private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
-  // private final DutyCycleEncoder encWrisDutyCycleEncoderot = new DutyCycleEncoder(0);
-  // private final DutyCycleEncoder encWrisDutyCycleEncoderaise = new DutyCycleEncoder(1);
 
   public void startup() {
-
-    // encWrisDutyCycleEncoderaise.reset();
-    // encWrisDutyCycleEncoderot.reset();
-
     encoderot.setPosition(0);
     encoderaise.setPosition(0);
   }
 
   public void encWrisrotright() {
-
-    // double rotation = encWrisDutyCycleEncoderot.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(rotation);
     double rotation = encoderot.getPosition();
     double degree = encoderot.getPosition();
 
@@ -49,10 +39,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisrotleft() {
-
-    // double rotation = encWrisDutyCycleEncoderot.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(degrees);
     double rotation = encoderot.getPosition();
     double degree = encoderot.getPosition();
 
@@ -67,15 +53,11 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderaise() {
-
-    // double raise = encWrisDutyCycleEncoderaise.get();
-    // double degrees = encWrisDutyCycleEncoderot.get()*360;
-    // System.out.println(degrees);
-
-    double rotation = encoderaise.getPosition();
+    // 1 to 40 gear ratio
+    double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
-    if (rotation >= -0.3) {
+    if (rotation >= -0.5) {
 
       m_raise.set(0.22);
 
@@ -86,15 +68,11 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public void encWrisDutyCycleEncoderlower() {
-
-    // double lower = encWrisDutyCycleEncoderaise.get();
-    // double degrees = encWrisDutyCycleEncoderaise.get()*360;
-    // System.out.println(degrees);
-
-    double rotation = encoderaise.getPosition();
+    // 1 to 40 gear ratio
+    double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
-    if (rotation <= 0.3) {
+    if (rotation <= 0.5) {
 
       m_raise.set(-0.22);
 
@@ -115,8 +93,6 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public double getrotations() {
-
-    // return encWrisDutyCycleEncoderot.get();
     return encoderot.getPosition();
   }
 
@@ -147,8 +123,6 @@ public class WristSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-
-    SmartDashboard.putNumber("rot360", encoderot.getPosition() * 360);
     SmartDashboard.putNumber("rot", encoderot.getPosition());
   }
 }

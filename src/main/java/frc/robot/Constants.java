@@ -13,17 +13,23 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static int LeftDrive1 = 6;
-  public static int LeftDrive2 = 7;
+
   public static int RightDrive1 = 1;
-  public static int RightDrive2 = 0;
+  public static int RightDrive2 = 2;
+  public static int LeftDrive1 = 4;
+  public static int LeftDrive2 = 3;
+  public static int OnebarRot = 5;
+  public static int OnebarExt = 6;
+  public static int Wrist = 7;
+  public static int Clawright = 8;
+  public static int Clawleft = 9;
   // establishing motor callouts and their CAN-IDs
 
-  public static double FORSPEED = -0.38;
-  public static double REVSPEED = Constants.FORSPEED * -1;
+  public static double onebarRotSpeed = 0.5;
+  public static double onebarExtSpeed = 0.6;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.2;
-  public static double SPEEDLIMIT_TURN = 0.75;
+  public static double SPEEDLIMIT_TURN = 0.55;
   public static double SPEEDLIMIT_SPEED = 0.95;
 
   // Basic Controller configuraton (Xbox Pro)
@@ -31,12 +37,12 @@ public final class Constants {
   public static int DRIVER_TURN = 4;
   public static int DRIVER_SPEED = 1;
 
-  // Potentiometer and Encoder maximums, minimums, and ratios
-  public static double ratio = 0.01;
+  // Potentiometer and Encoder maximums
   public static double potMaxPerc = 90;
   public static double potMinPerc = 20;
-  public static double encMaxVal = 50;
-  public static double encMinVal = -50;
+  public static int potOneBarPort = 0;
+  public static double encMinVal = -0.35;
+  public static double encMaxVal = 0.35;
 
   // PID Constants
   public static double kP = 1;
@@ -52,9 +58,4 @@ public final class Constants {
   // array.
   // numbers correspond to the values {0, 1, 2...}
 
-  // Ports for Encoder, Potentiometer, and Motors
-  public static int encOneBarPort = 3;
-  public static int potOneBarPort = 0;
-  public static int motorRotID = 3;
-  public static int motorExtID = 4;
 }
