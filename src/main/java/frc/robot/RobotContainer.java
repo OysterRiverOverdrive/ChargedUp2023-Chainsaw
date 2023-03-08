@@ -164,9 +164,13 @@ public class RobotContainer {
     // Open Claw
     supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
     // Shift Claw Left
-    supplier(Controllers.logi_lbutton, joysticks.OPERATOR).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
+        .onTrue(shiftLeftCmd)
+        .onFalse(stopClawCmd);
     // Shift Claw Right
-    supplier(Controllers.logi_rbutton, joysticks.OPERATOR).onTrue(shiftRightCmd).onFalse(stopClawCmd);
+    supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
+        .onTrue(shiftRightCmd)
+        .onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {

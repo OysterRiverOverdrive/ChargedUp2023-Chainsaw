@@ -71,7 +71,7 @@ public class WristSubsystem extends SubsystemBase {
     // double degrees = encWrisDutyCycleEncoderot.get()*360;
     // System.out.println(degrees);
 
-    double rotation = encoderaise.getPosition()/40;
+    double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
     if (rotation >= -0.5) {
@@ -90,7 +90,7 @@ public class WristSubsystem extends SubsystemBase {
     // double degrees = encWrisDutyCycleEncoderaise.get()*360;
     // System.out.println(degrees);
 
-    double rotation = encoderaise.getPosition()/40;
+    double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
     if (rotation <= 0.5) {
