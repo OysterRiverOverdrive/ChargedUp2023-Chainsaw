@@ -48,4 +48,18 @@ public final class Controllers {
   public static int logi_ly = 1;
   public static int logi_rx = 2;
   public static int logi_ry = 3;
+
+  // Buttons
+  public static int logi_x = 1;
+  public static int logi_a = 2;
+  public static int logi_b = 3;
+  public static int logi_y = 4;
+  public static int logi_lb = 5;
+  public static int logi_rb = 6;
+  public static int logi_lt = 7;
+  public static int logi_rt = 8;
+  public static int logi_back = 9;
+  public static int logi_start = 10;
+  public static int logi_lbutton = 11;
+  public static int logi_rbutton = 12;
 }

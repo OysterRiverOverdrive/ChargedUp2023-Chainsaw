@@ -38,8 +38,8 @@ public class RobotContainer {
   private final PIDController pidController =
       new PIDController(Constants.kP, Constants.kI, Constants.kD);
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
-  // private final WristSubsystem wristSubsystem = new WristSubsystem();
-  // private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final WristSubsystem wristSubsystem = new WristSubsystem();
+  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   // Defining Commands
   // Drivetrain
@@ -63,19 +63,19 @@ public class RobotContainer {
   private final PID stayHeight = new PID(onebar, pidController);
 
   // // Wrist
-  // private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
-  // private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
+  private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
+  private final RaiseCmd raiseCmd = new RaiseCmd(wristSubsystem);
   // private final RotLeftCmd rotLeftCmd = new RotLeftCmd(wristSubsystem);
   // private final RotRightCmd rotRightCmd = new RotRightCmd(wristSubsystem);
-  // private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
+  private final StopRaiseCmd stopRaiseCmd = new StopRaiseCmd(wristSubsystem);
   // private final StopRotCmd stopRotCmd = new StopRotCmd(wristSubsystem);
 
-  // // Claw
-  // private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  // private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  // private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  // private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  // private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  // Claw
+  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
+  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
+  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
+  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
+  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
   // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
@@ -122,10 +122,10 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    // // Wrist Raise
-    // supplier(1, joysticks.DRIVER).onTrue(raiseCmd).onFalse(stopRaiseCmd);
-    // // Wrist Lower
-    // supplier(2, joysticks.DRIVER).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    // Wrist Raise
+    supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    // Wrist Lower
+    supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
     // // Wrist Left
     // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
     // // Wrist Right
@@ -136,13 +136,13 @@ public class RobotContainer {
     // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
-    supplier(7, joysticks.DRIVER).onTrue(armIn).onFalse(armExtStop);
+    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
     // Arm Extension Out
-    supplier(8, joysticks.DRIVER).onTrue(armOut).onFalse(armExtStop);
+    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(1, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
+    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(4, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
+    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
 
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
@@ -152,13 +152,13 @@ public class RobotContainer {
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
     // Close Claw
-    // supplier(11, joysticks.DRIVER).onTrue(clampCmd).onFalse(stopClawCmd);
-    // // Open Claw
-    // supplier(12, joysticks.DRIVER).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // // Shift Claw Left
-    // supplier(13, joysticks.DRIVER).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
-    // // Shift Claw Right
-    // supplier(14, joysticks.DRIVER).onTrue(shiftRightCmd).onFalse(stopClawCmd);
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
+    // Open Claw
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
+    // Shift Claw Left
+    supplier(Controllers.logi_lbutton, joysticks.OPERATOR).onTrue(shiftLeftCmd).onFalse(stopClawCmd);
+    // Shift Claw Right
+    supplier(Controllers.logi_rbutton, joysticks.OPERATOR).onTrue(shiftRightCmd).onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {

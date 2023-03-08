@@ -15,7 +15,7 @@ public class ClawSubsystem extends SubsystemBase {
   public ClawSubsystem() {}
 
   private final CANSparkMax motleft = new CANSparkMax(9, MotorType.kBrushless);
-  private final CANSparkMax motright = new CANSparkMax(10, MotorType.kBrushed);
+  private final CANSparkMax motright = new CANSparkMax(8, MotorType.kBrushless);
   private final DutyCycleEncoder leftenc = new DutyCycleEncoder(0);
   private final DutyCycleEncoder rightenc = new DutyCycleEncoder(1);
 

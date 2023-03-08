@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class WristSubsystem extends SubsystemBase {
-  private final CANSparkMax rot = new CANSparkMax(7, MotorType.kBrushless);
-  private final CANSparkMax m_raise = new CANSparkMax(8, MotorType.kBrushless);
+  private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless);
+  private final CANSparkMax m_raise = new CANSparkMax(7, MotorType.kBrushless);
   // private final Joystick controller = new Joystick(0);
   private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
@@ -71,10 +71,10 @@ public class WristSubsystem extends SubsystemBase {
     // double degrees = encWrisDutyCycleEncoderot.get()*360;
     // System.out.println(degrees);
 
-    double rotation = encoderaise.getPosition();
+    double rotation = encoderaise.getPosition()/40;
     double degree = encoderaise.getPosition();
 
-    if (rotation >= -0.3) {
+    if (rotation >= -0.5) {
 
       m_raise.set(0.22);
 
@@ -90,10 +90,10 @@ public class WristSubsystem extends SubsystemBase {
     // double degrees = encWrisDutyCycleEncoderaise.get()*360;
     // System.out.println(degrees);
 
-    double rotation = encoderaise.getPosition();
+    double rotation = encoderaise.getPosition()/40;
     double degree = encoderaise.getPosition();
 
-    if (rotation <= 0.3) {
+    if (rotation <= 0.5) {
 
       m_raise.set(-0.22);
 

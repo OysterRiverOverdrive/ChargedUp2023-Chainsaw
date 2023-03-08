@@ -16,7 +16,7 @@ public class OnebarSubsystem extends SubsystemBase {
   /** Creates a new OnebarSubsystem. */
   private final CANSparkMax rotMotor = new CANSparkMax(Constants.motorRotID, MotorType.kBrushless);
 
-  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushed);
+  private final CANSparkMax extMotor = new CANSparkMax(Constants.motorExtID, MotorType.kBrushless);
   // private final DutyCycleEncoder encBarDutyCycleEncoder = new
   // DutyCycleEncoder(Constants.encOneBarPort);
   private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
@@ -36,10 +36,10 @@ public class OnebarSubsystem extends SubsystemBase {
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage < Constants.potMaxPerc) {
-      extMotor.set(Constants.REVSPEED);
+      extMotor.set(0.7);
     } else {
       if (percentage > Constants.potMaxPerc) {
-        extMotor.set(Constants.FORSPEED);
+        extMotor.set(-0.7);
       } else {
         extMotor.stopMotor();
       }
@@ -51,10 +51,10 @@ public class OnebarSubsystem extends SubsystemBase {
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage > Constants.potMinPerc) {
-      extMotor.set(Constants.FORSPEED);
+      extMotor.set(-0.7);
     } else {
       if (percentage < Constants.potMinPerc) {
-        extMotor.set(Constants.REVSPEED);
+        extMotor.set(0.7);
       } else {
         extMotor.stopMotor();
       }
