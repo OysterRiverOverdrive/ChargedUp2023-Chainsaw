@@ -23,10 +23,12 @@ public class ClawSubsystem extends SubsystemBase {
   private final RelativeEncoder rightenc = motright.getEncoder();
 
   MotorControllerGroup clawGroup = new MotorControllerGroup(motleft, motright);
+
   public void claw(double speed) {
-    motleft.set(speed * 4/5);
+    motleft.set(speed * 4 / 5);
     motright.set(speed);
   }
+
   public void zeroclaw() {
     // Claw needs to be zeroed open, if not the claw can misbehave
     leftenc.setPosition(0);
