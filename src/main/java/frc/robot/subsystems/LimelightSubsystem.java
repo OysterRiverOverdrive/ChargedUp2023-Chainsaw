@@ -41,6 +41,11 @@ public class LimelightSubsystem extends SubsystemBase {
     ty = table.getEntry("ty");
 
     pipeln = table.getEntry("getpipe");
+
+    NetworkTableInstance.getDefault()
+        .getTable("limelight")
+        .getEntry("pipeline")
+        .setNumber(0); // added to make pipeline 0
   }
 
   @Override
