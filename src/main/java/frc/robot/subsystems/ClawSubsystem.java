@@ -67,16 +67,18 @@ public class ClawSubsystem extends SubsystemBase {
   public void release() {
     motleft.setInverted(true);
     motright.setInverted(false);
-    if (getrightenc() >= 0) {
-      motright.set(-0.4);
-    } else {
-      motright.stopMotor();
-    }
-    if (getleftenc() <= 0) {
-      motleft.set(-0.4);
-    } else {
-      motleft.stopMotor();
-    }
+    // if (getrightenc() >= 0) {
+    //   motright.set(-0.4);
+    // } else {
+    //   motright.stopMotor();
+    // }
+    motright.set(-0.4);
+    // if (getleftenc() <= 0) {
+    //   motleft.set(-0.4);
+    // } else {
+    //   motleft.stopMotor();
+    // }
+    motleft.set(-0.4);
   }
 
   public void stop() {
