@@ -25,6 +25,7 @@ public class ClawSubsystem extends SubsystemBase {
   MotorControllerGroup clawGroup = new MotorControllerGroup(motleft, motright);
 
   public void claw(double speed) {
+
     motleft.set(speed * 5 / 4);
     motright.set(speed);
   }
