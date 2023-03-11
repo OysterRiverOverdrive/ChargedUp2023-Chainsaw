@@ -35,9 +35,9 @@ public class ShiftRightCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retval = false;
-    if (claw.getrightenc() >= 0) {
-      retval = true;
-    }
+    // if (claw.getrightenc() >= 0) {
+    //   retval = true;
+    // }
     return retval;
   }
 }

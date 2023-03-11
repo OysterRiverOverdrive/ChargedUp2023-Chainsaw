@@ -168,9 +168,9 @@ public class RobotContainer {
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
 
     // Close Claw
-    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
     // Open Claw
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
     // Shift Claw Left
     supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
         .onTrue(shiftLeftCmd)

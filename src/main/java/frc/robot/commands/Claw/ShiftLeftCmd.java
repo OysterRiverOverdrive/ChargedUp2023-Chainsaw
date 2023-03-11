@@ -35,9 +35,9 @@ public class ShiftLeftCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     boolean retval = false;
-    if (claw.getleftenc() <= 0) {
-      retval = true;
-    }
+    // if (claw.getleftenc() <= 0) {
+    //   retval = true;
+    // }
     return retval;
   }
 }
