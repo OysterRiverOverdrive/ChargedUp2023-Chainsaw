@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 // https://dev.studica.com/releases/2023/NavX.json
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Controllers;
@@ -111,7 +112,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   public boolean balancemvmnt() {
     double angle = navx.getRoll();
-    double errorvalue = 9.20;
+    double errorvalue = 7.20;
     double speed = 0;
     boolean dashboardf;
     boolean dashboardb;
@@ -119,14 +120,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.22;
+      speed = -0.28;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.22;
+      speed = 0.28;
     } else {
       dashboardb = false;
     }
@@ -168,6 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Navx", navx.getYaw());
     // This method will be called once per scheduler run
   }
 

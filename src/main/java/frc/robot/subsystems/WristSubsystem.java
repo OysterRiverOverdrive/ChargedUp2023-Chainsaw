@@ -57,7 +57,7 @@ public class WristSubsystem extends SubsystemBase {
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
-    if (rotation >= -0.5) {
+    if (rotation >= -1) {
 
       m_raise.set(0.22);
 
@@ -72,7 +72,7 @@ public class WristSubsystem extends SubsystemBase {
     double rotation = encoderaise.getPosition() / 40;
     double degree = encoderaise.getPosition();
 
-    if (rotation <= 0.5) {
+    if (rotation <= 1) {
 
       m_raise.set(-0.22);
 

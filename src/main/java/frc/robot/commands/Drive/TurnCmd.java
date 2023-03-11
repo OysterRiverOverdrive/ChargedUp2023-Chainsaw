@@ -25,6 +25,7 @@ public class TurnCmd extends CommandBase {
   @Override
   public void initialize() {
     drive.zeroencoders();
+    drive.zeroyawnavx();
     drive.setdegree(degree);
   }
 

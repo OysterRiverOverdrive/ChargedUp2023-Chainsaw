@@ -26,7 +26,7 @@ public final class Constants {
   // establishing motor callouts and their CAN-IDs
 
   public static double onebarRotSpeed = 0.5;
-  public static double onebarExtSpeed = 0.6;
+  public static double onebarExtSpeed = 0.4;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.2;
   public static double SPEEDLIMIT_TURN = 0.55;
@@ -39,7 +39,7 @@ public final class Constants {
 
   // Potentiometer and Encoder maximums
   public static double potMaxPerc = 90;
-  public static double potMinPerc = 20;
+  public static double potMinPerc = 02;
   public static int potOneBarPort = 0;
   public static double encMinVal = -0.35;
   public static double encMaxVal = 0.35;
