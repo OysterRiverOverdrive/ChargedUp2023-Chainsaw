@@ -53,7 +53,7 @@ public class RobotContainer {
   // Drivetrain
   private final RedAuto redmobandchargeCmd = new RedAuto(drivetrain);
   private final BlueAuto bluemobandchargeCmd = new BlueAuto(drivetrain);
-  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 80.0);
+  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0);
   private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
@@ -165,7 +165,9 @@ public class RobotContainer {
     // Shift Down
     supplier(Controllers.xbox_lbutton, joysticks.DRIVER).onTrue(shiftdown);
     // April tag control
-    supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
+    supplier(Controllers.xbox_x, joysticks.DRIVER).onTrue(moveToAprilTagCmd);
+    // Balance Seq
+    supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
     // Close Claw
     supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
