@@ -54,12 +54,12 @@ public class WristSubsystem extends SubsystemBase {
 
   public void encWrisDutyCycleEncoderaise() {
     // 1 to 40 gear ratio
-    double rotation = encoderaise.getPosition() / 40;
+    double rotation = encoderaise.getPosition() / 360;
     double degree = encoderaise.getPosition();
 
     if (rotation >= -1) {
 
-      m_raise.set(0.22);
+      m_raise.set(0.72);
 
     } else {
 
@@ -69,12 +69,12 @@ public class WristSubsystem extends SubsystemBase {
 
   public void encWrisDutyCycleEncoderlower() {
     // 1 to 40 gear ratio
-    double rotation = encoderaise.getPosition() / 40;
+    double rotation = encoderaise.getPosition() / 360;
     double degree = encoderaise.getPosition();
 
     if (rotation <= 1) {
 
-      m_raise.set(-0.22);
+      m_raise.set(-0.72);
 
     } else {
 
