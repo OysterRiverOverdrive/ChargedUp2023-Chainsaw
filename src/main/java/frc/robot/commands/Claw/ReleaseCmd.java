@@ -18,14 +18,13 @@ public class ReleaseCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-    claw.release();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    claw.release();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -34,6 +33,10 @@ public class ReleaseCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean retval = false;
+    // if (claw.getrightenc() >= 0 && claw.getleftenc() <= 0) {
+    //   retval = true;
+    // }
+    return retval;
   }
 }

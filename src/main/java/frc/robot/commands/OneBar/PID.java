@@ -6,18 +6,18 @@ package frc.robot.commands.OneBar;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.OnebarSubsystem;
 
 public class PID extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final PIDController PIDo;
+  private final PIDController PIDo = new PIDController(Constants.kP, Constants.kI, Constants.kD);
 
   double setPoint;
 
   /** Creates a new PID. */
-  public PID(OnebarSubsystem subsystem, PIDController pid) {
+  public PID(OnebarSubsystem subsystem) {
     onebarsubsystem = subsystem;
-    PIDo = pid;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }

@@ -112,7 +112,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   public boolean balancemvmnt() {
     double angle = navx.getRoll();
-    double errorvalue = 9.20;
+    double errorvalue = 7.20;
     double speed = 0;
     boolean dashboardf;
     boolean dashboardb;
@@ -120,14 +120,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.32;
+      speed = -0.28;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.32;
+      speed = 0.28;
     } else {
       dashboardb = false;
     }
@@ -142,8 +142,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
       m_robotDrive.arcadeDrive(speed, 0);
       stopped = false;
     }
-    SmartDashboard.putBoolean("Drive forward", dashboardf);
-    SmartDashboard.putBoolean("Drive Backwards", dashboardb);
     return stopped;
   }
 
@@ -171,6 +169,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Navx", navx.getYaw());
     // This method will be called once per scheduler run
   }
 

@@ -34,6 +34,10 @@ public class ShiftRightCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean retval = false;
+    // if (claw.getrightenc() >= 0) {
+    //   retval = true;
+    // }
+    return retval;
   }
 }

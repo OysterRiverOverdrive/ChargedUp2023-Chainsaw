@@ -8,6 +8,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -20,11 +21,18 @@ public class LimelightSubsystem extends SubsystemBase {
   private NetworkTableEntry ty; // = table.getEntry("ty");
 
   private NetworkTableEntry pipeln; // = table.getEntry("getpipe");
+
+  private final SendableChooser<Integer> pipelineChooser = new SendableChooser<>();
+
   NetworkTableEntry tv = table.getEntry("tv");
 
   private double y; // angle from camera to target
 
   private double tgtViz;
+
+  double tgtHeightInches = 18.00;
+
+  public int pLine = 1;
 
   /** Creates a new LimelightSubSys. */
   public LimelightSubsystem() {
@@ -33,6 +41,11 @@ public class LimelightSubsystem extends SubsystemBase {
     ty = table.getEntry("ty");
 
     pipeln = table.getEntry("getpipe");
+
+    NetworkTableInstance.getDefault()
+        .getTable("limelight")
+        .getEntry("pipeline")
+        .setNumber(0); // added to make pipeline 0
   }
 
   @Override
@@ -43,22 +56,49 @@ public class LimelightSubsystem extends SubsystemBase {
     if (tgtSeen == 1.0) {
       SmartDashboard.putBoolean("Target Seen", true);
       SmartDashboard.putNumber("target Id", table.getEntry("tid").getDouble(0.0));
-      SmartDashboard.putNumber("pipe line", pipeln.getDouble(0.0));
-      SmartDashboard.putNumber("distance constantly updated", getDistance());
+
     }
     // TODO get tgt ID  - based of pipeline
     else {
       SmartDashboard.putBoolean("Target Seen", false);
       SmartDashboard.putNumber("target Id", -99);
-      SmartDashboard.putNumber("pipe line", -99);
+    }
+
+    // SmartDashboard.putNumber("april tag
+    // id",NetworkTableInstance.getDefault().getTable("limelight").getEntry("tid").getDouble(-10000));
+
+    SmartDashboard.putNumber("distance constantly updated", getDistance());
+
+    pipelineChooser.setDefaultOption(
+        "Red Tag 1", 0); // TODO add the other tags that are on the field
+    pipelineChooser.setDefaultOption("Red Tag 2", 1);
+    pipelineChooser.setDefaultOption("Red Tag 3", 2);
+    pipelineChooser.setDefaultOption("Red Loading Zone Tag 5", 5);
+
+    pipelineChooser.setDefaultOption("Blue Tag 6", 4);
+    pipelineChooser.setDefaultOption("Blue Tag 7", 6);
+    pipelineChooser.setDefaultOption("Blue Tag 8", 7);
+    pipelineChooser.setDefaultOption("Blue Loading Zone Tag 4", 5);
+
+    SmartDashboard.putData("Choose Pipeline", pipelineChooser);
+
+    pLine = pipelineChooser.getSelected().intValue();
+
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pLine);
+
+    if (pLine == 5) {
+      tgtHeightInches = 27.375; // height of the loading zone targets
+
+    } else {
+      tgtHeightInches = 18.0; // height of the cube node targets
     }
   }
 
   public double getDistance() {
-    double tgtHeightInches = 18.00;
-    double cameraHeightInches = 10.5;
+
+    double cameraHeightInches = 10.0;
     double offSetInches = tgtHeightInches - cameraHeightInches;
-    double cameraMountAngleDegrees = -1.0;
+    double cameraMountAngleDegrees = 0.79;
     double tgtAngleRadians = 0.0;
 
     tgtViz = tv.getDouble(0.0);
@@ -71,7 +111,7 @@ public class LimelightSubsystem extends SubsystemBase {
       tgtAngleRadians = Units.degreesToRadians(cameraMountAngleDegrees + y);
       dist = offSetInches / (Math.tan(tgtAngleRadians));
     }
-    SmartDashboard.putNumber("April tag dist inches ", dist);
+
     return dist;
   }
 
@@ -90,7 +130,6 @@ public class LimelightSubsystem extends SubsystemBase {
 
     double retVal = -10000.00;
     tgtViz = tv.getDouble(0.0);
-    System.out.println("tgt viz " + tgtViz);
 
     if (tgtViz == 1) // if limelight can see target
     {
