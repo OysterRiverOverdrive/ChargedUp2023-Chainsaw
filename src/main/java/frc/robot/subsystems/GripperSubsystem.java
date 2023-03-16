@@ -27,7 +27,7 @@ public class GripperSubsystem extends SubsystemBase {
 
   public void stopGripper() {
 
-    gripmot.set(0);
+    gripmot.stopMotor();
   }
 
   @Override
