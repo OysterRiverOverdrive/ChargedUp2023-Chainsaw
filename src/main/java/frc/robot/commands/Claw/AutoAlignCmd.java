@@ -25,7 +25,6 @@ public class AutoAlignCmd extends CommandBase {
   public void execute() {
 
     wrist.autoAlign();
-
   }
 
   // Called once the command ends or is interrupted.

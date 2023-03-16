@@ -116,17 +116,15 @@ public class WristSubsystem extends SubsystemBase {
     m_raise.stopMotor();
   }
 
-  public void autoAlign (){
+  public void autoAlign() {
 
-  
     double rotation = encoderaise.getPosition() / 360;
     double degree = encoderaise.getPosition();
 
     if (degree <= 360) {
       m_raise.set(0.5);
-    
-    }
-    else {
+
+    } else {
 
       m_raise.stopMotor();
     }
