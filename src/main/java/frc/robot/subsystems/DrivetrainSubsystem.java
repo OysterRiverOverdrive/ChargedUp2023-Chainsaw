@@ -68,7 +68,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public void zeroyawnavx() {
+    navx.reset();
     navx.calibrate();
+    navx.zeroYaw();
   }
 
   public boolean move(double inches) {
@@ -95,12 +97,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
     angles = angle;
 
     if (angle + 2 > degrees && angle - 2 < degrees) {
+      System.out.println("center");
       m_robotDrive.arcadeDrive(0, 0);
       return true;
     } else if (degrees < angle) {
+      System.out.println("left");
       m_robotDrive.arcadeDrive(0, -0.2);
       return false;
     } else if (degrees > angle) {
+      System.out.println("right");
       m_robotDrive.arcadeDrive(0, 0.2);
       return false;
     } else {

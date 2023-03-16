@@ -15,6 +15,7 @@ public class BalanceSeqCmd extends SequentialCommandGroup {
   public BalanceSeqCmd(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+
     addCommands(new DriveCmd(drive, 80), new BalanceCmd(drive));
   }
 }
