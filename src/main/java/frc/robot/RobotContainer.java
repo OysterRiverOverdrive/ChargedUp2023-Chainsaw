@@ -79,12 +79,7 @@ public class RobotContainer {
   // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
-  // Claw
-  // private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  // private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  // private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  // private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  // private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  // Gripper
   private final InGripperCmd inGripperCmd = new InGripperCmd(gripperSubsystem);
   private final OutGripperCmd outGripperCmd = new OutGripperCmd(gripperSubsystem);
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
@@ -96,10 +91,6 @@ public class RobotContainer {
   public void setcoast() {
     drivetrain.setCoast();
   }
-
-  // public void clawbrake() {
-  //   clawSubsystem.clawbrake();
-  // }
 
   private enum joysticks {
     DRIVER,
