@@ -116,6 +116,22 @@ public class WristSubsystem extends SubsystemBase {
     m_raise.stopMotor();
   }
 
+  public void autoAlign (){
+
+  
+    double rotation = encoderaise.getPosition() / 360;
+    double degree = encoderaise.getPosition();
+
+    if (degree <= 360) {
+      m_raise.set(0.5);
+    
+    }
+    else {
+
+      m_raise.stopMotor();
+    }
+  }
+
   public WristSubsystem() {
     rot.setIdleMode(IdleMode.kBrake);
     m_raise.setIdleMode(IdleMode.kBrake);
