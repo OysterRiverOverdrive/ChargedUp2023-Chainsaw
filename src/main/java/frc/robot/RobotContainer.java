@@ -130,14 +130,6 @@ public class RobotContainer {
     supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
     supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
-    // // Wrist Left
-    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
-    // // Wrist Right
-    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-    // // Wrist Left 90
-    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-    // // Wrist Right 90
-    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
@@ -157,26 +149,14 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_back, joysticks.OPERATOR)
+    supplier(Controllers.logi_rt, joysticks.OPERATOR)
         .onTrue(inGripperCmd)
         .onFalse(stopGripperCmd);
 
-    supplier(Controllers.logi_start, joysticks.OPERATOR)
+    supplier(Controllers.logi_lt, joysticks.OPERATOR)
         .onTrue(outGripperCmd)
         .onFalse(stopGripperCmd);
 
-    // // Close Claw
-    // supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
-    // // Open Claw
-    // supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // // Shift Claw Left
-    // supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
-    //     .onTrue(shiftLeftCmd)
-    //     .onFalse(stopClawCmd);
-    // // Shift Claw Right
-    // supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
-    //     .onTrue(shiftRightCmd)
-    //     .onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {
