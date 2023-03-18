@@ -105,6 +105,37 @@ public class RobotContainer {
       return mybutton;
     }
   }
+
+  public boolean getPOVbutton(int degree, joysticks joystick) {
+    double point;
+    if (joystick == joysticks.DRIVER) {
+      point = driver1.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      point = operator.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  public Trigger POVsupplier(int angle, joysticks joystick) {
+    if (joystick == joysticks.DRIVER) {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    } else {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    }
+  }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
