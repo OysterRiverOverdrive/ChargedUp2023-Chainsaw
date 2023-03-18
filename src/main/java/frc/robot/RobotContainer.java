@@ -20,6 +20,7 @@ import frc.robot.commands.Drive.ShiftupCmd;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.GripperSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -42,7 +43,7 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final GripperSubsystem gripperSubsystem = new GripperSubsystem();
 
   // Defining Commands
   // Drivetrain
@@ -75,12 +76,10 @@ public class RobotContainer {
   // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
-  // Claw
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  // Gripper
+  private final InGripperCmd inGripperCmd = new InGripperCmd(gripperSubsystem);
+  private final OutGripperCmd outGripperCmd = new OutGripperCmd(gripperSubsystem);
+  private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
   public void setbrake() {
     drivetrain.setBrake();
@@ -88,10 +87,6 @@ public class RobotContainer {
 
   public void setcoast() {
     drivetrain.setCoast();
-  }
-
-  public void clawbrake() {
-    clawSubsystem.clawbrake();
   }
 
   private enum joysticks {
@@ -124,7 +119,7 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     wristSubsystem.resetraise();
-    clawSubsystem.zeroclaw();
+    // clawSubsystem.zeroclaw();
     controls.setup();
     onebar.resetEnc();
   }
@@ -162,18 +157,26 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    // Close Claw
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
-    // Open Claw
-    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // Shift Claw Left
-    supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
-        .onTrue(shiftLeftCmd)
-        .onFalse(stopClawCmd);
-    // Shift Claw Right
-    supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
-        .onTrue(shiftRightCmd)
-        .onFalse(stopClawCmd);
+    supplier(Controllers.logi_back, joysticks.OPERATOR)
+        .onTrue(inGripperCmd)
+        .onFalse(stopGripperCmd);
+
+    supplier(Controllers.logi_start, joysticks.OPERATOR)
+        .onTrue(outGripperCmd)
+        .onFalse(stopGripperCmd);
+
+    // // Close Claw
+    // supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
+    // // Open Claw
+    // supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
+    // // Shift Claw Left
+    // supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
+    //     .onTrue(shiftLeftCmd)
+    //     .onFalse(stopClawCmd);
+    // // Shift Claw Right
+    // supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
+    //     .onTrue(shiftRightCmd)
+    //     .onFalse(stopClawCmd);
   }
 
   public Command getAutonomousCommand() {

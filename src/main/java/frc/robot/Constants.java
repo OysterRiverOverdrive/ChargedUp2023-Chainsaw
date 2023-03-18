@@ -23,6 +23,7 @@ public final class Constants {
   public static int Wrist = 7;
   public static int Clawright = 8;
   public static int Clawleft = 9;
+  public static int Gripper = 10;
   // establishing motor callouts and their CAN-IDs
 
   public static double onebarRotSpeed = 0.5;
