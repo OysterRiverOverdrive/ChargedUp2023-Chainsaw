@@ -192,7 +192,7 @@ public class RobotContainer {
     // Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
 
-    //gripper out
+    // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 

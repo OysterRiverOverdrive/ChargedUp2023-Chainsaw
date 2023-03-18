@@ -18,8 +18,8 @@ public class ArmToHigh extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PID(onebar, 25),//needs testing
-        new AutoAlignCmd(wrists, 0.3)//needs testing
+        new PID(onebar, 25), // needs testing
+        new AutoAlignCmd(wrists, 0.3) // needs testing
         );
   }
 }
