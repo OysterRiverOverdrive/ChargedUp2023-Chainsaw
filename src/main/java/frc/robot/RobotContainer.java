@@ -149,14 +149,9 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_rt, joysticks.OPERATOR)
-        .onTrue(inGripperCmd)
-        .onFalse(stopGripperCmd);
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
 
-    supplier(Controllers.logi_lt, joysticks.OPERATOR)
-        .onTrue(outGripperCmd)
-        .onFalse(stopGripperCmd);
-
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
