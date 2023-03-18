@@ -10,12 +10,13 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class BalanceSeqCmd extends SequentialCommandGroup {
-  /** Creates a new BalanceSeqCmd. */
-  public BalanceSeqCmd(DrivetrainSubsystem drive) {
+public class LongRunAuto extends SequentialCommandGroup {
+  /** Creates a new LongRunAuto. */
+  public LongRunAuto(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-
-    addCommands(new DriveCmd(drive, 80, 0.6), new BalanceCmd(drive));
+    addCommands(
+      new DriveCmd(drive, 144, 0.4)
+    );
   }
 }
