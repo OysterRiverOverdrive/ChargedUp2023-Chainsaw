@@ -5,15 +5,15 @@
 package frc.robot.commands.Claw;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 
-public class ShiftRightCmd extends CommandBase {
+public class StopGripperCmd extends CommandBase {
+  /** Creates a new InGripperCmd. */
+  private GripperSubsystem gripper;
 
-  private ClawSubsystem claw;
-
-  public ShiftRightCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  public StopGripperCmd(GripperSubsystem grippers) {
+    gripper = grippers;
+    addRequirements(grippers);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +24,7 @@ public class ShiftRightCmd extends CommandBase {
   @Override
   public void execute() {
 
-    claw.shiftright();
+    gripper.stopGripper();
   }
 
   // Called once the command ends or is interrupted.
@@ -34,10 +34,6 @@ public class ShiftRightCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean retval = false;
-    // if (claw.getrightenc() >= 0) {
-    //   retval = true;
-    // }
-    return retval;
+    return false;
   }
 }

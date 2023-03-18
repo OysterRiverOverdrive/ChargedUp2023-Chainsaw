@@ -4,12 +4,16 @@
 
 package frc.robot.commands.Drive;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class TurnCmd extends CommandBase {
   /** Creates a new TurnCmd. */
   DrivetrainSubsystem drive;
+
+  PIDController pid = new PIDController(Constants.kP, Constants.kI, Constants.kD);
 
   boolean isdone;
   double degree;

@@ -5,15 +5,15 @@
 package frc.robot.commands.Claw;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 
-public class ReleaseCmd extends CommandBase {
-  /** Creates a new ReleaseCmd. */
-  private ClawSubsystem claw;
+public class InGripperCmd extends CommandBase {
+  /** Creates a new InGripperCmd. */
+  private GripperSubsystem gripper;
 
-  public ReleaseCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  public InGripperCmd(GripperSubsystem grippers) {
+    gripper = grippers;
+    addRequirements(grippers);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +23,8 @@ public class ReleaseCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    claw.release();
+
+    gripper.rotateinGripper();
   }
 
   // Called once the command ends or is interrupted.
@@ -33,10 +34,6 @@ public class ReleaseCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean retval = false;
-    // if (claw.getrightenc() >= 0 && claw.getleftenc() <= 0) {
-    //   retval = true;
-    // }
-    return retval;
+    return false;
   }
 }

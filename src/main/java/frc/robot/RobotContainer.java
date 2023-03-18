@@ -12,15 +12,14 @@ import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.commands.Claw.*;
 import frc.robot.commands.Drive.BalanceSeqCmd;
-import frc.robot.commands.Drive.BlueAuto;
 import frc.robot.commands.Drive.DriveCmd;
 import frc.robot.commands.Drive.MoveToAprilTagCmd;
-import frc.robot.commands.Drive.RedAuto;
 import frc.robot.commands.Drive.ShiftdownCmd;
 import frc.robot.commands.Drive.ShiftupCmd;
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.GripperSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
@@ -30,8 +29,6 @@ public class RobotContainer {
   private final String mob = "auto1";
   private final String farmob = "auto2";
   private final String charge = "auto3";
-  private final String redmobandcharge = "auto4";
-  private final String bluemobandcharge = "auto5";
 
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
@@ -44,12 +41,10 @@ public class RobotContainer {
   private final OnebarSubsystem onebar = new OnebarSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final WristSubsystem wristSubsystem = new WristSubsystem();
-  private final ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private final GripperSubsystem gripperSubsystem = new GripperSubsystem();
 
   // Defining Commands
   // Drivetrain
-  private final RedAuto redmobandchargeCmd = new RedAuto(drivetrain);
-  private final BlueAuto bluemobandchargeCmd = new BlueAuto(drivetrain);
   private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0);
   private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
@@ -81,12 +76,10 @@ public class RobotContainer {
   // private final RotLeft90Cmd rotLeft90Cmd = new RotLeft90Cmd(wristSubsystem);
   // private final RotRight90Cmd rotRight90Cmd = new RotRight90Cmd(wristSubsystem);
 
-  // Claw
-  private final ClampCmd clampCmd = new ClampCmd(clawSubsystem);
-  private final ReleaseCmd releaseCmd = new ReleaseCmd(clawSubsystem);
-  private final ShiftLeftCmd shiftLeftCmd = new ShiftLeftCmd(clawSubsystem);
-  private final ShiftRightCmd shiftRightCmd = new ShiftRightCmd(clawSubsystem);
-  private final StopClawCmd stopClawCmd = new StopClawCmd(clawSubsystem);
+  // Gripper
+  private final InGripperCmd inGripperCmd = new InGripperCmd(gripperSubsystem);
+  private final OutGripperCmd outGripperCmd = new OutGripperCmd(gripperSubsystem);
+  private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
   public void setbrake() {
     drivetrain.setBrake();
@@ -94,10 +87,6 @@ public class RobotContainer {
 
   public void setcoast() {
     drivetrain.setCoast();
-  }
-
-  public void clawbrake() {
-    clawSubsystem.clawbrake();
   }
 
   private enum joysticks {
@@ -122,8 +111,6 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Basic Mobility", mob);
     m_chooser.addOption("Mobility Far", farmob);
     m_chooser.addOption("Charge", charge);
-    m_chooser.addOption("Mobility & Charge red", redmobandcharge);
-    m_chooser.addOption("Mobility & Charge blue", bluemobandcharge);
     SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
@@ -131,7 +118,7 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(teleopCmd);
     drivetrain.zeroyawnavx();
     wristSubsystem.resetraise();
-    clawSubsystem.zeroclaw();
+    // clawSubsystem.zeroclaw();
     controls.setup();
     onebar.resetEnc();
   }
@@ -169,19 +156,6 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    // Close Claw
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
-    // Open Claw
-    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // Shift Claw Left
-    supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
-        .onTrue(shiftLeftCmd)
-        .onFalse(stopClawCmd);
-    // Shift Claw Right
-    supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
-        .onTrue(shiftRightCmd)
-        .onFalse(stopClawCmd);
-
     //Set Arm To Middle Height
     supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
     //Set Arm To High Height
@@ -190,6 +164,14 @@ public class RobotContainer {
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
     //Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
+    
+    supplier(Controllers.logi_back, joysticks.OPERATOR)
+        .onTrue(inGripperCmd)
+        .onFalse(stopGripperCmd);
+
+    supplier(Controllers.logi_start, joysticks.OPERATOR)
+        .onTrue(outGripperCmd)
+        .onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
@@ -198,10 +180,6 @@ public class RobotContainer {
         return farmobCmd;
       case charge:
         return chargeCmd;
-      case redmobandcharge:
-        return redmobandchargeCmd;
-      case bluemobandcharge:
-        return bluemobandchargeCmd;
       case mob:
       default:
         return mobCmd;

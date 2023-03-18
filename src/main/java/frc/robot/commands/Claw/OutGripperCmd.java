@@ -5,15 +5,15 @@
 package frc.robot.commands.Claw;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
 
-public class StopClawCmd extends CommandBase {
-  /** Creates a new StopClawCmd. */
-  private ClawSubsystem claw;
+public class OutGripperCmd extends CommandBase {
+  /** Creates a new InGripperCmd. */
+  private GripperSubsystem gripper;
 
-  public StopClawCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  public OutGripperCmd(GripperSubsystem grippers) {
+    gripper = grippers;
+    addRequirements(grippers);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +24,7 @@ public class StopClawCmd extends CommandBase {
   @Override
   public void execute() {
 
-    claw.stop();
+    gripper.rotateoutGripper();
   }
 
   // Called once the command ends or is interrupted.

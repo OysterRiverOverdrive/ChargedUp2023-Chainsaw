@@ -2,26 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Claw;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
 
-public class ShiftLeftCmd extends CommandBase {
-  /** Creates a new ShiftLeftCmd. */
-  private ClawSubsystem claw;
-
-  public ShiftLeftCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+public class AutoAlignCmd extends CommandBase {
+  /** Creates a new AutoAlignCmd. */
+  public AutoAlignCmd() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-    claw.shiftleft();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -34,10 +27,6 @@ public class ShiftLeftCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    boolean retval = false;
-    // if (claw.getleftenc() <= 0) {
-    //   retval = true;
-    // }
-    return retval;
+    return false;
   }
 }
