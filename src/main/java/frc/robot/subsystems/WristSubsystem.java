@@ -87,6 +87,6 @@ public class WristSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("rotations", encoderaise.getPosition());
+    SmartDashboard.putNumber("wrist position", encoderaise.getPosition());
   }
 }
