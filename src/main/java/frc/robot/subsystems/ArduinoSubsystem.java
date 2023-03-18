@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ArduinoSubsystem extends SubsystemBase {
 
   private enum PATTERN {
-    INITIALIZING,
+    OFF,
     PURPLE,
     YELLOW
   }
@@ -20,8 +20,8 @@ public class ArduinoSubsystem extends SubsystemBase {
   /** Creates a new Arduino controller. */
   public ArduinoSubsystem(SerialPort.Port port) {
     this.port = port;
-    this.handler = new SerialPort(9600, port);
-    this.state = PATTERN.INITIALIZING;
+    this.handler = new SerialPort(9600, this.port);
+    this.state = PATTERN.OFF;
     timer = new Timer();
     timer.start();
   }
@@ -38,11 +38,12 @@ public class ArduinoSubsystem extends SubsystemBase {
       if (handler.getBytesReceived() > 0) {
         System.out.print(handler.readString());
       }
+      timer.reset();
     }
   }
 
   private byte[] enumToByte(PATTERN p) {
-    if (p == PATTERN.INITIALIZING) {
+    if (p == PATTERN.OFF) {
       return new byte[] {0x40};
     } else if (p == PATTERN.YELLOW) {
       return new byte[] {0x41};
@@ -51,5 +52,17 @@ public class ArduinoSubsystem extends SubsystemBase {
     }
     // If unknown state, return a 0 byte.
     return new byte[] {0x00};
+  }
+
+  public void ledOff() {
+    state = PATTERN.OFF;
+  }
+
+  public void ledPurple() {
+    state = PATTERN.PURPLE;
+  }
+
+  public void ledYellow() {
+    state = PATTERN.YELLOW;
   }
 }
