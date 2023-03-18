@@ -13,9 +13,11 @@ public class DriveCmd extends CommandBase {
 
   boolean isdone = false;
   double inches;
+  double speed;
 
-  public DriveCmd(DrivetrainSubsystem drives, double inches) {
+  public DriveCmd(DrivetrainSubsystem drives, double inches, double speeds) {
     drive = drives;
+    speed = speeds;
     this.inches = inches;
     addRequirements(drives);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,7 +32,7 @@ public class DriveCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    isdone = drive.move(inches);
+    isdone = drive.move(inches, speed);
   }
 
   // Called once the command ends or is interrupted.
