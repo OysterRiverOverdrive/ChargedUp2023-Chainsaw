@@ -92,8 +92,8 @@ public class WristSubsystem extends SubsystemBase {
     rot.set(0.2);
   }
 
-  public double getrotations() {
-    return encoderot.getPosition();
+  public double getraise() {
+    return encoderaise.getPosition()/360;
   }
 
   public void resetrot() {
@@ -116,18 +116,16 @@ public class WristSubsystem extends SubsystemBase {
     m_raise.stopMotor();
   }
 
-  public void autoAlign() {
+  public void autoAlign(double degrees) {
 
-    double rotation = encoderaise.getPosition() / 360;
-    double degree = encoderaise.getPosition();
+    double position = encoderaise.getPosition();
 
-    if (degree <= 360) {
-      m_raise.set(0.5);
-
-    } else {
-
-      m_raise.stopMotor();
+    if (degrees < position) {
+      m_raise.set(-1);
     }
+      else{
+        m_raise.set(1);
+      }
   }
 
   public WristSubsystem() {
