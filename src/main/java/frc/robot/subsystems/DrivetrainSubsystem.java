@@ -52,7 +52,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     double navxXquat = navx.getQuaternionX();
     double navxYquat = navx.getQuaternionY();
     double navxZquat = navx.getQuaternionZ();
-    return Math.abs(navxXquat + navxYquat + navxZquat);
+    double navxWquat = navx.getQuaternionW();
+    return Math.abs(navxXquat) + Math.abs(navxYquat) + Math.abs(navxZquat) + Math.abs(navxWquat);
   }
 
   public void setBrake() {
