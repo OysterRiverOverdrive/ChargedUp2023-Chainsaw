@@ -52,7 +52,7 @@ public class WristSubsystem extends SubsystemBase {
 
       m_raise.stopMotor();
     }
-  }
+  } 
 
   public double getraise() {
     return encoderaise.getPosition() / 360;
