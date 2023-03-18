@@ -48,11 +48,15 @@ public class OnebarSubsystem extends SubsystemBase {
   }
 
   public void armUp() {
-    rotMotor.set(Constants.onebarRotSpeed * -1); // constraints were moved into the command
+    // rotMotor.set(Constants.onebarRotSpeed * -1); // constraints were moved into the command
+    rotMotor.set(-0.5);
+    System.out.println("Up");
   }
 
   public void armDown() {
-    rotMotor.set(Constants.onebarRotSpeed); // constraints were moved into the command
+    // rotMotor.set(Constants.onebarRotSpeed); // constraints were moved into the command
+    rotMotor.set(-0.5);
+    System.out.println("Down");
   }
 
   public void armRotationStop() {
