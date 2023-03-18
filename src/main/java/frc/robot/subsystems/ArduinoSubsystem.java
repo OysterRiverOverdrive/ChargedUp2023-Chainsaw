@@ -2,8 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ArduinoSubsystem {
+public class ArduinoSubsystem extends SubsystemBase {
 
   private enum PATTERN {
     INITIALIZING,
@@ -25,10 +26,8 @@ public class ArduinoSubsystem {
     timer.start();
   }
 
-  /**
-   * Call this function from robotPeriodic so that the desired state is sent to the arduino
-   * continuously.
-   */
+  /** Call this function constantly sends the desired state to the arduino. */
+  @Override
   public void periodic() {
     // Send the current state on a timer.
     if (timer.get() > 1) {

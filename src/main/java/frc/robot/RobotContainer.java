@@ -202,8 +202,4 @@ public class RobotContainer {
         return mobCmd;
     }
   }
-
-  public void arduinoPeriodic() {
-    arduino.periodic();
-  }
 }
