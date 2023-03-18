@@ -123,6 +123,6 @@ public class WristSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("rot", encoderot.getPosition());
+    SmartDashboard.putNumber("Wrist Raise", encoderaise.getPosition());
   }
 }
