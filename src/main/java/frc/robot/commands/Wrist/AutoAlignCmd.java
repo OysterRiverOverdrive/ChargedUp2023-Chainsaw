@@ -5,11 +5,19 @@
 package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.WristSubsystem;
 
 public class AutoAlignCmd extends CommandBase {
-  /** Creates a new AutoAlignCmd. */
-  public AutoAlignCmd() {
-    // Use addRequirements() here to declare subsystem dependencies.
+
+  /** Creates a new LowerCmd. */
+  private WristSubsystem wrist;
+
+  private double rotation;
+
+  public AutoAlignCmd(WristSubsystem wrists, double rotations) {
+    wrist = wrists;
+    rotation = rotations;
+    addRequirements(wrists);
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +26,10 @@ public class AutoAlignCmd extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    wrist.autoAlign(rotation);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -27,6 +38,11 @@ public class AutoAlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double encoder = wrist.getraise();
+    if (encoder == rotation) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

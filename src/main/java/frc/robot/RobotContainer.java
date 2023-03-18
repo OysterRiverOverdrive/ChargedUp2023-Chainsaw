@@ -108,6 +108,37 @@ public class RobotContainer {
       return mybutton;
     }
   }
+
+  public boolean getPOVbutton(int degree, joysticks joystick) {
+    double point;
+    if (joystick == joysticks.DRIVER) {
+      point = driver1.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      point = operator.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  public Trigger POVsupplier(int angle, joysticks joystick) {
+    if (joystick == joysticks.DRIVER) {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    } else {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    }
+  }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
@@ -133,14 +164,6 @@ public class RobotContainer {
     supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
     supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
-    // // Wrist Left
-    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
-    // // Wrist Right
-    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-    // // Wrist Left 90
-    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-    // // Wrist Right 90
-    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
@@ -169,13 +192,17 @@ public class RobotContainer {
     // Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
 
-    supplier(Controllers.logi_back, joysticks.OPERATOR)
-        .onTrue(inGripperCmd)
-        .onFalse(stopGripperCmd);
+    // Set Arm To Middle Height
+    // supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
+    // // Set Arm To High Height
+    // supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
+    // // Speed Mode
+    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
+    // // Balance Mode
+    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
 
-    supplier(Controllers.logi_start, joysticks.OPERATOR)
-        .onTrue(outGripperCmd)
-        .onFalse(stopGripperCmd);
+
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {

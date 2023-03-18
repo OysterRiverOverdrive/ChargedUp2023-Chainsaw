@@ -17,12 +17,12 @@ public class GripperSubsystem extends SubsystemBase {
 
   public void rotateoutGripper() {
 
-    gripmot.set(-0.33);
+    gripmot.set(-0.6);
   }
 
   public void rotateinGripper() {
 
-    gripmot.set(0.33);
+    gripmot.set(0.6);
   }
 
   public void stopGripper() {
