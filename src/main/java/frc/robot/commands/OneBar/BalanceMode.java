@@ -4,8 +4,8 @@
 
 package frc.robot.commands.OneBar;
 
-import frc.robot.commands.Wrist.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
@@ -18,8 +18,8 @@ public class BalanceMode extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new PID(onebar,0)
-      //set wrist position to up? or no wrist movement might be fine
-    );
+        new PID(onebar, 0)
+        // set wrist position to up? or no wrist movement might be fine
+        );
   }
 }

@@ -4,8 +4,8 @@
 
 package frc.robot.commands.OneBar;
 
-import frc.robot.commands.Wrist.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
@@ -18,8 +18,8 @@ public class ArmToMid extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new PID(onebar,50)// test if height is correct for mid pole
-      //wrist command for setting wrist to corrects position to drop on middle pole
-    );
+        new PID(onebar, 50) // test if height is correct for mid pole
+        // wrist command for setting wrist to corrects position to drop on middle pole
+        );
   }
 }

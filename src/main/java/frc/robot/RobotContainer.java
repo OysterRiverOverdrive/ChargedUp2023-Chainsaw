@@ -60,7 +60,7 @@ public class RobotContainer {
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
-  private final PID stayHeight = new PID(onebar,onebar.getEncoder());
+  private final PID stayHeight = new PID(onebar, onebar.getEncoder());
   private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
   private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
   private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
@@ -156,15 +156,15 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    //Set Arm To Middle Height
+    // Set Arm To Middle Height
     supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
-    //Set Arm To High Height
+    // Set Arm To High Height
     supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
-    //Speed Mode
+    // Speed Mode
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
-    //Balance Mode
+    // Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
-    
+
     supplier(Controllers.logi_back, joysticks.OPERATOR)
         .onTrue(inGripperCmd)
         .onFalse(stopGripperCmd);

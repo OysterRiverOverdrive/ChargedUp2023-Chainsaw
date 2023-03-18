@@ -4,11 +4,10 @@
 
 package frc.robot.commands.OneBar;
 
-import frc.robot.commands.Wrist.*;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
-
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -19,8 +18,7 @@ public class SpeedMode extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      //put command to make wrist move to tuck in
-      new PID(onebar,125)
-    );
+        // put command to make wrist move to tuck in
+        new PID(onebar, 125));
   }
 }
