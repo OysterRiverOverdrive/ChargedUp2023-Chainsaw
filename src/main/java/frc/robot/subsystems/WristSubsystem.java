@@ -16,40 +16,11 @@ public class WristSubsystem extends SubsystemBase {
   private final CANSparkMax rot = new CANSparkMax(24, MotorType.kBrushless);
   // not used so useless can id was assigned, will show red in riolog
   private final CANSparkMax m_raise = new CANSparkMax(Constants.Wrist, MotorType.kBrushless);
-  private RelativeEncoder encoderot = rot.getEncoder();
   private RelativeEncoder encoderaise = m_raise.getEncoder();
 
   public void startup() {
-    encoderot.setPosition(0);
+
     encoderaise.setPosition(0);
-  }
-
-  public void encWrisrotright() {
-    double rotation = encoderot.getPosition();
-    double degree = encoderot.getPosition();
-
-    if (rotation <= 5) {
-
-      rot.set(0.33);
-
-    } else {
-
-      rot.stopMotor();
-    }
-  }
-
-  public void encWrisrotleft() {
-    double rotation = encoderot.getPosition();
-    double degree = encoderot.getPosition();
-
-    if (rotation >= -5) {
-
-      rot.set(-0.33);
-
-    } else {
-
-      rot.stopMotor();
-    }
   }
 
   public void encWrisDutyCycleEncoderaise() {
@@ -82,23 +53,8 @@ public class WristSubsystem extends SubsystemBase {
     }
   }
 
-  public void rotWrist90Left() {
-
-    rot.set(-0.2);
-  }
-
-  public void rotWristRight90() {
-
-    rot.set(0.2);
-  }
-
-  public double getrotations() {
-    return encoderot.getPosition();
-  }
-
-  public void resetrot() {
-
-    encoderot.setPosition(0);
+  public double getraise() {
+    return encoderaise.getPosition() / 360;
   }
 
   public void resetraise() {
@@ -106,27 +62,19 @@ public class WristSubsystem extends SubsystemBase {
     encoderaise.setPosition(0);
   }
 
-  public void stoprot() {
-
-    rot.stopMotor();
-  }
-
   public void stopraise() {
 
     m_raise.stopMotor();
   }
 
-  public void autoAlign() {
+  public void autoAlign(double degrees) {
 
-    double rotation = encoderaise.getPosition() / 360;
-    double degree = encoderaise.getPosition();
+    double position = encoderaise.getPosition();
 
-    if (degree <= 360) {
-      m_raise.set(0.5);
-
+    if (degrees < position) {
+      m_raise.set(-0.6);
     } else {
-
-      m_raise.stopMotor();
+      m_raise.set(0.6);
     }
   }
 
@@ -137,6 +85,6 @@ public class WristSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("rot", encoderot.getPosition());
+    SmartDashboard.putNumber("wrist position", encoderaise.getPosition());
   }
 }
