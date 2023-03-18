@@ -121,10 +121,10 @@ public class WristSubsystem extends SubsystemBase {
     double position = encoderaise.getPosition();
 
     if (degrees < position) {
-      m_raise.set(-1);
+      m_raise.set(-0.6);
     }
       else{
-        m_raise.set(1);
+        m_raise.set(0.6);
       }
   }
 

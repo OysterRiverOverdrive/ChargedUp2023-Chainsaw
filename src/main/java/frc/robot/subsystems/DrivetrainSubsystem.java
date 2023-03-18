@@ -73,8 +73,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     navx.zeroYaw();
   }
 
-  public boolean move(double inches) {
+  public boolean move(double inches, double speed) {
     // Inches divided by 2*3(wheel radius)*pi
+    speed = speed * -1.0;
     inches = inches / 18.8495559215;
     if (m_encoder_Left.getPosition() / 9.52 <= inches) {
       m_robotDrive.arcadeDrive(-0.6, 0);
