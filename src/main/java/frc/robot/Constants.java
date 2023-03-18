@@ -40,8 +40,8 @@ public final class Constants {
   public static double potMaxPerc = 90;
   public static double potMinPerc = 02;
   public static int potOneBarPort = 0;
-  public static double encMinVal = -125;
-  public static double encMaxVal = 125;
+  public static double encMinVal = -0.34;
+  public static double encMaxVal = 0.34;
 
   // PID Constants
   public static double kP = 1;
