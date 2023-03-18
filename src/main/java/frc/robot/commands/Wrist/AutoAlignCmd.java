@@ -11,6 +11,7 @@ public class AutoAlignCmd extends CommandBase {
 
   /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
+
   private double rotation;
 
   public AutoAlignCmd(WristSubsystem wrists, double rotations) {
@@ -28,7 +29,6 @@ public class AutoAlignCmd extends CommandBase {
   public void execute() {
 
     wrist.autoAlign(rotation);
-
   }
 
   // Called once the command ends or is interrupted.
@@ -39,10 +39,9 @@ public class AutoAlignCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     double encoder = wrist.getraise();
-    if(encoder == rotation) {
+    if (encoder == rotation) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }

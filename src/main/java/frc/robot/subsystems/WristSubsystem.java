@@ -93,7 +93,7 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public double getraise() {
-    return encoderaise.getPosition()/360;
+    return encoderaise.getPosition() / 360;
   }
 
   public void resetrot() {
@@ -122,10 +122,9 @@ public class WristSubsystem extends SubsystemBase {
 
     if (degrees < position) {
       m_raise.set(-0.6);
+    } else {
+      m_raise.set(0.6);
     }
-      else{
-        m_raise.set(0.6);
-      }
   }
 
   public WristSubsystem() {
