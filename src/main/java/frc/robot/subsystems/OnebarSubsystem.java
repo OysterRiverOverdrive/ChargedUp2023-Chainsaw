@@ -68,7 +68,7 @@ public class OnebarSubsystem extends SubsystemBase {
   }
 
   public double getEncoder() {
-    return encRelativeEncoder.getPosition();
+    return encRelativeEncoder.getPosition() / 311;
   }
 
   public double getPot() {

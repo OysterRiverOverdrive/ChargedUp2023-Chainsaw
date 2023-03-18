@@ -36,7 +36,7 @@ public class OnebarUp extends CommandBase {
   @Override
   public boolean isFinished() {
     // 1 to approx 311 gear ratio
-    if (onebarsubsystem.getEncoder() / 311 > Constants.encMinVal) {
+    if (onebarsubsystem.getEncoder() > Constants.encMinVal) {
       return false;
     } else {
       return true;

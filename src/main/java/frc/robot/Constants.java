@@ -41,21 +41,11 @@ public final class Constants {
   public static double potMaxPerc = 90;
   public static double potMinPerc = 02;
   public static int potOneBarPort = 0;
-  public static double encMinVal = -0.35;
-  public static double encMaxVal = 0.35;
+  public static double encMinVal = -125;
+  public static double encMaxVal = 125;
 
   // PID Constants
   public static double kP = 1;
   public static double kI = 1.5;
   public static double kD = 0.2;
-
-  // PID Assisted Arm heights
-  public final double[] armHeights = {
-    0, 180, 360
-  }; // these are, in order, lowest, middle, and highest. There can different placements.
-  public static int index =
-      1; // this is where the basic selection of the arm height you want it to be. this is for an
-  // array.
-  // numbers correspond to the values {0, 1, 2...}
-
 }

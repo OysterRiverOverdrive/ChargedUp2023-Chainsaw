@@ -65,8 +65,11 @@ public class RobotContainer {
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
-  private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-  private final PID stayHeight = new PID(onebar);
+  private final PID stayHeight = new PID(onebar,onebar.getEncoder());
+  private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
+  private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
+  private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
+  private final SpeedMode speedMode = new SpeedMode(onebar, wristSubsystem);
 
   // // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -178,6 +181,15 @@ public class RobotContainer {
     supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
         .onTrue(shiftRightCmd)
         .onFalse(stopClawCmd);
+
+    //Set Arm To Middle Height
+    supplier(0, joysticks.OPERATOR);
+    //Set Arm To High Height
+    supplier(0, joysticks.OPERATOR);
+    //Speed Mode
+    supplier(0, joysticks.OPERATOR);
+    //Balance Mode
+    supplier(0, joysticks.OPERATOR);
   }
 
   public Command getAutonomousCommand() {
