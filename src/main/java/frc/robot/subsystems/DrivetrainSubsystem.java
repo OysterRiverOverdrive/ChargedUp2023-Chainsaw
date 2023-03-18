@@ -174,7 +174,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Navx", navx.getYaw());
+    SmartDashboard.putBoolean("Navx Connectivity", navx.isConnected());
     // This method will be called once per scheduler run
   }
 
