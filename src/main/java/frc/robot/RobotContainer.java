@@ -183,13 +183,13 @@ public class RobotContainer {
         .onFalse(stopClawCmd);
 
     //Set Arm To Middle Height
-    supplier(0, joysticks.OPERATOR);
+    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
     //Set Arm To High Height
-    supplier(0, joysticks.OPERATOR);
+    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
     //Speed Mode
-    supplier(0, joysticks.OPERATOR);
+    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
     //Balance Mode
-    supplier(0, joysticks.OPERATOR);
+    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
   }
 
   public Command getAutonomousCommand() {
