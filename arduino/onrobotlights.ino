@@ -66,6 +66,9 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     byte value = Serial.read();
+
+    // These byte values should match with values in
+    // ArduinoSubsystem.enumToByte()
     if (value == 0x40) {
       Serial.println("turning leds off");
       off();

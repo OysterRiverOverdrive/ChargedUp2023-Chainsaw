@@ -42,6 +42,7 @@ public class ArduinoSubsystem extends SubsystemBase {
     }
   }
 
+  /** These byte values should match with values in arduino/onrobotlights.ino */
   private byte[] enumToByte(PATTERN p) {
     if (p == PATTERN.OFF) {
       return new byte[] {0x40};
