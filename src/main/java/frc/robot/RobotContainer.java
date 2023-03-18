@@ -13,6 +13,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Claw.*;
 import frc.robot.commands.Drive.BalanceSeqCmd;
 import frc.robot.commands.Drive.DriveCmd;
+import frc.robot.commands.Drive.LongRunAuto;
 import frc.robot.commands.Drive.MoveToAprilTagCmd;
 import frc.robot.commands.Drive.ShiftdownCmd;
 import frc.robot.commands.Drive.ShiftupCmd;
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final String mob = "auto1";
   private final String farmob = "auto2";
   private final String charge = "auto3";
+  private final String longauto = "auto4";
 
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
@@ -45,9 +47,10 @@ public class RobotContainer {
 
   // Defining Commands
   // Drivetrain
-  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0);
-  private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
+  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0, 0.6);
+  private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0, 0.6);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
+  private final LongRunAuto longautoCmd = new LongRunAuto(drivetrain);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -111,6 +114,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Basic Mobility", mob);
     m_chooser.addOption("Mobility Far", farmob);
     m_chooser.addOption("Charge", charge);
+    m_chooser.addOption("Mobility and Charge", longauto);
     SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
@@ -180,6 +184,8 @@ public class RobotContainer {
         return farmobCmd;
       case charge:
         return chargeCmd;
+      case longauto:
+        return longautoCmd;
       case mob:
       default:
         return mobCmd;
