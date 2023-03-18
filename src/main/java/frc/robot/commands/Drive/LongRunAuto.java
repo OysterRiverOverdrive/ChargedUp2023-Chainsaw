@@ -15,8 +15,6 @@ public class LongRunAuto extends SequentialCommandGroup {
   public LongRunAuto(DrivetrainSubsystem drive) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new DriveCmd(drive, 144, 0.4)
-    );
+    addCommands(new DriveCmd(drive, 144, 0.4));
   }
 }
