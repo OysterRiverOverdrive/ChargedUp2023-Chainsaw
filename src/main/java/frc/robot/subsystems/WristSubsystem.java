@@ -23,7 +23,6 @@ public class WristSubsystem extends SubsystemBase {
     encoderaise.setPosition(0);
   }
 
-
   public void encWrisDutyCycleEncoderaise() {
     // 1 to 40 gear ratio
     double rotation = encoderaise.getPosition() / 360;
@@ -52,12 +51,11 @@ public class WristSubsystem extends SubsystemBase {
 
       m_raise.stopMotor();
     }
-  } 
+  }
 
   public double getraise() {
     return encoderaise.getPosition() / 360;
   }
-
 
   public void resetraise() {
 
