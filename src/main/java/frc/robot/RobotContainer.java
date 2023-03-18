@@ -166,13 +166,13 @@ public class RobotContainer {
     supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
 
     // Arm Extension In
-    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
+    POVsupplier(0, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
     // Arm Extension Out
-    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armOut).onFalse(armExtStop);
+    POVsupplier(180, joysticks.OPERATOR).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
+    POVsupplier(90, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
+    POVsupplier(270, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
 
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
@@ -192,16 +192,7 @@ public class RobotContainer {
     // Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
 
-    // Set Arm To Middle Height
-    // supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
-    // // Set Arm To High Height
-    // supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
-    // // Speed Mode
-    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
-    // // Balance Mode
-    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
-
-
+    //gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 

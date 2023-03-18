@@ -18,8 +18,8 @@ public class ArmToMid extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PID(onebar, 50) // test if height is correct for mid pole
-        // wrist command for setting wrist to corrects position to drop on middle pole
+        new PID(onebar, 50),//needs testing
+        new AutoAlignCmd(wrists, 0.3)//needs testing
         );
   }
 }

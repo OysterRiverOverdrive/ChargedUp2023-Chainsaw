@@ -18,8 +18,8 @@ public class BalanceMode extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PID(onebar, 0)
-        // set wrist position to up? or no wrist movement might be fine
+        new PID(onebar, 0),
+        new AutoAlignCmd(wrists, 0)
         );
   }
 }
