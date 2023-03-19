@@ -86,7 +86,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     speed = speed * -1.0;
     inches = inches / 18.8495559215;
     if (m_encoder_Left.getPosition() / 9.52 <= inches) {
-      m_robotDrive.arcadeDrive(-0.6, 0);
+      m_robotDrive.arcadeDrive(speed, 0);
       return false;
     } else {
       m_robotDrive.arcadeDrive(0, 0);
@@ -134,14 +134,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.22;
+      speed = -0.28;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.22;
+      speed = 0.28;
     } else {
       dashboardb = false;
     }
@@ -186,7 +186,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Navx Connectivity", navx.isConnected());
     SmartDashboard.putNumber("Navx Quaternion", getnavxconnectivity());
     SmartDashboard.putNumber("Navx", navx.getYaw());
-    SmartDashboard.putNumber("Error", navx.getPitch());
+    SmartDashboard.putNumber("Error", navx.getRoll());
     // This method will be called once per scheduler run
   }
 
