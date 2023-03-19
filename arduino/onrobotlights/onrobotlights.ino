@@ -71,16 +71,25 @@ void loop() {
     // ArduinoSubsystem.enumToByte()
     if (value == 0x40) {
       Serial.println("turning leds off");
-      off();
+      pattern = 0;
     } else if (value == 0x41) {
       Serial.println("setting leds yellow");
-      yellow();
+      pattern = 1;
     } else if (value == 0x42) {
       Serial.println("setting leds purple");
+      pattern = 2;
+    }
+  }
+
+  EVERY_N_MILLISECONDS(500) {
+    if (pattern == 0) {
+      off();
+    } else if (pattern == 1) {
+      yellow();
+    } else if (pattern == 2) {
       purple();
     }
   }
-  delay(20);
 
   FastLED.show();
 }
