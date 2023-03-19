@@ -48,6 +48,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSide.setInverted(true);
   }
 
+  public double getnavxconnectivity() {
+    double navxXquat = navx.getQuaternionX();
+    double navxYquat = navx.getQuaternionY();
+    double navxZquat = navx.getQuaternionZ();
+    double navxWquat = navx.getQuaternionW();
+    return Math.abs(navxXquat) + Math.abs(navxYquat) + Math.abs(navxZquat) + Math.abs(navxWquat);
+  }
+
   public void setBrake() {
     right1.setIdleMode(IdleMode.kBrake);
     right2.setIdleMode(IdleMode.kBrake);
@@ -175,6 +183,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Navx Connectivity", navx.isConnected());
+    SmartDashboard.putNumber("Navx Quaternion", getnavxconnectivity());
     SmartDashboard.putNumber("Navx", navx.getYaw());
     SmartDashboard.putNumber("Error", navx.getPitch());
     // This method will be called once per scheduler run
