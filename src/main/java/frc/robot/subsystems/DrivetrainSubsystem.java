@@ -134,14 +134,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.28;
+      speed = -0.22;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.28;
+      speed = 0.22;
     } else {
       dashboardb = false;
     }
@@ -185,6 +185,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putBoolean("Navx Connectivity", navx.isConnected());
     SmartDashboard.putNumber("Navx Quaternion", getnavxconnectivity());
+    SmartDashboard.putNumber("Navx", navx.getYaw());
+    SmartDashboard.putNumber("Error", navx.getPitch());
     // This method will be called once per scheduler run
   }
 

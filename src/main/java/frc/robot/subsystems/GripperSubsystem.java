@@ -16,12 +16,10 @@ public class GripperSubsystem extends SubsystemBase {
   private final CANSparkMax gripmot = new CANSparkMax(Constants.Gripper, MotorType.kBrushless);
 
   public void rotateoutGripper() {
-
     gripmot.set(-0.6);
   }
 
   public void rotateinGripper() {
-
     gripmot.set(0.6);
   }
 

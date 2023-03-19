@@ -21,6 +21,7 @@ public class WristSubsystem extends SubsystemBase {
   public void startup() {
 
     encoderaise.setPosition(0);
+    rot.setInverted(true);
   }
 
   public void encWrisDutyCycleEncoderaise() {
