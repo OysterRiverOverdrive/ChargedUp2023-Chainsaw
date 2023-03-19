@@ -79,7 +79,7 @@ void loop() {
       Serial.println("setting leds purple");
       pattern = 2;
     }
- }
+  }
 
   if (pattern == 0) {
     off();
