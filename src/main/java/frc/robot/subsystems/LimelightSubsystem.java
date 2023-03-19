@@ -82,6 +82,8 @@ public class LimelightSubsystem extends SubsystemBase {
 
     pipelineChooser.setDefaultOption("any april tag", 8);
 
+    pipelineChooser.setDefaultOption("Cone Nodes", 9);
+
     SmartDashboard.putData("Choose Pipeline", pipelineChooser);
 
     pLine = pipelineChooser.getSelected().intValue();
@@ -92,7 +94,11 @@ public class LimelightSubsystem extends SubsystemBase {
       tgtHeightInches = 27.375; // height of the loading zone targets
 
     } else {
-      tgtHeightInches = 18.0; // height of the cube node targets
+      if (pLine == 9) {
+        tgtHeightInches = 25.5;
+      } else {
+        tgtHeightInches = 18.0; // height of the cube node targets
+      }
     }
   }
 
