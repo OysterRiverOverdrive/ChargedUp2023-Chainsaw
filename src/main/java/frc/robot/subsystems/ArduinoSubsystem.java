@@ -19,11 +19,12 @@ public class ArduinoSubsystem extends SubsystemBase {
 
   /** Creates a new Arduino controller. */
   public ArduinoSubsystem(SerialPort.Port port) {
-    this.port = port;
-    this.handler = new SerialPort(9600, this.port);
-    this.state = PATTERN.OFF;
-    timer = new Timer();
-    timer.start();
+    return;
+    // this.port = port;
+    // this.handler = new SerialPort(9600, this.port);
+    // this.state = PATTERN.OFF;
+    // timer = new Timer();
+    // timer.start();
   }
 
   /** Call this function constantly sends the desired state to the arduino. */
