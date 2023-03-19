@@ -83,7 +83,7 @@ public class RobotContainer {
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
   // Display
-  private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
+  // private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
 
   public void setbrake() {
     drivetrain.setBrake();
@@ -184,9 +184,9 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
 
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
