@@ -162,9 +162,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Wrist Raise
-    supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
-    supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
 
     // Arm Extension In
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
@@ -184,9 +184,9 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
 
-    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
