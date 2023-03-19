@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -13,6 +14,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Claw.*;
 import frc.robot.commands.Drive.BalanceSeqCmd;
 import frc.robot.commands.Drive.DriveCmd;
+import frc.robot.commands.Drive.LongRunAuto;
 import frc.robot.commands.Drive.MoveToAprilTagCmd;
 import frc.robot.commands.Drive.ShiftdownCmd;
 import frc.robot.commands.Drive.ShiftupCmd;
@@ -29,6 +31,7 @@ public class RobotContainer {
   private final String mob = "auto1";
   private final String farmob = "auto2";
   private final String charge = "auto3";
+  private final String longauto = "auto4";
 
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
@@ -45,9 +48,10 @@ public class RobotContainer {
 
   // Defining Commands
   // Drivetrain
-  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0);
-  private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0);
+  private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0, 0.6);
+  private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0, 0.6);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
+  private final LongRunAuto longautoCmd = new LongRunAuto(drivetrain);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -78,6 +82,9 @@ public class RobotContainer {
   private final OutGripperCmd outGripperCmd = new OutGripperCmd(gripperSubsystem);
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
+  // Display
+  private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
+
   public void setbrake() {
     drivetrain.setBrake();
   }
@@ -102,12 +109,44 @@ public class RobotContainer {
       return mybutton;
     }
   }
+
+  public boolean getPOVbutton(int degree, joysticks joystick) {
+    double point;
+    if (joystick == joysticks.DRIVER) {
+      point = driver1.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      point = operator.getPOV();
+      if (point == degree) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  public Trigger POVsupplier(int angle, joysticks joystick) {
+    if (joystick == joysticks.DRIVER) {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    } else {
+      BooleanSupplier bsup = () -> getPOVbutton(angle, joystick);
+      Trigger mybutton = new Trigger(bsup);
+      return mybutton;
+    }
+  }
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
     m_chooser.setDefaultOption("Basic Mobility", mob);
     m_chooser.addOption("Mobility Far", farmob);
     m_chooser.addOption("Charge", charge);
+    m_chooser.addOption("Mobility and Charge", longauto);
     SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
@@ -126,14 +165,6 @@ public class RobotContainer {
     supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
     supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
-    // // Wrist Left
-    // supplier(3, joysticks.DRIVER).onTrue(rotLeftCmd).onFalse(stopRotCmd);
-    // // Wrist Right
-    // supplier(4, joysticks.DRIVER).onTrue(rotRightCmd).onFalse(stopRotCmd);
-    // // Wrist Left 90
-    // supplier(5, joysticks.DRIVER).onTrue(rotLeft90Cmd);
-    // // Wrist Right 90
-    // supplier(6, joysticks.DRIVER).onTrue(rotRight90Cmd);
 
     // Arm Extension In
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
@@ -153,26 +184,9 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_back, joysticks.OPERATOR)
-        .onTrue(inGripperCmd)
-        .onFalse(stopGripperCmd);
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
 
-    supplier(Controllers.logi_start, joysticks.OPERATOR)
-        .onTrue(outGripperCmd)
-        .onFalse(stopGripperCmd);
-
-    // // Close Claw
-    // supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(clampCmd).onFalse(stopClawCmd);
-    // // Open Claw
-    // supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(releaseCmd).onFalse(stopClawCmd);
-    // // Shift Claw Left
-    // supplier(Controllers.logi_lbutton, joysticks.OPERATOR)
-    //     .onTrue(shiftLeftCmd)
-    //     .onFalse(stopClawCmd);
-    // // Shift Claw Right
-    // supplier(Controllers.logi_rbutton, joysticks.OPERATOR)
-    //     .onTrue(shiftRightCmd)
-    //     .onFalse(stopClawCmd);
+    supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
@@ -181,6 +195,8 @@ public class RobotContainer {
         return farmobCmd;
       case charge:
         return chargeCmd;
+      case longauto:
+        return longautoCmd;
       case mob:
       default:
         return mobCmd;

@@ -2,18 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Claw;
+package frc.robot.commands.Wrist;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
-public class StopClawCmd extends CommandBase {
-  /** Creates a new StopClawCmd. */
-  private ClawSubsystem claw;
+public class AutoAlignCmd extends CommandBase {
 
-  public StopClawCmd(ClawSubsystem claws) {
-    claw = claws;
-    addRequirements(claws);
+  /** Creates a new LowerCmd. */
+  private WristSubsystem wrist;
+
+  private double rotation;
+
+  public AutoAlignCmd(WristSubsystem wrists, double rotations) {
+    wrist = wrists;
+    rotation = rotations;
+    addRequirements(wrists);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +28,7 @@ public class StopClawCmd extends CommandBase {
   @Override
   public void execute() {
 
-    claw.stop();
+    wrist.autoAlign(rotation);
   }
 
   // Called once the command ends or is interrupted.
@@ -34,6 +38,11 @@ public class StopClawCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double encoder = wrist.getraise();
+    if (encoder == rotation) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
