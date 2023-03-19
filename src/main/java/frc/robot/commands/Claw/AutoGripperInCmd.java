@@ -1,14 +1,14 @@
 package frc.robot.commands.Claw;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.GripperSubsystem;
-import edu.wpi.first.wpilibj.Timer;
-
 
 public class AutoGripperInCmd extends CommandBase {
   private Timer timer = new Timer();
   /** Creates a new RollerPush. */
   GripperSubsystem gripper;
+
   public AutoGripperInCmd(GripperSubsystem grippers) {
     gripper = grippers;
     addRequirements(grippers);
@@ -17,10 +17,9 @@ public class AutoGripperInCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() 
-  {
+  public void initialize() {
     timer.reset();
-    timer.start();  
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,8 +30,7 @@ public class AutoGripperInCmd extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) 
-  {
+  public void end(boolean interrupted) {
     gripper.stopGripper();
   }
 
@@ -43,16 +41,12 @@ public class AutoGripperInCmd extends CommandBase {
 
     double currTime = timer.get();
 
-   
-    if (currTime >= 1.5)
-    {
+    if (currTime >= 1.5) {
       retVal = true;
-    }else
-    {
+    } else {
       retVal = false;
     }
 
-    
     return retVal;
   }
 }
