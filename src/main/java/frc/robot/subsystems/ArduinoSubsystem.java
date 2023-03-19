@@ -31,7 +31,7 @@ public class ArduinoSubsystem extends SubsystemBase {
   }
 
   private void connect() {
-    System.out.println("ArduinoSubsystem: connecting on port "+this.port);
+    System.out.println("ArduinoSubsystem: connecting on port " + this.port);
     try {
       this.handler = new SerialPort(9600, this.port);
     } catch (Exception e) {
@@ -62,7 +62,7 @@ public class ArduinoSubsystem extends SubsystemBase {
         connect();
         return;
       }
-  
+
       System.out.println("Sending lighting state: " + state + " to " + handler);
       int n = handler.write(enumToByte(state), 1);
       if (n == 0) {
