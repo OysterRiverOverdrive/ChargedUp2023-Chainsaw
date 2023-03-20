@@ -7,10 +7,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
@@ -20,8 +20,7 @@ public class OnebarSubsystem extends SubsystemBase {
   private final CANSparkMax extMotor = new CANSparkMax(Constants.OnebarExt, MotorType.kBrushless);
   private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
   private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
-  private final SlewRateLimiter slr= new SlewRateLimiter(Constants.SLEWONEBAR);
-
+  private final SlewRateLimiter slr = new SlewRateLimiter(Constants.SLEWONEBAR);
 
   public OnebarSubsystem() {
     // armInUse = false;
