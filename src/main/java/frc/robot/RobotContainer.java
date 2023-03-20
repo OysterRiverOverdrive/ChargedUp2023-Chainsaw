@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -84,6 +85,9 @@ public class RobotContainer {
   private final OutGripperCmd outGripperCmd = new OutGripperCmd(gripperSubsystem);
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
+  // Display
+  private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
+
   public void setbrake() {
     drivetrain.setBrake();
   }
@@ -161,9 +165,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     // Wrist Raise
-    supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
+    supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(raiseCmd).onFalse(stopRaiseCmd);
     // Wrist Lower
-    supplier(Controllers.logi_lb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
+    supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
 
     // Arm Extension In
     POVsupplier(0, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);

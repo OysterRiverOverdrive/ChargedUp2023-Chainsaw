@@ -48,6 +48,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSide.setInverted(true);
   }
 
+  public double getnavxconnectivity() {
+    double navxXquat = navx.getQuaternionX();
+    double navxYquat = navx.getQuaternionY();
+    double navxZquat = navx.getQuaternionZ();
+    double navxWquat = navx.getQuaternionW();
+    return Math.abs(navxXquat) + Math.abs(navxYquat) + Math.abs(navxZquat) + Math.abs(navxWquat);
+  }
+
   public void setBrake() {
     right1.setIdleMode(IdleMode.kBrake);
     right2.setIdleMode(IdleMode.kBrake);
@@ -78,7 +86,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     speed = speed * -1.0;
     inches = inches / 18.8495559215;
     if (m_encoder_Left.getPosition() / 9.52 <= inches) {
-      m_robotDrive.arcadeDrive(-0.6, 0);
+      m_robotDrive.arcadeDrive(speed, 0);
       return false;
     } else {
       m_robotDrive.arcadeDrive(0, 0);
@@ -175,7 +183,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putBoolean("Navx Connectivity", navx.isConnected());
+    SmartDashboard.putNumber("Navx Quaternion", getnavxconnectivity());
     SmartDashboard.putNumber("Navx", navx.getYaw());
+    SmartDashboard.putNumber("Error", navx.getRoll());
     // This method will be called once per scheduler run
   }
 
