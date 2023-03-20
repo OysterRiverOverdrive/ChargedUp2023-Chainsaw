@@ -10,6 +10,7 @@ import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import frc.robot.Constants;
 
 public class OnebarSubsystem extends SubsystemBase {
@@ -19,6 +20,8 @@ public class OnebarSubsystem extends SubsystemBase {
   private final CANSparkMax extMotor = new CANSparkMax(Constants.OnebarExt, MotorType.kBrushless);
   private RelativeEncoder encRelativeEncoder = rotMotor.getEncoder();
   private final AnalogPotentiometer pot = new AnalogPotentiometer(Constants.potOneBarPort);
+  private final SlewRateLimiter slr= new SlewRateLimiter(Constants.SLEWONEBAR);
+
 
   public OnebarSubsystem() {
     // armInUse = false;
@@ -49,12 +52,12 @@ public class OnebarSubsystem extends SubsystemBase {
 
   public void armUp() {
     // rotMotor.set(Constants.onebarRotSpeed * -1); // constraints were moved into the command
-    rotMotor.set(-0.5);
+    setMotorSpeed(-0.5);
   }
 
   public void armDown() {
     // rotMotor.set(Constants.onebarRotSpeed); // constraints were moved into the command
-    rotMotor.set(0.5);
+    setMotorSpeed(0.5);
   }
 
   public void armRotationStop() {
@@ -78,7 +81,7 @@ public class OnebarSubsystem extends SubsystemBase {
   }
 
   public void setMotorSpeed(double speed) {
-    rotMotor.set(speed);
+    rotMotor.set(slr.calculate(speed));
   }
 
   @Override
