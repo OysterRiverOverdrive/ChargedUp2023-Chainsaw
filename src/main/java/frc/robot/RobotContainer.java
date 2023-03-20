@@ -63,7 +63,7 @@ public class RobotContainer {
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
-  private final PID stayHeight = new PID(onebar, onebar.getEncoder());
+  private final PID stayHeight = new PID(onebar, Constants.KnownValPID);
   private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
   private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
   private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
