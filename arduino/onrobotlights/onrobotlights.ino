@@ -81,39 +81,76 @@ void loop() {
     }
   }
 
-  EVERY_N_MILLISECONDS(500) {
-    if (pattern == 0) {
-      off();
-    } else if (pattern == 1) {
-      yellow();
-    } else if (pattern == 2) {
-      purple();
-    }
+  if (pattern == 0) {
+    off();
+  } else if (pattern == 1) {
+    yellow();
+  } else if (pattern == 2) {
+    purple();
+  } else if (pattern == 3) {
+    night_rider();
+  } else if (pattern == 4) {
+    rainbow();
+  } else if (pattern == 5) {
+    gradient();
   }
 
   FastLED.show();
 }
 
 void bluewash() {
- for (int i = 0; i < section_one; i++) {
+  for (int i = 0; i < section_one; i++) {
     leds[i] = CRGB::Blue;
   }
-}  
+}
+
+void night_rider() {
+  static int pos = 0;
+  static int direction = 1;
+  static int len = 4;
+  static uint8_t hue = 0;
+  
+  EVERY_N_MILLISECONDS(20) {
+    pos += direction;
+    if (pos == NUM_LEDS - 1) {
+      direction = -1;
+    } else if (pos == 0) {
+      direction = 1;
+    }
+    fadeToBlackBy(leds, NUM_LEDS, 50);
+    hue++;
+    leds[pos] = CHSV(hue, 255, 255);
+  }
+}
+
+void rainbow() {
+  static uint8_t hue = 0;
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i] = CHSV(hue + i, 255, 255);
+  }
+  EVERY_N_MILLISECONDS(15) {
+    hue++;
+  }
+}
+
+void gradient() {
+  fill_gradient_RGB(leds, NUM_LEDS, CRGB::Purple, CRGB::Teal, CRGB::Teal, CRGB::Purple);
+}
 
 void purple() {
- for (int i = 10; i < section_two; i++) {
+ for (int i = 0; i < NUM_LEDS; i++) {
    leds[i] = CRGB::Purple;
   }
 }
 
 void off() {
-  for (int i = 20; i < section_three; i++) {
+  for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::Black;
   }
 }
 
 void yellow() {
-  for (int i = 30; i < section_four; i++) {
+  for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CRGB::DarkOrange;
   }
 }
