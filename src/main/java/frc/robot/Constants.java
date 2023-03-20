@@ -49,13 +49,5 @@ public final class Constants {
   public static double kI = 1.5;
   public static double kD = 0.2;
 
-  // PID Assisted Arm heights
-  public final double[] armHeights = {
-    0, 180, 360
-  }; // these are, in order, lowest, middle, and highest. There can different placements.
-  public static int index =
-      1; // this is where the basic selection of the arm height you want it to be. this is for an
-  // array.
-  // numbers correspond to the values {0, 1, 2...}
-
+  public static double KnownValPID = 15000;
 }

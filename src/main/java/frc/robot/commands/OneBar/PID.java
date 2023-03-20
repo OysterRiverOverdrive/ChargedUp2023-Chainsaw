@@ -13,11 +13,12 @@ public class PID extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
   private final PIDController PIDo = new PIDController(Constants.kP, Constants.kI, Constants.kD);
 
-  double setPoint;
+  public double setPoint;
 
   /** Creates a new PID. */
-  public PID(OnebarSubsystem subsystem) {
+  public PID(OnebarSubsystem subsystem, double pointSet) {
     onebarsubsystem = subsystem;
+    setPoint = pointSet;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -25,7 +26,9 @@ public class PID extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    setPoint = onebarsubsystem.getEncoder();
+    if (setPoint == Constants.KnownValPID) {
+      setPoint = onebarsubsystem.getEncoder();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

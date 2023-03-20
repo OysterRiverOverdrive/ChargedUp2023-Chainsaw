@@ -64,8 +64,11 @@ public class RobotContainer {
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
-  private final ArmRotStop armRotStop = new ArmRotStop(onebar);
-  private final PID stayHeight = new PID(onebar);
+  private final PID stayHeight = new PID(onebar, Constants.KnownValPID);
+  private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
+  private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
+  private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
+  private final SpeedMode speedMode = new SpeedMode(onebar, wristSubsystem);
 
   // // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -167,13 +170,13 @@ public class RobotContainer {
     supplier(Controllers.logi_rb, joysticks.OPERATOR).onTrue(lowerCmd).onFalse(stopRaiseCmd);
 
     // Arm Extension In
-    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
+    POVsupplier(0, joysticks.OPERATOR).onTrue(armIn).onFalse(armExtStop);
     // Arm Extension Out
-    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armOut).onFalse(armExtStop);
+    POVsupplier(180, joysticks.OPERATOR).onTrue(armOut).onFalse(armExtStop);
     // Arm Rotation Up
-    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
+    POVsupplier(90, joysticks.OPERATOR).onTrue(armUp).onFalse(stayHeight);
     // Arm Rotation Down
-    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
+    POVsupplier(270, joysticks.OPERATOR).onTrue(armDown).onFalse(stayHeight);
 
     // Shift Up
     supplier(Controllers.xbox_rbutton, joysticks.DRIVER).onTrue(shiftup);
@@ -184,8 +187,16 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
+    // Set Arm To Middle Height
+    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
+    // Set Arm To High Height
+    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
+    // Speed Mode
+    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
+    // Balance Mode
+    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
 
+    // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
   }
 
