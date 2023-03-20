@@ -16,8 +16,8 @@ public class MoveToAprilTagCmd extends CommandBase {
 
   boolean cmdFinished = false;
   double speed = 0.0;
-  final double speedKp = 0.01;
-  final double turnRateKp = 0.011;
+  final double speedKp = -0.01;
+  final double turnRateKp = 0.015;
 
   /** Creates a new ToAprilTagCmd. */
   public MoveToAprilTagCmd(DrivetrainSubsystem drivetrain, LimelightSubsystem limelight) {
@@ -35,12 +35,12 @@ public class MoveToAprilTagCmd extends CommandBase {
   public void initialize() {
     cmdFinished = false;
 
-    speed = 0.6;
+    speed = -0.6;
 
     if (camera.pLine == 5) {
-      standOffDistInches = 47.0;
+      standOffDistInches = 60.0;
     } else {
-      standOffDistInches = 31.0;
+      standOffDistInches = 45.0;
     }
   }
 

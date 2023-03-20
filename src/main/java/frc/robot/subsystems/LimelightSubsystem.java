@@ -80,6 +80,10 @@ public class LimelightSubsystem extends SubsystemBase {
     pipelineChooser.setDefaultOption("Blue Tag 8", 7);
     pipelineChooser.setDefaultOption("Blue Loading Zone Tag 4", 5);
 
+    pipelineChooser.setDefaultOption("any april tag", 8);
+
+    pipelineChooser.setDefaultOption("Cone Nodes", 9);
+
     SmartDashboard.putData("Choose Pipeline", pipelineChooser);
 
     pLine = pipelineChooser.getSelected().intValue();
@@ -90,15 +94,19 @@ public class LimelightSubsystem extends SubsystemBase {
       tgtHeightInches = 27.375; // height of the loading zone targets
 
     } else {
-      tgtHeightInches = 18.0; // height of the cube node targets
+      if (pLine == 9) {
+        tgtHeightInches = 25.5;
+      } else {
+        tgtHeightInches = 18.0; // height of the cube node targets
+      }
     }
   }
 
   public double getDistance() {
 
-    double cameraHeightInches = 10.0;
+    double cameraHeightInches = 13.5;
     double offSetInches = tgtHeightInches - cameraHeightInches;
-    double cameraMountAngleDegrees = 0.79;
+    double cameraMountAngleDegrees = 2.31;
     double tgtAngleRadians = 0.0;
 
     tgtViz = tv.getDouble(0.0);
