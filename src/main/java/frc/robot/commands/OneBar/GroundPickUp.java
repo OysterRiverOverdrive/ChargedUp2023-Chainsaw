@@ -17,9 +17,6 @@ public class GroundPickUp extends SequentialCommandGroup {
   public GroundPickUp(OnebarSubsystem onebar, WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new AutoAlignCmd(wrist, 0.5),
-      new PID(onebar, 110)
-    );
+    addCommands(new AutoAlignCmd(wrist, 0.5), new PID(onebar, 110));
   }
 }

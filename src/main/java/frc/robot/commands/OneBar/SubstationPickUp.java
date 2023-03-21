@@ -17,9 +17,6 @@ public class SubstationPickUp extends SequentialCommandGroup {
   public SubstationPickUp(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new PID(onebar, 30),
-      new AutoAlignCmd(wrists, 0.2)
-    );
+    addCommands(new PID(onebar, 30), new AutoAlignCmd(wrists, 0.2));
   }
 }

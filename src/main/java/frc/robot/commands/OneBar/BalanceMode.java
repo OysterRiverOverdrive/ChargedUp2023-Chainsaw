@@ -17,9 +17,6 @@ public class BalanceMode extends SequentialCommandGroup {
   public BalanceMode(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new PID(onebar, 0),
-      new AutoAlignCmd(wrists, 0)
-      );
+    addCommands(new PID(onebar, 0), new AutoAlignCmd(wrists, 0));
   }
 }

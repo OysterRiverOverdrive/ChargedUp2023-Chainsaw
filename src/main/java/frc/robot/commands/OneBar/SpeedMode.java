@@ -17,9 +17,6 @@ public class SpeedMode extends SequentialCommandGroup {
   public SpeedMode(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      new AutoAlignCmd(wrists, 0),
-      new PID(onebar, 110)
-      );
+    addCommands(new AutoAlignCmd(wrists, 0), new PID(onebar, 110));
   }
 }
