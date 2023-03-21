@@ -6,7 +6,7 @@ package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.OneBar.PID;
-import frc.robot.commands.Wrist.*;
+import frc.robot.commands.Wrist.AutoAlignCmd;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 
