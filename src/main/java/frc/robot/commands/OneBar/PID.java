@@ -37,7 +37,7 @@ public class PID extends CommandBase {
     double PIDPos = onebarsubsystem.getEncoder();
 
     double speedOut = PIDo.calculate(PIDPos, setPoint);
-    speedOut = speedOut * 0.05;
+    speedOut = speedOut * 0.01;
     System.out.println("turn speed: " + speedOut);
 
     onebarsubsystem.setMotorSpeed(speedOut);
