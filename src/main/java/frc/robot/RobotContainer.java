@@ -203,6 +203,8 @@ public class RobotContainer {
 
     // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
+    // gripper in
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
