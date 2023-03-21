@@ -69,6 +69,8 @@ public class RobotContainer {
   private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
   private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
   private final SpeedMode speedMode = new SpeedMode(onebar, wristSubsystem);
+  private final GroundPickUp groundPickUp = new GroundPickUp(onebar, wristSubsystem);
+  private final SubstationPickUp substationPickUp = new SubstationPickUp(onebar, wristSubsystem);
 
   // // Wrist
   private final LowerCmd lowerCmd = new LowerCmd(wristSubsystem);
@@ -195,6 +197,10 @@ public class RobotContainer {
     supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
     // Balance Mode
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
+    // Ground Pick Up
+    supplier(Controllers.xbox_a, joysticks.DRIVER).onTrue(groundPickUp);
+    // Substation Pick Up
+    supplier(Controllers.xbox_y, joysticks.DRIVER).onTrue(substationPickUp);
 
     // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
