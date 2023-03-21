@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
-import java.util.function.BooleanSupplier;
 import frc.robot.commands.*;
 import frc.robot.commands.Claw.*;
 import frc.robot.commands.Drive.*;
@@ -17,6 +16,7 @@ import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Presets.*;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
+import java.util.function.BooleanSupplier;
 
 public class RobotContainer {
 
