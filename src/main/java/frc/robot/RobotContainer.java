@@ -88,7 +88,7 @@ public class RobotContainer {
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
   // Display
-  private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
+  // private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
 
   public void setbrake() {
     drivetrain.setBrake();
@@ -204,6 +204,8 @@ public class RobotContainer {
 
     // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
+    // gripper in
+    supplier(Controllers.logi_rt, joysticks.OPERATOR).onTrue(inGripperCmd).onFalse(stopGripperCmd);
   }
 
   public Command getAutonomousCommand() {
