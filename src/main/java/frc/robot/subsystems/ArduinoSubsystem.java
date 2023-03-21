@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,33 +13,23 @@ public class ArduinoSubsystem extends SubsystemBase {
     YELLOW
   }
 
-  private SerialPort.Port port;
-  private SerialPort handler;
   private Timer timer;
   private Timer colorChange;
   private PATTERN state;
-  private boolean initialized = false;
+  private I2C arduino;
+  private final int ARDUINO_ADDRESS = 4;
+  private final Port PORT = Port.kOnboard;
+  private final int WRITE_ADDRESS = 0x10;
 
   /** Creates a new Arduino controller. */
-  public ArduinoSubsystem(SerialPort.Port port) {
-    this.port = port;
+  public ArduinoSubsystem() {
+    arduino = new I2C(PORT, ARDUINO_ADDRESS);
     this.state = PATTERN.PURPLE;
     timer = new Timer();
     colorChange = new Timer();
 
     timer.start();
     colorChange.start();
-  }
-
-  private void connect() {
-    System.out.println("ArduinoSubsystem: connecting on port " + this.port);
-    try {
-      this.handler = new SerialPort(9600, this.port);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return;
-    }
-    this.initialized = true;
   }
 
   /** Call this function constantly sends the desired state to the arduino. */
@@ -57,39 +48,22 @@ public class ArduinoSubsystem extends SubsystemBase {
 
     // Send the current state on a timer.
     if (timer.get() > 1) {
-
-      if (!this.initialized) {
-        connect();
-        return;
-      }
-
-      System.out.println("Sending lighting state: " + state + " to " + handler);
-      int n = handler.write(enumToByte(state), 1);
-      if (n == 0) {
-        System.out.println("ARDUINO: closing connection to arduino.");
-        this.handler.close();
-        this.initialized = false;
-        return;
-      }
-
-      if (handler.getBytesReceived() > 0) {
-        System.out.print(handler.readString());
-      }
+      arduino.write(WRITE_ADDRESS, enumToByte(state));
       timer.reset();
     }
   }
 
   /** These byte values should match with values in arduino/onrobotlights.ino */
-  private byte[] enumToByte(PATTERN p) {
+  private byte enumToByte(PATTERN p) {
     if (p == PATTERN.OFF) {
-      return new byte[] {0x40};
+      return 0x40;
     } else if (p == PATTERN.YELLOW) {
-      return new byte[] {0x41};
+      return 0x41;
     } else if (p == PATTERN.PURPLE) {
-      return new byte[] {0x42};
+      return 0x42;
     }
     // If unknown state, return a 0 byte.
-    return new byte[] {0x00};
+    return 0x00;
   }
 
   public void ledOff() {

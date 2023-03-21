@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -88,7 +87,7 @@ public class RobotContainer {
   private final StopGripperCmd stopGripperCmd = new StopGripperCmd(gripperSubsystem);
 
   // Display
-  private final ArduinoSubsystem arduino = new ArduinoSubsystem(SerialPort.Port.kUSB2);
+  private final ArduinoSubsystem arduino = new ArduinoSubsystem();
 
   public void setbrake() {
     drivetrain.setBrake();
