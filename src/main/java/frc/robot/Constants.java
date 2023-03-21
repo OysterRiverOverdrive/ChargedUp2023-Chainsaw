@@ -38,11 +38,11 @@ public final class Constants {
   public static int DRIVER_SPEED = 1;
 
   // Potentiometer and Encoder maximums
-  public static double potMaxPerc = 68;
+  public static double potMaxPerc = 66;
   public static double potMinPerc = 02;
   public static int potOneBarPort = 0;
-  public static double encMinVal = -110;
-  public static double encMaxVal = 98;
+  public static double encMinVal = -0.40;
+  public static double encMaxVal = 0.29;
 
   // PID Constants
   public static double kP = 1;
