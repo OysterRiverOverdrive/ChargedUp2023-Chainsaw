@@ -9,25 +9,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
-
-// Drive
-import frc.robot.commands.TeleopCmd;
+import frc.robot.commands.Claw.InGripperCmd;
+import frc.robot.commands.Claw.OutGripperCmd;
+import frc.robot.commands.Claw.StopGripperCmd;
 import frc.robot.commands.Drive.BalanceSeqCmd;
 import frc.robot.commands.Drive.DriveCmd;
 import frc.robot.commands.Drive.LongRunAuto;
 import frc.robot.commands.Drive.MoveToAprilTagCmd;
 import frc.robot.commands.Drive.ShiftdownCmd;
 import frc.robot.commands.Drive.ShiftupCmd;
-
-// Gripper
-import frc.robot.commands.Claw.AutoGripperInCmd;
-import frc.robot.commands.Claw.AutoGripperOutCmd;
-import frc.robot.commands.Claw.InGripperCmd;
-import frc.robot.commands.Claw.OutGripperCmd;
-import frc.robot.commands.Claw.StopGripperCmd;
-
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Presets.*;
+import frc.robot.commands.TeleopCmd;
 import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;

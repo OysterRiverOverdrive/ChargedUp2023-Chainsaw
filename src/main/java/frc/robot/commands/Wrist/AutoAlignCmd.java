@@ -12,7 +12,8 @@ public class AutoAlignCmd extends CommandBase {
 
   /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
-  private final PIDController PIDo = new PIDController(.2, 0,0);
+
+  private final PIDController PIDo = new PIDController(.15, 0, 0);
   private double rotation;
 
   public AutoAlignCmd(WristSubsystem wrists, double rotations) {
@@ -30,7 +31,6 @@ public class AutoAlignCmd extends CommandBase {
   public void execute() {
 
     double speedOut = PIDo.calculate(wrist.getraise(), rotation);
-    System.out.println("turn speed: " + speedOut);
     wrist.autoAlign(speedOut);
   }
 
@@ -41,12 +41,6 @@ public class AutoAlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // double encoder = wrist.getraise();
-    // if (encoder+20 > rotation && encoder-20 < rotation) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
     return false;
   }
 }

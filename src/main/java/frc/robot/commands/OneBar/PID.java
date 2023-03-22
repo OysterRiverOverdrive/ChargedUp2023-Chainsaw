@@ -23,23 +23,15 @@ public class PID extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // if (setPoint == Constants.KnownValPID) {
-      setPoint = onebarsubsystem.getEncoder();
-      // System.out.println("Changed -------------------------------");
-      // setPoint = 0;
-    // }
+    setPoint = onebarsubsystem.getEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // System.out.println(setPoint);
     double PIDPos = onebarsubsystem.getEncoder();
 
     double speedOut = PIDo.calculate(PIDPos, setPoint);
-     System.out.println("turn speed: " + speedOut);
-    // speedOut = speedOut * 0.07;
-    // System.out.println("tup;rn speed: " + speedOut);
     onebarsubsystem.setMotorSpeed(speedOut);
   }
 
