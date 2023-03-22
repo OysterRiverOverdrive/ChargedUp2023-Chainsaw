@@ -70,13 +70,14 @@ public class WristSubsystem extends SubsystemBase {
 
   public void autoAlign(double degrees) {
 
-    double position = encoderaise.getPosition();
+    // double position = encoderaise.getPosition();
 
-    if (degrees < position) {
-      m_raise.set(-0.5);
-    } else {
-      m_raise.set(0.5);
-    }
+    // if (degrees < position) {
+    //   m_raise.set(-0.5);
+    // } else {
+    //   m_raise.set(0.5);
+    // }
+    m_raise.set(degrees);
   }
 
   public WristSubsystem() {

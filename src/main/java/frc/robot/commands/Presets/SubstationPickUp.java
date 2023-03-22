@@ -19,6 +19,6 @@ public class SubstationPickUp extends ParallelCommandGroup {
   public SubstationPickUp(OnebarSubsystem onebar, WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PID2(onebar, 0.091), new AutoAlignCmd(wrist, 64.83));
+    addCommands(new PID2(onebar, 0.115), new AutoAlignCmd(wrist, -96.83));
   }
 }
