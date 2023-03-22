@@ -39,7 +39,7 @@ public class AutoAlignCmd extends CommandBase {
   @Override
   public boolean isFinished() {
     double encoder = wrist.getraise();
-    if (encoder == rotation) {
+    if (encoder+20 > rotation && encoder-20 < rotation) {
       return true;
     } else {
       return false;

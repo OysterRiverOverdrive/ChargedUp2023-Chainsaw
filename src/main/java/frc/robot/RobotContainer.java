@@ -9,9 +9,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.*;
-import frc.robot.commands.*;
-import frc.robot.commands.Claw.*;
-import frc.robot.commands.Drive.*;
+
+// Drive
+import frc.robot.commands.TeleopCmd;
+import frc.robot.commands.Drive.BalanceSeqCmd;
+import frc.robot.commands.Drive.DriveCmd;
+import frc.robot.commands.Drive.LongRunAuto;
+import frc.robot.commands.Drive.MoveToAprilTagCmd;
+import frc.robot.commands.Drive.ShiftdownCmd;
+import frc.robot.commands.Drive.ShiftupCmd;
+
+// Gripper
+import frc.robot.commands.Claw.AutoGripperInCmd;
+import frc.robot.commands.Claw.AutoGripperOutCmd;
+import frc.robot.commands.Claw.InGripperCmd;
+import frc.robot.commands.Claw.OutGripperCmd;
+import frc.robot.commands.Claw.StopGripperCmd;
+
 import frc.robot.commands.OneBar.*;
 import frc.robot.commands.Presets.*;
 import frc.robot.commands.Wrist.*;
@@ -58,7 +72,7 @@ public class RobotContainer {
   private final OnebarOut armOut = new OnebarOut(onebar);
   private final OnebarIn armIn = new OnebarIn(onebar);
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
-  private final PID stayHeight = new PID(onebar, Constants.KnownValPID);
+  private final PID stayHeight = new PID(onebar);
   private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
   private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
   private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
@@ -151,6 +165,7 @@ public class RobotContainer {
     // clawSubsystem.zeroclaw();
     controls.setup();
     onebar.resetEnc();
+    onebar.setDefaultCommand(stayHeight);
   }
 
   private void configureButtonBindings() {
@@ -178,18 +193,18 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    // Set Arm To Middle Height
-    supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
-    // Set Arm To High Height
-    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
+    // // Set Arm To Middle Height
+    // supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
+    // // Set Arm To High Height
+    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armToHigh);
     // Speed Mode
-    supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
-    // Balance Mode
-    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
+    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
+    // // Balance Mode
+    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
     // Ground Pick Up
-    supplier(Controllers.xbox_a, joysticks.DRIVER).onTrue(groundPickUp);
+    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(groundPickUp);
     // Substation Pick Up
-    supplier(Controllers.xbox_y, joysticks.DRIVER).onTrue(substationPickUp);
+    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(substationPickUp);
 
     // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);

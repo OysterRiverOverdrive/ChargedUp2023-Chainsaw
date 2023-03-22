@@ -32,7 +32,7 @@ public class OnebarSubsystem extends SubsystemBase {
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage < Constants.potMaxPerc) {
-      extMotor.set(Constants.onebarExtSpeed);
+      extMotor.set(slr.calculate(Constants.onebarExtSpeed));
     } else {
       extMotor.stopMotor();
     }
@@ -43,7 +43,7 @@ public class OnebarSubsystem extends SubsystemBase {
     double percentage = pValue * 100.0;
     SmartDashboard.putNumber("Arm Extension %", percentage);
     if (percentage > Constants.potMinPerc) {
-      extMotor.set(Constants.onebarExtSpeed * -1);
+      extMotor.set(slr.calculate(Constants.onebarExtSpeed * -1));
     } else {
       extMotor.stopMotor();
     }
@@ -80,7 +80,7 @@ public class OnebarSubsystem extends SubsystemBase {
   }
 
   public void setMotorSpeed(double speed) {
-    rotMotor.set(slr.calculate(speed));
+    rotMotor.set(speed);
   }
 
   @Override

@@ -55,7 +55,7 @@ public class WristSubsystem extends SubsystemBase {
   }
 
   public double getraise() {
-    return encoderaise.getPosition() / 360;
+    return encoderaise.getPosition();
   }
 
   public void resetraise() {
@@ -70,12 +70,12 @@ public class WristSubsystem extends SubsystemBase {
 
   public void autoAlign(double degrees) {
 
-    double position = encoderaise.getPosition() / 360;
+    double position = encoderaise.getPosition();
 
     if (degrees < position) {
-      m_raise.set(-0.6);
+      m_raise.set(-0.5);
     } else {
-      m_raise.set(0.6);
+      m_raise.set(0.5);
     }
   }
 

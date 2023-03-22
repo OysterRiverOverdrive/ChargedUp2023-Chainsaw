@@ -5,7 +5,7 @@
 package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.OneBar.PID;
+import frc.robot.commands.OneBar.PID2;
 import frc.robot.commands.Wrist.AutoAlignCmd;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
@@ -19,7 +19,7 @@ public class ArmToHigh extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PID(onebar, 25), // needs testing
+        new PID2(onebar, 25), // needs testing
         new AutoAlignCmd(wrists, 0.3) // needs testing
         );
   }

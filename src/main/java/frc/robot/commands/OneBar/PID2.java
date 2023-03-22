@@ -6,29 +6,27 @@ package frc.robot.commands.OneBar;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.OnebarSubsystem;
+import edu.wpi.first.wpilibj.Timer;
 
-public class PID extends CommandBase {
+public class PID2 extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final PIDController PIDo = new PIDController(Constants.kP, Constants.kI, Constants.kD);
-  double setPoint;
+  private final PIDController PIDo = new PIDController(3, 0,0);
+
+  public double setPoint;
+  Timer timer = new Timer();
+
   /** Creates a new PID. */
-  public PID(OnebarSubsystem subsystem) {
+  public PID2(OnebarSubsystem subsystem, double pointSet) {
     onebarsubsystem = subsystem;
+    setPoint = pointSet;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
-  // Called when the command is initially scheduled.
+  // Called when the command is initially scheduled
   @Override
-  public void initialize() {
-    // if (setPoint == Constants.KnownValPID) {
-      setPoint = onebarsubsystem.getEncoder();
-      // System.out.println("Changed -------------------------------");
-      // setPoint = 0;
-    // }
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -37,10 +35,14 @@ public class PID extends CommandBase {
     double PIDPos = onebarsubsystem.getEncoder();
 
     double speedOut = PIDo.calculate(PIDPos, setPoint);
-     System.out.println("turn speed: " + speedOut);
-    // speedOut = speedOut * 0.07;
-    // System.out.println("tup;rn speed: " + speedOut);
+    System.out.println("turn speed: " + speedOut);
     onebarsubsystem.setMotorSpeed(speedOut);
+    if (Math.abs(speedOut) < 0.04) {
+      timer.reset();
+      timer.start();
+    } else {
+      timer.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +52,13 @@ public class PID extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean status;
+    if (timer.get() > 1) {
+      status = true;
+    } else {
+      status = false;
+    }
+    System.out.println(status);
+    return status;
   }
 }

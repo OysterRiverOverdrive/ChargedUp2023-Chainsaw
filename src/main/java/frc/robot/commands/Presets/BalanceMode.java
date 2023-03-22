@@ -5,7 +5,7 @@
 package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.OneBar.PID;
+import frc.robot.commands.OneBar.PID2;
 import frc.robot.commands.Wrist.AutoAlignCmd;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
@@ -18,6 +18,6 @@ public class BalanceMode extends SequentialCommandGroup {
   public BalanceMode(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PID(onebar, 0), new AutoAlignCmd(wrists, 0));
+    addCommands(new PID2(onebar, 0), new AutoAlignCmd(wrists, 0));
   }
 }
