@@ -5,26 +5,28 @@
 package frc.robot.commands.OneBar;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.OnebarSubsystem;
 
-public class PID extends CommandBase {
+public class PID2 extends CommandBase {
   private final OnebarSubsystem onebarsubsystem;
-  private final PIDController PIDo = new PIDController(Constants.kP, Constants.kI, Constants.kD);
-  double setPoint;
+  private final PIDController PIDo = new PIDController(3, 0, 0);
+
+  public double setPoint;
+  Timer timer = new Timer();
+
   /** Creates a new PID. */
-  public PID(OnebarSubsystem subsystem) {
+  public PID2(OnebarSubsystem subsystem, double pointSet) {
     onebarsubsystem = subsystem;
+    setPoint = pointSet;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
-  // Called when the command is initially scheduled.
+  // Called when the command is initially scheduled
   @Override
-  public void initialize() {
-    setPoint = onebarsubsystem.getEncoder();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Wrist;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.WristSubsystem;
 
@@ -12,6 +13,7 @@ public class AutoAlignCmd extends CommandBase {
   /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
 
+  private final PIDController PIDo = new PIDController(.15, 0, 0);
   private double rotation;
 
   public AutoAlignCmd(WristSubsystem wrists, double rotations) {
@@ -28,7 +30,8 @@ public class AutoAlignCmd extends CommandBase {
   @Override
   public void execute() {
 
-    wrist.autoAlign(rotation);
+    double speedOut = PIDo.calculate(wrist.getraise(), rotation);
+    wrist.autoAlign(speedOut);
   }
 
   // Called once the command ends or is interrupted.
@@ -38,11 +41,6 @@ public class AutoAlignCmd extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double encoder = wrist.getraise();
-    if (encoder == rotation) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 }
