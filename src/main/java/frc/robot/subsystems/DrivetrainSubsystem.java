@@ -70,7 +70,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     left2.setIdleMode(IdleMode.kCoast);
   }
 
-  public void zeroncoders() {
+  public void zeroencoders() {
     m_encoder_Right.setPosition(0);
     m_encoder_Left.setPosition(0);
   }
