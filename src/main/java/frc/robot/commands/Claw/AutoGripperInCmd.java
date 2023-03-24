@@ -41,7 +41,7 @@ public class AutoGripperInCmd extends CommandBase {
 
     double currTime = timer.get();
 
-    if (currTime >= 1.5) {
+    if (currTime >= 0.5) {
       retVal = true;
     } else {
       retVal = false;

@@ -6,18 +6,18 @@ package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.OneBar.PID2;
-import frc.robot.commands.Wrist.AutoAlignCmd;
+import frc.robot.commands.Wrist.*;
 import frc.robot.subsystems.OnebarSubsystem;
 import frc.robot.subsystems.WristSubsystem;
+
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-
-public class BalanceMode extends ParallelCommandGroup {
-  /** Creates a new BalanceMode. */
-  public BalanceMode(OnebarSubsystem onebar, WristSubsystem wrists) {
+public class SpeedMode extends ParallelCommandGroup {
+  /** Creates a new speedMode. */
+  public SpeedMode(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new PID2(onebar, 0), new AutoAlignCmd(wrists, 0));
+    addCommands(new AutoAlignCmd(wrists, -286.1), new PID2(onebar, 0.34));
   }
 }

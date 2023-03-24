@@ -32,9 +32,12 @@ public class PID2 extends CommandBase {
   @Override
   public void execute() {
     double PIDPos = onebarsubsystem.getEncoder();
-
     double speedOut = PIDo.calculate(PIDPos, setPoint);
+    System.out.println(speedOut);
     onebarsubsystem.setMotorSpeed(speedOut);
+    if (Math.abs(speedOut) < 0.02) {
+      timer.start();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +47,10 @@ public class PID2 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    boolean status = false;
+    if (timer.get() >= 0.2) {
+      status = true;
+    }
+    return status;
   }
 }

@@ -85,7 +85,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     // Inches divided by 2*3(wheel radius)*pi
     speed = speed * -1.0;
     inches = inches / 18.8495559215;
-    if (m_encoder_Left.getPosition() / 9.52 <= inches) {
+    if (Math.abs(m_encoder_Left.getPosition()) / 9.52 <= inches) {
       m_robotDrive.arcadeDrive(speed, 0);
       return false;
     } else {
@@ -134,14 +134,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     if (angle > errorvalue) {
       dashboardf = true;
-      speed = -0.28;
+      speed = -0.29;
     } else {
       dashboardf = false;
     }
 
     if (angle < errorvalue * -1.0) {
       dashboardb = true;
-      speed = 0.28;
+      speed = 0.29;
     } else {
       dashboardb = false;
     }
