@@ -17,6 +17,9 @@
 // Create a variable that will store the colors for the LEDs.
 CRGB leds[NUM_LEDS];
 
+//I2C address of the arduino
+#define I2C_ADDR 4
+
 int pattern = 0;
 
 void setup() {
@@ -28,6 +31,8 @@ void setup() {
   //   * leds - the variable that is storing all the colors
   //   * NUM_LEDS - the number of LEDs to control
   Serial.begin(9600);
+  Wire.begin(I2C_ADDR);
+  Wire.onReceive(receiveEvent);
 
   // Ensures that the onboard led LOW == off.
   pinMode(13, OUTPUT);
@@ -63,9 +68,12 @@ void setup() {
   FastLED.setMaxPowerInVoltsAndMilliamps(5, 400);
 }
 
-void loop() {
-  if (Serial.available() > 0) {
-    byte value = Serial.read();
+void receiveEvent(int howMany){
+  int addr = Wire.read();
+
+  //the robot wants to send some data
+  if (addr == 0x10) {
+    byte value = Wire.read();
 
     // These byte values should match with values in
     // ArduinoSubsystem.enumToByte()
@@ -80,7 +88,9 @@ void loop() {
       pattern = 2;
     }
   }
+}
 
+void loop() {
   if (pattern == 0) {
     off();
   } else if (pattern == 1) {
@@ -96,6 +106,9 @@ void loop() {
   }
 
   FastLED.show();
+
+  // Roughly match the roborio loop timing.
+  delay(20);
 }
 
 void bluewash() {
