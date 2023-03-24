@@ -40,9 +40,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   // right side encoder
   private RelativeEncoder m_encoder_Right = right1.getEncoder();
 
-  
   private double degrees;
-  
+
   public DrivetrainSubsystem() {
     m_robotDrive.setSafetyEnabled(false);
     leftSide.setInverted(true);
@@ -103,24 +102,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
     double angle = 0;
     angle = navx.getYaw();
 
-
     if (angle + 2 > degrees && angle - 2 < degrees) {
-      
+
       m_robotDrive.arcadeDrive(0, 0);
       return true;
     } else if (degrees < angle) {
-       
+
       m_robotDrive.arcadeDrive(0, -0.2);
       return false;
     } else if (degrees > angle) {
-       
+
       m_robotDrive.arcadeDrive(0, 0.2);
       return false;
     } else {
       return false;
     }
-
-    
   }
 
   public boolean balancemvmnt() {
