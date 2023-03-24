@@ -52,7 +52,7 @@ public class RobotContainer {
   private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0, 0.6);
   private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0, 0.6);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
-  private final LongRunAuto longautoCmd = new LongRunAuto(drivetrain);
+  private final LongRunAuto longautoCmd = new LongRunAuto(drivetrain, gripperSubsystem, onebar, wristSubsystem);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -67,7 +67,6 @@ public class RobotContainer {
   private final ArmExtStop armExtStop = new ArmExtStop(onebar);
   private final PID stayHeight = new PID(onebar);
   private final ArmToHigh armToHigh = new ArmToHigh(onebar, wristSubsystem);
-  private final ArmToMid armToMid = new ArmToMid(onebar, wristSubsystem);
   private final BalanceMode balanceMode = new BalanceMode(onebar, wristSubsystem);
   private final SpeedMode speedMode = new SpeedMode(onebar, wristSubsystem);
   private final GroundPickUp groundPickUp = new GroundPickUp(onebar, wristSubsystem);
@@ -186,16 +185,15 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    // // Set Arm To Middle Height
-    // supplier(Controllers.logi_b, joysticks.OPERATOR).onTrue(armToMid);
-    // // Set Arm To High Height
-    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(armToHigh);
+    
+    // Set Arm To High Height
+    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
     // Speed Mode
-    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(speedMode);
-    // // Balance Mode
-    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(balanceMode);
+    supplier(Controllers.xbox_a, joysticks.DRIVER).onTrue(speedMode);
+    // Balance Mode
+    supplier(Controllers.xbox_y, joysticks.DRIVER).onTrue(balanceMode);
     // Ground Pick Up
-    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(groundPickUp);
+    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(groundPickUp);
     // Substation Pick Up
     supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(substationPickUp);
 

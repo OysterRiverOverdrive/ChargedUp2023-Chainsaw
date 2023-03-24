@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Presets;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.OneBar.PID2;
 import frc.robot.commands.Wrist.AutoAlignCmd;
 import frc.robot.subsystems.OnebarSubsystem;
@@ -13,14 +13,14 @@ import frc.robot.subsystems.WristSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ArmToHigh extends SequentialCommandGroup {
+public class ArmToHigh extends ParallelCommandGroup {
   /** Creates a new ArmToHigh. */
   public ArmToHigh(OnebarSubsystem onebar, WristSubsystem wrists) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-        new PID2(onebar, 25), // needs testing
-        new AutoAlignCmd(wrists, 0.3) // needs testing
+        new PID2(onebar, 0.18), // needs testing
+        new AutoAlignCmd(wrists, -230.5) // needs testing
         );
   }
 }

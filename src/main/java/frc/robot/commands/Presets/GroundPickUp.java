@@ -4,7 +4,7 @@
 
 package frc.robot.commands.Presets;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.OneBar.PID2;
 import frc.robot.commands.Wrist.AutoAlignCmd;
 import frc.robot.subsystems.OnebarSubsystem;
@@ -13,11 +13,11 @@ import frc.robot.subsystems.WristSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class GroundPickUp extends SequentialCommandGroup {
+public class GroundPickUp extends ParallelCommandGroup {
   /** Creates a new GroundPickUp. */
   public GroundPickUp(OnebarSubsystem onebar, WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoAlignCmd(wrist, 0.5), new PID2(onebar, 110));
+    addCommands(new AutoAlignCmd(wrist, -157.6), new PID2(onebar, 0.38));
   }
 }
