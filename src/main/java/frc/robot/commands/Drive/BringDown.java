@@ -18,6 +18,6 @@ public class BringDown extends ParallelCommandGroup {
   public BringDown(DrivetrainSubsystem drive, OnebarSubsystem onebar, WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveCmd(drive, 79, -0.6), new SpeedMode(onebar, wrist));
+    addCommands(new drivingauto(drive), new SpeedMode(onebar, wrist));
   }
 }
