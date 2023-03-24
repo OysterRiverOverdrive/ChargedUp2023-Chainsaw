@@ -40,9 +40,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   // right side encoder
   private RelativeEncoder m_encoder_Right = right1.getEncoder();
 
-  private double angles;
+  
   private double degrees;
-
+  
   public DrivetrainSubsystem() {
     m_robotDrive.setSafetyEnabled(false);
     leftSide.setInverted(true);
@@ -70,7 +70,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     left2.setIdleMode(IdleMode.kCoast);
   }
 
-  public void zeroencoders() {
+  public void zeroncoders() {
     m_encoder_Right.setPosition(0);
     m_encoder_Left.setPosition(0);
   }
@@ -101,27 +101,26 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public boolean turn() {
     // this turns the sensors raw data(-180,180)
     double angle = 0;
-    double raw_angle = navx.getYaw();
-    angle = raw_angle;
-    angles = angle;
+    angle = navx.getYaw();
+
 
     if (angle + 2 > degrees && angle - 2 < degrees) {
-      System.out.println("center");
+      
       m_robotDrive.arcadeDrive(0, 0);
       return true;
     } else if (degrees < angle) {
-      System.out.println("left");
+       
       m_robotDrive.arcadeDrive(0, -0.2);
       return false;
     } else if (degrees > angle) {
-      System.out.println("right");
+       
       m_robotDrive.arcadeDrive(0, 0.2);
       return false;
     } else {
       return false;
     }
 
-    // System.out.println(angle);
+    
   }
 
   public boolean balancemvmnt() {
