@@ -6,7 +6,6 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Claw.AutoGripperOutCmd;
-import frc.robot.commands.Presets.SpeedMode;
 import frc.robot.commands.Presets.SubstationPickUp;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.GripperSubsystem;
@@ -18,9 +17,17 @@ import frc.robot.subsystems.WristSubsystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class LongRunAuto extends SequentialCommandGroup {
   /** Creates a new LongRunAuto. */
-  public LongRunAuto(DrivetrainSubsystem drive, GripperSubsystem grip, OnebarSubsystem onebar, WristSubsystem wrist) {
+  public LongRunAuto(
+      DrivetrainSubsystem drive,
+      GripperSubsystem grip,
+      OnebarSubsystem onebar,
+      WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SubstationPickUp(onebar, wrist), new AutoGripperOutCmd(grip), new BringDown(drive, onebar, wrist), new BalanceCmd(drive));
+    addCommands(
+        new SubstationPickUp(onebar, wrist),
+        new AutoGripperOutCmd(grip),
+        new BringDown(drive, onebar, wrist),
+        new BalanceCmd(drive));
   }
 }

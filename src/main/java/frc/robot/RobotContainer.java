@@ -52,7 +52,8 @@ public class RobotContainer {
   private final DriveCmd farmobCmd = new DriveCmd(drivetrain, 140.0, 0.6);
   private final DriveCmd mobCmd = new DriveCmd(drivetrain, 40.0, 0.6);
   private final BalanceSeqCmd chargeCmd = new BalanceSeqCmd(drivetrain);
-  private final LongRunAuto longautoCmd = new LongRunAuto(drivetrain, gripperSubsystem, onebar, wristSubsystem);
+  private final LongRunAuto longautoCmd =
+      new LongRunAuto(drivetrain, gripperSubsystem, onebar, wristSubsystem);
   private final TeleopCmd teleopCmd = new TeleopCmd(drivetrain);
   private final ShiftdownCmd shiftdown = new ShiftdownCmd(drivetrain);
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
@@ -185,7 +186,6 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    
     // Set Arm To High Height
     supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
     // Speed Mode
