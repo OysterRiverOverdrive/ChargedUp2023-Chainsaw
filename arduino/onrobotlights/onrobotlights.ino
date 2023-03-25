@@ -17,7 +17,7 @@
 // Create a variable that will store the colors for the LEDs.
 CRGB leds[NUM_LEDS];
 
-int pattern = 0;
+int pattern = 4;
 
 void setup() {
   // Tell the FastLED library:
@@ -64,22 +64,22 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    byte value = Serial.read();
-
-    // These byte values should match with values in
-    // ArduinoSubsystem.enumToByte()
-    if (value == 0x40) {
-      Serial.println("turning leds off");
-      pattern = 0;
-    } else if (value == 0x41) {
-      Serial.println("setting leds yellow");
-      pattern = 1;
-    } else if (value == 0x42) {
-      Serial.println("setting leds purple");
-      pattern = 2;
-    }
-  }
+//  if (Serial.available() > 0) {
+//    byte value = Serial.read();
+//
+//    // These byte values should match with values in
+//    // ArduinoSubsystem.enumToByte()
+//    if (value == 0x40) {
+//      Serial.println("turning leds off");
+//      pattern = 0;
+//    } else if (value == 0x41) {
+//      Serial.println("setting leds yellow");
+//      pattern = 1;
+//    } else if (value == 0x42) {
+//      Serial.println("setting leds purple");
+//      pattern = 2;
+//    }
+//  }
 
   if (pattern == 0) {
     off();
