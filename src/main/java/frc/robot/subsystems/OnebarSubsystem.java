@@ -67,6 +67,12 @@ public class OnebarSubsystem extends SubsystemBase {
     extMotor.stopMotor();
   }
 
+  public void rotstop(boolean stopped) {
+    if (stopped == true) {
+      rotMotor.stopMotor();
+    }
+  }
+
   public void resetEnc() {
     encRelativeEncoder.setPosition(0);
   }

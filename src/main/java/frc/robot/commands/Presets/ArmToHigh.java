@@ -20,7 +20,7 @@ public class ArmToHigh extends ParallelCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
         new PID2(onebar, 0.18), // needs testing
-        new AutoAlignCmd(wrists, -230.5) // needs testing
+        new AutoAlignCmd(wrists, -0.6) // needs testing
         );
   }
 }

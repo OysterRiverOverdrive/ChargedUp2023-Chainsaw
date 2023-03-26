@@ -5,16 +5,28 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.Claw.AutoGripperOutCmd;
+import frc.robot.commands.Presets.SubstationPickUp;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.GripperSubsystem;
+import frc.robot.subsystems.OnebarSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class drivingauto extends SequentialCommandGroup {
-  /** Creates a new drivingauto. */
-  public drivingauto(DrivetrainSubsystem drive) {
+public class DropandBack extends SequentialCommandGroup {
+  /** Creates a new DropandBack. */
+  public DropandBack(
+      DrivetrainSubsystem drive,
+      GripperSubsystem grip,
+      OnebarSubsystem onebar,
+      WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new DriveCmd(drive, 83, -0.6), new BalanceCmd(drive));
+    addCommands(
+        new SubstationPickUp(onebar, wrist),
+        new AutoGripperOutCmd(grip),
+        new drivingauto2(drive, onebar, wrist));
   }
 }

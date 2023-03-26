@@ -18,6 +18,6 @@ public class GroundPickUp extends ParallelCommandGroup {
   public GroundPickUp(OnebarSubsystem onebar, WristSubsystem wrist) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new AutoAlignCmd(wrist, -157.6), new PID2(onebar, 0.38));
+    addCommands(new AutoAlignCmd(wrist, -0.5), new PID2(onebar, 0.38));
   }
 }

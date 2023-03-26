@@ -29,14 +29,14 @@ public class WristSubsystem extends SubsystemBase {
     double rotation = encoderaise.getPosition() / 360;
     double degree = encoderaise.getPosition();
 
-    if (rotation >= -1) {
+    // if (rotation <= Constants.wristmax) {
 
-      m_raise.set(0.72);
+    m_raise.set(0.72);
 
-    } else {
+    // } else {
 
-      m_raise.stopMotor();
-    }
+    //   m_raise.stopMotor();
+    // }
   }
 
   public void encWrisDutyCycleEncoderlower() {
@@ -44,18 +44,18 @@ public class WristSubsystem extends SubsystemBase {
     double rotation = encoderaise.getPosition() / 360;
     double degree = encoderaise.getPosition();
 
-    if (rotation <= 1) {
+    // if (rotation >= Constants.wristmin) {
 
-      m_raise.set(-0.72);
+    m_raise.set(-0.72);
 
-    } else {
+    // } else {
 
-      m_raise.stopMotor();
-    }
+    //   m_raise.stopMotor();
+    // }
   }
 
   public double getraise() {
-    return encoderaise.getPosition();
+    return encoderaise.getPosition() / 360;
   }
 
   public void resetraise() {
@@ -66,6 +66,12 @@ public class WristSubsystem extends SubsystemBase {
   public void stopraise() {
 
     m_raise.stopMotor();
+  }
+
+  public void stoprot(boolean stopped) {
+    if (stopped == true) {
+      m_raise.stopMotor();
+    }
   }
 
   public void autoAlign(double degrees) {
@@ -88,5 +94,6 @@ public class WristSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("wrist position", encoderaise.getPosition());
+    SmartDashboard.putNumber("Wrist gear", encoderaise.getPosition() / 360);
   }
 }

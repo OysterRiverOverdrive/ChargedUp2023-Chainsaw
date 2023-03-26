@@ -14,8 +14,8 @@ public class AutoAlignCmd extends CommandBase {
   /** Creates a new LowerCmd. */
   private WristSubsystem wrist;
 
-  private final PIDController PIDo = new PIDController(.18, .05, 0);
-  private double rotation;
+  PIDController PIDo = new PIDController(1.5, 0, 0);
+  double rotation;
   Timer timer = new Timer();
 
   public AutoAlignCmd(WristSubsystem wrists, double rotations) {
@@ -26,22 +26,28 @@ public class AutoAlignCmd extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    PIDo.reset();
+    timer.reset();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    double speedOut = PIDo.calculate(wrist.getraise(), rotation);
+    double PIDval = wrist.getraise();
+    double speedOut = PIDo.calculate(PIDval, rotation);
+    // System.out.println(speedOut);
     wrist.autoAlign(speedOut);
-    if (Math.abs(speedOut) < 0.02) {
+    if (Math.abs(speedOut) < 0.04) {
       timer.start();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // wrist.autoAlign(0);
+  }
 
   // Returns true when the command should end.
   @Override
@@ -50,6 +56,7 @@ public class AutoAlignCmd extends CommandBase {
     if (timer.get() >= 0.3) {
       status = true;
     }
+    wrist.stoprot(status);
     return status;
   }
 }

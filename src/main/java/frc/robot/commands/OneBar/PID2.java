@@ -20,13 +20,16 @@ public class PID2 extends CommandBase {
   public PID2(OnebarSubsystem subsystem, double pointSet) {
     onebarsubsystem = subsystem;
     setPoint = pointSet;
-    // Use addRequirements() here to declare subsystem dependencies.
+    // Use addRequirements() here to de45clare subsystem dependencies.
     addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled
   @Override
-  public void initialize() {}
+  public void initialize() {
+    PIDo.reset();
+    timer.reset();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -35,14 +38,16 @@ public class PID2 extends CommandBase {
     double speedOut = PIDo.calculate(PIDPos, setPoint);
     System.out.println(speedOut);
     onebarsubsystem.setMotorSpeed(speedOut);
-    if (Math.abs(speedOut) < 0.02) {
+    if (Math.abs(speedOut) < 0.1) {
       timer.start();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // onebarsubsystem.setMotorSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override
@@ -51,6 +56,7 @@ public class PID2 extends CommandBase {
     if (timer.get() >= 0.2) {
       status = true;
     }
+    onebarsubsystem.rotstop(status);
     return status;
   }
 }

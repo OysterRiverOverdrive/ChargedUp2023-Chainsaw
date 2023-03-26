@@ -25,6 +25,14 @@ public class GripperSubsystem extends SubsystemBase {
     gripmot.set(-0.8);
   }
 
+  public void autorotate(boolean reverse) {
+    double speed = 0.75;
+    if (reverse == true) {
+      speed = speed * -1;
+    }
+    gripmot.set(speed);
+  }
+
   public void stopGripper() {
 
     gripmot.stopMotor();

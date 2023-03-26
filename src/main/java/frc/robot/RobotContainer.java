@@ -14,6 +14,7 @@ import frc.robot.commands.Claw.OutGripperCmd;
 import frc.robot.commands.Claw.StopGripperCmd;
 import frc.robot.commands.Drive.BalanceSeqCmd;
 import frc.robot.commands.Drive.DriveCmd;
+import frc.robot.commands.Drive.DropandBack;
 import frc.robot.commands.Drive.LongRunAuto;
 import frc.robot.commands.Drive.MoveToAprilTagCmd;
 import frc.robot.commands.Drive.ShiftdownCmd;
@@ -33,6 +34,7 @@ public class RobotContainer {
   private final String farmob = "auto2";
   private final String charge = "auto3";
   private final String longauto = "auto4";
+  private final String dropping = "auto5";
 
   // Defining Controllers
   private final Joystick driver1 = new Joystick(Controllers.DRIVER_ONE_PORT);
@@ -59,6 +61,8 @@ public class RobotContainer {
   private final ShiftupCmd shiftup = new ShiftupCmd(drivetrain);
   private final MoveToAprilTagCmd moveToAprilTagCmd =
       new MoveToAprilTagCmd(drivetrain, limelightSubsystem);
+  private final DropandBack dropauto =
+      new DropandBack(drivetrain, gripperSubsystem, onebar, wristSubsystem);
 
   // One Bar
   private final OnebarDown armDown = new OnebarDown(onebar);
@@ -147,7 +151,8 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Basic Mobility", mob);
     m_chooser.addOption("Mobility Far", farmob);
     m_chooser.addOption("Charge", charge);
-    m_chooser.addOption("Mobility and Charge", longauto);
+    m_chooser.addOption("Drop and Charge", longauto);
+    m_chooser.addOption("Drop and Mobility", dropping);
     SmartDashboard.putData("Auto Run", m_chooser);
 
     // Configure the button bindings
@@ -186,16 +191,16 @@ public class RobotContainer {
     // Balance Seq
     supplier(Controllers.xbox_b, joysticks.DRIVER).onTrue(chargeCmd);
 
-    // Set Arm To High Height
-    supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
-    // Speed Mode
-    supplier(Controllers.xbox_a, joysticks.DRIVER).onTrue(speedMode);
-    // Balance Mode
-    supplier(Controllers.xbox_y, joysticks.DRIVER).onTrue(balanceMode);
-    // Ground Pick Up
-    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(groundPickUp);
-    // Substation Pick Up
-    supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(substationPickUp);
+    // // Set Arm To High Height
+    // supplier(Controllers.logi_y, joysticks.OPERATOR).onTrue(armToHigh);
+    // // Speed Mode
+    // supplier(Controllers.xbox_a, joysticks.DRIVER).onTrue(speedMode);
+    // // Balance Mode
+    // supplier(Controllers.xbox_y, joysticks.DRIVER).onTrue(balanceMode);
+    // // Ground Pick Up
+    // supplier(Controllers.logi_x, joysticks.OPERATOR).onTrue(groundPickUp);
+    // // Substation Pick Up
+    // supplier(Controllers.logi_a, joysticks.OPERATOR).onTrue(substationPickUp);
 
     // gripper out
     supplier(Controllers.logi_lt, joysticks.OPERATOR).onTrue(outGripperCmd).onFalse(stopGripperCmd);
@@ -211,6 +216,8 @@ public class RobotContainer {
         return chargeCmd;
       case longauto:
         return longautoCmd;
+      case dropping:
+        return dropauto;
       case mob:
       default:
         return mobCmd;
