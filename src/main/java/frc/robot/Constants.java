@@ -43,6 +43,8 @@ public final class Constants {
   public static int potOneBarPort = 0;
   public static double encMinVal = -0.40;
   public static double encMaxVal = 0.38;
+  public static double wristmax = 0;
+  public static double wristmin = -0.6;
 
   // PID Constants
   public static double kP = 2;
