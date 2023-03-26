@@ -31,6 +31,7 @@ public class TurnCmd extends CommandBase {
     drive.zeroencoders();
     drive.zeroyawnavx();
     drive.setdegree(degree);
+    pid.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

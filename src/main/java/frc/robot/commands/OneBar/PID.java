@@ -24,6 +24,7 @@ public class PID extends CommandBase {
   @Override
   public void initialize() {
     setPoint = onebarsubsystem.getEncoder();
+    PIDo.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
