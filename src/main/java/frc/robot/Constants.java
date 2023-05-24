@@ -24,8 +24,8 @@ public final class Constants {
   public static int Gripper = 8;
   // establishing motor callouts and their CAN-IDs
 
-  public static double onebarRotSpeed = 0.5;
-  public static double onebarExtSpeed = 0.4;
+  public static double onebarRotSpeed = 0.6;
+  public static double onebarExtSpeed = 0.6;
   public static double SLEWTURN = 4.5;
   public static double SLEWSPEED = 2.0;
   public static double SLEWONEBAR = 3.0;

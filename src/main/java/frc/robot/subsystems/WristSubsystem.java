@@ -31,7 +31,7 @@ public class WristSubsystem extends SubsystemBase {
 
     // if (rotation <= Constants.wristmax) {
 
-    m_raise.set(0.72);
+    m_raise.set(0.8);
 
     // } else {
 
@@ -46,7 +46,7 @@ public class WristSubsystem extends SubsystemBase {
 
     // if (rotation >= Constants.wristmin) {
 
-    m_raise.set(-0.72);
+    m_raise.set(-0.8);
 
     // } else {
 
