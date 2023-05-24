@@ -18,6 +18,10 @@ public class AutoGripperInCmd extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // will reset the timer if not equal zero
+    if (timer.get() != 0) {
+      timer.stop();
+    }
     timer.reset();
     timer.start();
   }
