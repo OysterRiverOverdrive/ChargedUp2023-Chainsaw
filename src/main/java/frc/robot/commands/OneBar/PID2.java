@@ -28,6 +28,9 @@ public class PID2 extends CommandBase {
   @Override
   public void initialize() {
     PIDo.reset();
+    if (timer.get() != 0) {
+      timer.stop();
+    }
     timer.reset();
   }
 
